@@ -15,6 +15,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { RecipesComponent } from './recipes/recipes.component';
 import { RecipesEditComponent } from './recipes/recipes-edit/recipes-edit.component';
 import { RecipesAddComponent } from './recipes/recipes-add/recipes-add.component';
+import { HeaderComponent } from './header/header.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http);
@@ -28,6 +29,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 		RecipesComponent,
 		RecipesEditComponent,
 		RecipesAddComponent,
+		HeaderComponent,
 	],
 	imports: [
 		BrowserModule,
