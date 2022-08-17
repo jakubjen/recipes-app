@@ -27,7 +27,6 @@ export function HttpLoaderFactory(http: HttpClient) {
 		AppComponent,
 		HomePageComponent,
 		RecipesComponent,
-		RecipesComponent,
 		RecipesEditComponent,
 		RecipesAddComponent,
 		HeaderComponent,
@@ -46,7 +45,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 		}),
 		BrowserAnimationsModule,
 		NgbModule,
-		StoreModule.forRoot({ recipe: recipesReducer }),
+		StoreModule.forRoot({ recipes: recipesReducer }),
 		StoreDevtoolsModule.instrument({
 			maxAge: 25,
 			logOnly: environment.production,
