@@ -20,7 +20,7 @@ export class RecipesService {
 	}
 
 	public deleteRecipe(id: string): Observable<'ok'> {
-		return this.http.delete<'ok'>(this.recipeUrl + '/' + id);
+		return this.http.delete<'ok'>(`${this.recipeUrl}/${id}`);
 	}
 
 	public updateRecipe(recipe: Recipe): Observable<Recipe> {
