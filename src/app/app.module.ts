@@ -11,13 +11,27 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { HomePageComponent } from './home-page/home-page.component';
+import { RecipesComponent } from './recipes/recipes.component';
+import { RecipesEditComponent } from './recipes/recipes-edit/recipes-edit.component';
+import { RecipesAddComponent } from './recipes/recipes-add/recipes-add.component';
+import { HeaderComponent } from './header/header.component';
+import { recipesReducer } from './store/recipes/recipes.reducer';
 
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http);
 }
 
 @NgModule({
-	declarations: [AppComponent],
+	declarations: [
+		AppComponent,
+		HomePageComponent,
+		RecipesComponent,
+		RecipesComponent,
+		RecipesEditComponent,
+		RecipesAddComponent,
+		HeaderComponent,
+	],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
@@ -32,7 +46,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 		}),
 		BrowserAnimationsModule,
 		NgbModule,
-		StoreModule.forRoot({}, {}),
+		StoreModule.forRoot({ recipe: recipesReducer }),
 		StoreDevtoolsModule.instrument({
 			maxAge: 25,
 			logOnly: environment.production,

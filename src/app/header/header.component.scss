@@ -1,0 +1,20 @@
+.logo {
+    position: relative;
+    background: #fdfdfd;
+    --size: 38px;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 6px;
+
+    &::after {
+        content: '';
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        background: #e1e1e1;
+        border-radius: 50%;
+    }
+}
