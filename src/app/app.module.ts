@@ -50,6 +50,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 			maxAge: 25,
 			logOnly: environment.production,
 		}),
+		EffectsModule.forRoot([loadRecipeEffect]),
 	],
 	providers: [],
 	exports: [TranslateModule],
