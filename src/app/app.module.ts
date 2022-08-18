@@ -11,30 +11,25 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { HomePageComponent } from './home-page/home-page.component';
-import { RecipesComponent } from './recipes/recipes.component';
-import { RecipesEditComponent } from './recipes/recipes-edit/recipes-edit.component';
-import { RecipesAddComponent } from './recipes/recipes-add/recipes-add.component';
 import { HeaderComponent } from './header/header.component';
+import { RecipeModule } from './recipes/recipe.module';
+import { SharedModule } from './shared/shared.module';
 import { recipesReducer } from './store/recipes/recipes.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { loadRecipeEffect } from './store/recipe.effect';
 
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http);
 }
 
 @NgModule({
-	declarations: [
-		AppComponent,
-		HomePageComponent,
-		RecipesComponent,
-		RecipesEditComponent,
-		RecipesAddComponent,
-		HeaderComponent,
-	],
+	declarations: [AppComponent, HeaderComponent],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
 		HttpClientModule,
+		RecipeModule,
+		SharedModule,
 		TranslateModule.forRoot({
 			defaultLanguage: 'en',
 			loader: {
