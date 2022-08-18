@@ -1,8 +1,8 @@
 /* eslint-disable @ngrx/prefer-selector-in-select */
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { RecipesService } from './services/recipes-service';
-import { setRecipes } from './store/recipes/recipes.actions';
+import { RecipesService } from './recipes/services/recipes-service';
+import { RecipesActions } from './store/recipes';
 import { AppState } from './store/store';
 
 @Component({
@@ -18,7 +18,7 @@ export class AppComponent implements OnInit {
 	ngOnInit(): void {
 		this.recipesService.fetchRecipes().subscribe({
 			next: value => {
-				this.store.dispatch(setRecipes({ recipes: value }));
+				this.store.dispatch(RecipesActions.loadRecipes());
 			},
 		});
 	}
