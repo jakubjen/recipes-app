@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import Recipe from 'src/models/Recipe.model';
+import Recipe from '@models/Recipe.model';
 
 const loadRecipes = createAction('[Router] Load recipes');
 

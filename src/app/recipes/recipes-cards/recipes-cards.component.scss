@@ -1,4 +1,4 @@
-@use 'Variables';
+@use 'variables';
 @import '~bootstrap/scss/bootstrap';
 
 .recipesCards {
@@ -16,7 +16,7 @@
 	justify-content: space-between;
 
 	.recipeCard {
-		background: Variables.$recipesCardsBackground;
+		background: variables.$recipesCardsBackground;
 		position: relative;
 		border-radius: 5px;
 		overflow: hidden;

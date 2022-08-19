@@ -1,6 +1,6 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, select, on } from '@ngrx/store';
-import Recipe from 'src/models/Recipe.model';
+import Recipe from '@models/Recipe.model';
 import RecipesActions from './recipes.actions';
 
 export interface RecipesState extends EntityState<Recipe> {

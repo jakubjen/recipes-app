@@ -7,8 +7,8 @@ import { AppState } from '@store/store';
 import { finalize, first, Observable, tap } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
-export class RecipeResolver implements Resolve<any> {
-	loading = false;
+export class RecipeResolver implements Resolve<void> {
+	private loading = false;
 
 	constructor(private store: Store<AppState>) {}
 

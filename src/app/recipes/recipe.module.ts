@@ -7,7 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { RecipeRouterModule } from './recipe-routing.module';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { loadRecipeEffect } from '@store/recipes/loadRecipeEffect';
+import { loadRecipeEffect } from '@store/recipes/load-recipes-effect';
 import { recipesReducer } from '@store/recipes/recipes.reducer';
 
 @NgModule({

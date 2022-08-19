@@ -1,8 +1,8 @@
-@use 'Variables';
+@use 'variables';
 
 .logo {
 	position: relative;
-	background:  Variables.$logoBackground;
+	background:  variables.$logoBackground;
 	width: 38px;
 	height: 38px;
 	border-radius: 6px;
@@ -15,7 +15,7 @@
 		top: 50%;
 		left: 50%;
 		transform: translateX(-50%) translateY(-50%);
-		background: Variables.$logoCircle;
+		background: variables.$logoCircle;
 		border-radius: 50%;
 	}
 }
