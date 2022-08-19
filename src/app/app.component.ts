@@ -1,7 +1,7 @@
 /* eslint-disable @ngrx/prefer-selector-in-select */
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { RecipesService } from './recipes/services/recipes-service';
+import { RecipesService } from '@services/recipes/recipes-service';
 import { RecipesActions } from './store/recipes';
 import { AppState } from './store/store';
 

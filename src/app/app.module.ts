@@ -15,8 +15,8 @@ import { RecipeModule } from './recipes/recipe.module';
 import { SharedModule } from './shared/shared.module';
 import { recipesReducer } from './store/recipes/recipes.reducer';
 import { EffectsModule } from '@ngrx/effects';
-import { loadRecipeEffect } from './store/recipe.effect';
 import { DashboardModule } from './dashboard/dashboard.module';
+import { loadRecipeEffect } from '@store/recipes/recipe.effect';
 
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http);

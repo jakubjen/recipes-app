@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { catchError, exhaustMap, map, mergeMap, of, switchMap } from 'rxjs';
-import { RecipesService } from '../recipes/services/recipes-service';
-import { RecipesActions } from './recipes';
+import { RecipesService } from '@services/recipes/recipes-service';
+import { catchError, exhaustMap, map, of } from 'rxjs';
+import { RecipesActions } from '.';
 
 @Injectable()
 export class loadRecipeEffect {
