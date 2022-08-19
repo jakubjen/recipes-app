@@ -1,18 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { RecipesCardsComponent } from './recipes/recipes-cards/recipes-cards.component';
-import { RecipesEditComponent } from './recipes/recipes-edit/recipes-edit.component';
-import { RecipeResolver } from './recipes/resolvers/recipe.resolver';
 import { NotFoundPageComponent } from './shared/not-found-page/not-found-page.component';
 
 const routes: Routes = [
-	{ path: '', component: RecipesCardsComponent, resolve: [RecipeResolver] },
 	{
-		path: 'recipes',
-		children: [
-			{ path: 'edit', component: RecipesEditComponent },
-			// { path: '', component: RecipesComponent },
-		],
+		path: '',
+		loadChildren: () =>
+			import('./recipes/recipe.module').then(m => m.RecipeModule),
 	},
 	{ path: '**', component: NotFoundPageComponent },
 ];

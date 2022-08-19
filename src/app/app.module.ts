@@ -8,16 +8,13 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { RecipeModule } from './recipes/recipe.module';
 import { SharedModule } from './shared/shared.module';
-import { recipesReducer } from './store/recipes/recipes.reducer';
-import { EffectsModule } from '@ngrx/effects';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { DashboardModule } from './dashboard/dashboard.module';
-import { loadRecipeEffect } from '@store/recipes/loadRecipeEffect';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http);
@@ -29,7 +26,6 @@ export function HttpLoaderFactory(http: HttpClient) {
 		BrowserModule,
 		AppRoutingModule,
 		HttpClientModule,
-		RecipeModule,
 		DashboardModule,
 		SharedModule,
 		TranslateModule.forRoot({
@@ -42,13 +38,13 @@ export function HttpLoaderFactory(http: HttpClient) {
 		}),
 		BrowserAnimationsModule,
 		NgbModule,
-		StoreModule.forRoot({ recipes: recipesReducer }),
 		StoreDevtoolsModule.instrument({
 			maxAge: 25,
 			logOnly: environment.production,
 		}),
-		EffectsModule.forRoot([loadRecipeEffect]),
 		StoreRouterConnectingModule.forRoot(),
+		StoreModule.forRoot({}),
+		EffectsModule.forRoot([]),
 	],
 	providers: [],
 	exports: [TranslateModule],

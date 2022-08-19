@@ -1,4 +1,3 @@
-/* eslint-disable @ngrx/prefer-selector-in-select */
 import { Component } from '@angular/core';
 
 @Component({
