@@ -15,6 +15,7 @@ import { RecipeModule } from './recipes/recipe.module';
 import { SharedModule } from './shared/shared.module';
 import { recipesReducer } from './store/recipes/recipes.reducer';
 import { EffectsModule } from '@ngrx/effects';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { loadRecipeEffect } from '@store/recipes/recipe.effect';
 
@@ -47,6 +48,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 			logOnly: environment.production,
 		}),
 		EffectsModule.forRoot([loadRecipeEffect]),
+		StoreRouterConnectingModule.forRoot(),
 	],
 	providers: [],
 	exports: [TranslateModule],
