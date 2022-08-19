@@ -1,15 +1,22 @@
 import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, select, on } from '@ngrx/store';
 import Recipe from 'src/models/Recipe.model';
-import { RecipesActions } from '.';
+import RecipesActions from './recipes.actions';
 
-export interface RecipesState extends EntityState<Recipe> {}
+export interface RecipesState extends EntityState<Recipe> {
+	loadingIsCompleted: boolean;
+}
 const adapter: EntityAdapter<Recipe> = createEntityAdapter<Recipe>();
-const initialState = adapter.getInitialState({});
+const initialState = adapter.getInitialState({
+	loadingIsCompleted: false,
+});
 export const recipesReducer = createReducer(
 	initialState,
+	on(RecipesActions.loadRecipes, (state: RecipesState): RecipesState => {
+		return { ...state, loadingIsCompleted: false };
+	}),
 	on(RecipesActions.loadRecipesSuccess, (state: RecipesState, { recipes }) => {
-		return adapter.setAll(recipes, state);
+		return adapter.setAll(recipes, { ...state, loadingIsCompleted: true });
 	})
 );
 

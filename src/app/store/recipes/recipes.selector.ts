@@ -1,10 +1,15 @@
 import { createSelector } from '@ngrx/store';
 import { AppState } from '../store';
-import { selectAllRecipes } from './recipes.reducer';
+import { RecipesState, selectAllRecipes } from './recipes.reducer';
 
-export const selectRecipesState = (state: AppState) => state.recipes;
+const selectRecipesState = (state: AppState) => state.recipes;
 
-export const selectRecipes = createSelector(
+const selectRecipes = createSelector(selectRecipesState, selectAllRecipes);
+
+const selectLoadingIsComplied = createSelector(
 	selectRecipesState,
-	selectAllRecipes
+	(state: RecipesState) => state.loadingIsCompleted
 );
+
+const RecipesSelectors = { selectRecipes, selectLoadingIsComplied };
+export default RecipesSelectors;
