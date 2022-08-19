@@ -17,7 +17,6 @@ import { recipesReducer } from './store/recipes/recipes.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { loadRecipeEffect } from './store/recipe.effect';
 import { DashboardModule } from './dashboard/dashboard.module';
-import { RouterModule } from '@angular/router';
 
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http);
