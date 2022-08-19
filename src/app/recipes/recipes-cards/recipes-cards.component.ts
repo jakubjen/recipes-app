@@ -11,6 +11,6 @@ import Recipe from '@models/Recipe.model';
 	styleUrls: ['recipes-cards.component.scss'],
 })
 export class RecipesCardsComponent {
-	recipes$: Observable<Recipe[]> = this.store.select(selectRecipes);
+	public recipes$: Observable<Recipe[]> = this.store.select(selectRecipes);
 	constructor(private store: Store<AppState>) {}
 }
