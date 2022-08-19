@@ -11,24 +11,26 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { HeaderComponent } from './header/header.component';
 import { RecipeModule } from './recipes/recipe.module';
 import { SharedModule } from './shared/shared.module';
 import { recipesReducer } from './store/recipes/recipes.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { loadRecipeEffect } from './store/recipe.effect';
+import { DashboardModule } from './dashboard/dashboard.module';
+import { RouterModule } from '@angular/router';
 
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http);
 }
 
 @NgModule({
-	declarations: [AppComponent, HeaderComponent],
+	declarations: [AppComponent],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
 		HttpClientModule,
 		RecipeModule,
+		DashboardModule,
 		SharedModule,
 		TranslateModule.forRoot({
 			defaultLanguage: 'en',
