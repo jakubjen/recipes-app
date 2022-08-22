@@ -15,6 +15,14 @@ import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
+import { AngularFireModule } from '@angular/fire/compat';
+import {
+	AngularFireAnalyticsModule,
+	ScreenTrackingService,
+	UserTrackingService,
+} from '@angular/fire/compat/analytics';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http);
@@ -45,8 +53,15 @@ export function HttpLoaderFactory(http: HttpClient) {
 			maxAge: 25,
 			logOnly: environment.production,
 		}),
+		AngularFireModule.initializeApp(environment.firebase),
+		AngularFireAnalyticsModule,
+		AngularFirestoreModule,
+		AngularFireAnalyticsModule,
+		AngularFireAuthModule,
+		// provideAnalytics(() => getAnalytics()),
+		// provideAuth(() => getAuth()),
 	],
-	providers: [],
+	providers: [ScreenTrackingService, UserTrackingService],
 	exports: [TranslateModule],
 	bootstrap: [AppComponent],
 })
