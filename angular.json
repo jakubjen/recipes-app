@@ -26,10 +26,8 @@
 						"assets": ["src/favicon.ico", "src/assets"],
 						"styles": ["src/assets/scss/styles.scss"],
 						"stylePreprocessorOptions": {
-							"includePaths": [
-							  "src/assets/scss"
-							]
-						  },
+							"includePaths": ["src/assets/scss"]
+						},
 						"scripts": ["node_modules/bootstrap/dist/js/bootstrap.js"]
 					},
 					"configurations": {
@@ -94,10 +92,8 @@
 						"assets": ["src/favicon.ico", "src/assets"],
 						"styles": ["src/assets/scss/styles.scss"],
 						"stylePreprocessorOptions": {
-							"includePaths": [
-							  "src/assets/scss"
-							]
-						  },
+							"includePaths": ["src/assets/scss"]
+						},
 						"scripts": []
 					}
 				},
@@ -105,6 +101,16 @@
 					"builder": "@angular-eslint/builder:lint",
 					"options": {
 						"lintFilePatterns": ["src/**/*.ts", "src/**/*.html"]
+					}
+				},
+				"deploy": {
+					"builder": "@angular/fire:deploy",
+					"options": {
+						"prerender": false,
+						"ssr": false,
+						"browserTarget": "recipes-app:build:production",
+						"firebaseProject": "recipes-b5b2c",
+						"firebaseHostingSite": "recipes-b5b2c"
 					}
 				}
 			}
