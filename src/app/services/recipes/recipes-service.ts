@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import Recipe from 'src/models/Recipe.model';
-import Constants from '../constants';
+import Constants from 'src/app/constants';
+import Recipe from '@models/Recipe.model';
 
 @Injectable({
 	providedIn: 'root',

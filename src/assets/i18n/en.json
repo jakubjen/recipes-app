@@ -1,3 +1,12 @@
 {
-	"test": "Test text"
+	"Recipes": {
+		"LatestRecipes": "Latest recipes"
+	},
+	"Time": {
+		"minutesShort": "min"
+	},
+	"Navigation": {
+		"Home": "Home",
+		"AddRecipe": "Add Recipe"
+	}
 }

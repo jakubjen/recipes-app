@@ -1,7 +1,15 @@
 import { createAction, props } from '@ngrx/store';
-import Recipe from 'src/models/Recipe.model';
+import Recipe from '@models/Recipe.model';
 
-export const updateRecipes = createAction(
-	'[Recipes Service] update',
+const loadRecipes = createAction('[Router] Load recipes');
+
+const loadRecipesSuccess = createAction(
+	'[Router] Load recipes success',
 	props<{ recipes: Recipe[] }>()
 );
+
+const loadRecipesFailed = createAction('[Router] Load recipes failed');
+
+const RecipesActions = { loadRecipes, loadRecipesSuccess, loadRecipesFailed };
+
+export default RecipesActions;

@@ -8,34 +8,26 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { HomePageComponent } from './home-page/home-page.component';
-import { RecipesComponent } from './recipes/recipes.component';
-import { RecipesEditComponent } from './recipes/recipes-edit/recipes-edit.component';
-import { RecipesAddComponent } from './recipes/recipes-add/recipes-add.component';
-import { HeaderComponent } from './header/header.component';
-import { recipesReducer } from './store/recipes/recipes.reducer';
+import { SharedModule } from './shared/shared.module';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { DashboardModule } from './dashboard/dashboard.module';
+import { EffectsModule } from '@ngrx/effects';
+import { StoreModule } from '@ngrx/store';
 
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http);
 }
 
 @NgModule({
-	declarations: [
-		AppComponent,
-		HomePageComponent,
-		RecipesComponent,
-		RecipesComponent,
-		RecipesEditComponent,
-		RecipesAddComponent,
-		HeaderComponent,
-	],
+	declarations: [AppComponent],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
 		HttpClientModule,
+		DashboardModule,
+		SharedModule,
 		TranslateModule.forRoot({
 			defaultLanguage: 'en',
 			loader: {
@@ -46,7 +38,9 @@ export function HttpLoaderFactory(http: HttpClient) {
 		}),
 		BrowserAnimationsModule,
 		NgbModule,
-		StoreModule.forRoot({ recipe: recipesReducer }),
+		StoreRouterConnectingModule.forRoot(),
+		StoreModule.forRoot({}),
+		EffectsModule.forRoot([]),
 		StoreDevtoolsModule.instrument({
 			maxAge: 25,
 			logOnly: environment.production,

@@ -1,0 +1,12 @@
+<h2 class="m-b-4">{{ 'Recipes.LatestRecipes' | translate }}</h2>
+<div class="recipesCards">
+	<div class="recipeCard" *ngFor="let recipe of recipes$ | async">
+		<img [src]="recipe.imageUrl" [alt]="recipe.title" />
+		<div class="text">
+			<div class="time">
+				{{ recipe.time }} {{ 'Time.minutesShort' | translate }}
+			</div>
+			<div class="title">{{ recipe.title }}</div>
+		</div>
+	</div>
+</div>
