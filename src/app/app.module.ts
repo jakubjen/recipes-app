@@ -58,8 +58,6 @@ export function HttpLoaderFactory(http: HttpClient) {
 		AngularFirestoreModule,
 		AngularFireAnalyticsModule,
 		AngularFireAuthModule,
-		// provideAnalytics(() => getAnalytics()),
-		// provideAuth(() => getAuth()),
 	],
 	providers: [ScreenTrackingService, UserTrackingService],
 	exports: [TranslateModule],
