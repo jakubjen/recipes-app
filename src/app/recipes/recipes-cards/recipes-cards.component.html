@@ -1,6 +1,6 @@
-<h2 class="m-b-4">{{ 'Recipes.LatestRecipes' | translate }}</h2>
-<div class="recipesCards">
-	<div class="recipeCard" *ngFor="let recipe of recipes$ | async">
+<h3 class="mb-4">{{ 'Recipes.LatestRecipes' | translate }}</h3>
+<div class="recipes-cards m" *ngIf="recipes$ | async as recipes">
+	<div class="recipe-card" *ngFor="let recipe of recipes">
 		<img [src]="recipe.imageUrl" [alt]="recipe.title" />
 		<div class="text">
 			<div class="time">
@@ -8,5 +8,13 @@
 			</div>
 			<div class="title">{{ recipe.title }}</div>
 		</div>
+	</div>
+</div>
+
+<div
+	class="d-flex justify-content-center mt-3"
+	*ngIf="(recipesAreLoaded$ | async) === false">
+	<div class="spinner-border text-primary" role="status">
+		<span class="visually-hidden">{{ 'App.Loading' | translate </span>
 	</div>
 </div>

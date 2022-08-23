@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "recipes-b5b2c": {
+      "hosting": {
+        "recipes-app": [
+          "recipes-b5b2c"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "recipes-b5b2c"
+  }
+}

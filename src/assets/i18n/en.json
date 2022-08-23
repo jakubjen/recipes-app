@@ -8,5 +8,8 @@
 	"Navigation": {
 		"Home": "Home",
 		"AddRecipe": "Add Recipe"
+	},
+	"App": {
+		"'Loading": "Loading..."
 	}
 }
