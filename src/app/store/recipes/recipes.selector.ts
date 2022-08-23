@@ -8,10 +8,10 @@ const selectRecipesState = createFeatureSelector<AppState, RecipesState>(
 
 const selectRecipes = createSelector(selectRecipesState, selectAllRecipes);
 
-const selectLoadingIsComplied = createSelector(
+const selectRecipesAreLoaded = createSelector(
 	selectRecipesState,
-	(state: RecipesState) => state.loadingIsCompleted
+	(state: RecipesState) => state.recipesAreLoaded
 );
 
-const RecipesSelectors = { selectRecipes, selectLoadingIsComplied };
+const RecipesSelectors = { selectRecipes, selectRecipesAreLoaded };
 export default RecipesSelectors;

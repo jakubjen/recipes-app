@@ -13,7 +13,7 @@ export class RecipeResolver implements Resolve<void> {
 	constructor(private store: Store<AppState>) {}
 
 	resolve(): Observable<any> {
-		return this.store.select(RecipesSelectors.selectLoadingIsComplied).pipe(
+		return this.store.select(RecipesSelectors.selectRecipesAreLoaded).pipe(
 			tap(recipesLoaded => {
 				if (!this.loading && !recipesLoaded) {
 					this.loading = true;

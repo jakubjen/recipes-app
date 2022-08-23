@@ -7,8 +7,9 @@ import { TranslateModule } from '@ngx-translate/core';
 import { RecipeRouterModule } from './recipe-routing.module';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { loadRecipeEffect } from '@store/recipes/load-recipes-effect';
+import { loadRecipeEffect } from '@store/recipes/effects/load-recipes-effect';
 import { recipesReducer } from '@store/recipes/recipes.reducer';
+import { loadRecipesSuccessEffect } from '@store/recipes/effects/load-success-recipe.effect';
 
 @NgModule({
 	declarations: [
@@ -21,7 +22,7 @@ import { recipesReducer } from '@store/recipes/recipes.reducer';
 		TranslateModule,
 		RecipeRouterModule,
 		StoreModule.forFeature('recipes', recipesReducer),
-		EffectsModule.forFeature([loadRecipeEffect]),
+		EffectsModule.forFeature([loadRecipeEffect, loadRecipesSuccessEffect]),
 	],
 	exports: [RecipesAddComponent, RecipesEditComponent, RecipesCardsComponent],
 })
