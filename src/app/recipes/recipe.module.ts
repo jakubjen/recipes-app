@@ -8,7 +8,6 @@ import { RecipeRouterModule } from './recipe-routing.module';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { recipesReducer } from '@store/recipes/recipes.reducer';
-import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { RecipesService } from '@services/recipes/recipes.service';
 import { RecipeResolver } from './resolvers/recipe.resolver';
 import { loadRecipesStartEffect } from '@store/recipes/effect/load-recipe-start.effect';
@@ -18,7 +17,6 @@ import { loadRecipesStartEffect } from '@store/recipes/effect/load-recipe-start.
 		RecipesEditComponent,
 		RecipesAddComponent,
 		RecipesCardsComponent,
-		RecipeDetailComponent,
 	],
 	providers: [RecipesService, RecipeResolver],
 	imports: [

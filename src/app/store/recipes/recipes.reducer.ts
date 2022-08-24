@@ -2,28 +2,28 @@ import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, select, on } from '@ngrx/store';
 import Recipe from '@models/recipe.model';
 import RecipesActions from './recipes.actions';
-import dataState from 'src/app/enums/data-store.enum';
+import DataState from '@models/data-store.enum';
 
 export interface RecipesState extends EntityState<Recipe> {
-	dataState: dataState;
+	dataState: DataState;
 }
 const adapter: EntityAdapter<Recipe> = createEntityAdapter<Recipe>();
 const initialState = adapter.getInitialState({
-	dataState: dataState.beforeLoad,
+	dataState: DataState.BeforeLoad,
 });
 export const recipesReducer = createReducer(
 	{ ...initialState },
 
 	on(RecipesActions.loadRecipesStart, (state: RecipesState): RecipesState => {
-		return { ...state, dataState: dataState.loading };
+		return { ...state, dataState: DataState.Loading };
 	}),
 
 	on(RecipesActions.loadRecipesSuccess, (state: RecipesState): RecipesState => {
-		return { ...state, dataState: dataState.loaded };
+		return { ...state, dataState: DataState.Loaded };
 	}),
 
 	on(RecipesActions.loadRecipesFailed, (state: RecipesState): RecipesState => {
-		return { ...state, dataState: dataState.error };
+		return { ...state, dataState: DataState.Error };
 	}),
 
 	on(RecipesActions.serviceAddRecipe, (state: RecipesState, { recipe }) => {

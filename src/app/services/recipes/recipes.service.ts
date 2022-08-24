@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import FirebaseActions from '@models/firebase-actions.enum';
 import Recipe from '@models/recipe.model';
 import { Store } from '@ngrx/store';
 import RecipesActions from '@store/recipes/recipes.actions';
@@ -25,15 +26,15 @@ export class RecipesService {
 						};
 						const { id } = recipe;
 						switch (action.type) {
-							case 'added':
+							case FirebaseActions.Added:
 								return this.store.dispatch(
 									RecipesActions.serviceAddRecipe({ recipe })
 								);
-							case 'removed':
+							case FirebaseActions.Removed:
 								return this.store.dispatch(
 									RecipesActions.serviceRemoveRecipe({ id })
 								);
-							case 'modified':
+							case FirebaseActions.Modified:
 								return this.store.dispatch(
 									RecipesActions.serviceModifyRecipe({ recipe })
 								);

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import RecipesSelectors from 'src/app/store/recipes/recipes.selector';
 import { AppState } from 'src/app/store/store';
 import Recipe from '@models/recipe.model';
-import dataState from 'src/app/enums/data-store.enum';
+import DataState from '@models/data-store.enum';
 
 @Component({
 	selector: 'app-recipe-cards',
@@ -13,7 +13,8 @@ import dataState from 'src/app/enums/data-store.enum';
 })
 export class RecipesCardsComponent implements OnInit {
 	public recipes$: Observable<Recipe[]> | undefined;
-	public recipesAreLoaded$: Observable<dataState> | undefined;
+	public recipesAreLoaded$: Observable<DataState> | undefined;
+	public dataState: typeof DataState = DataState;
 	constructor(private store: Store<AppState>) {}
 
 	ngOnInit(): void {

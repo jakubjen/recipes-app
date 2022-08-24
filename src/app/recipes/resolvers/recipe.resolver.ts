@@ -6,21 +6,18 @@ import RecipesActions from '@store/recipes/recipes.actions';
 import RecipesSelectors from '@store/recipes/recipes.selector';
 import { AppState } from '@store/store';
 import { finalize, first, Observable, tap } from 'rxjs';
-import dataState from 'src/app/enums/data-store.enum';
+import DataState from '@models/data-store.enum';
 
 @Injectable()
 export class RecipeResolver implements Resolve<void> {
 	private loading = false;
 
-	constructor(
-		private store: Store<AppState>,
-		private recipeService: RecipesService
-	) {}
+	constructor(private store: Store<AppState>) {}
 
 	resolve(): Observable<any> {
 		return this.store.select(RecipesSelectors.selectDataState).pipe(
 			tap(state => {
-				if (!this.loading && state === dataState.beforeLoad) {
+				if (!this.loading && state === DataState.BeforeLoad) {
 					this.loading = true;
 					this.store.dispatch(RecipesActions.loadRecipesStart());
 				}
