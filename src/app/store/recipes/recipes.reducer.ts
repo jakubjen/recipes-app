@@ -2,34 +2,40 @@ import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, select, on } from '@ngrx/store';
 import Recipe from '@models/recipe.model';
 import RecipesActions from './recipes.actions';
+import dataState from 'src/app/enums/data-store.enum';
 
 export interface RecipesState extends EntityState<Recipe> {
-	recipesAreLoaded: boolean;
+	dataState: dataState;
 }
 const adapter: EntityAdapter<Recipe> = createEntityAdapter<Recipe>();
 const initialState = adapter.getInitialState({
-	recipesAreLoaded: false,
+	dataState: dataState.beforeLoad,
 });
 export const recipesReducer = createReducer(
-	initialState,
+	{ ...initialState },
 
-	on(RecipesActions.loadRecipesSuccess, (state: RecipesState): RecipesState => {
-		return { ...state, recipesAreLoaded: true };
+	on(RecipesActions.loadRecipesStart, (state: RecipesState): RecipesState => {
+		return { ...state, dataState: dataState.loading };
 	}),
 
-	on(RecipesActions.firestoreAddRecipe, (state: RecipesState, { recipe }) => {
+	on(RecipesActions.loadRecipesSuccess, (state: RecipesState): RecipesState => {
+		return { ...state, dataState: dataState.loaded };
+	}),
+
+	on(RecipesActions.loadRecipesFailed, (state: RecipesState): RecipesState => {
+		return { ...state, dataState: dataState.error };
+	}),
+
+	on(RecipesActions.serviceAddRecipe, (state: RecipesState, { recipe }) => {
 		return adapter.addOne(recipe, state);
 	}),
 
-	on(
-		RecipesActions.firestoreModifyRecipe,
-		(state: RecipesState, { recipe }) => {
-			return adapter.setOne(recipe, state);
-		}
-	),
+	on(RecipesActions.serviceModifyRecipe, (state: RecipesState, { recipe }) => {
+		return adapter.setOne(recipe, state);
+	}),
 
-	on(RecipesActions.firebaseRemoveRecipe, (state: RecipesState, { recipe }) => {
-		return adapter.removeOne(recipe.id, state);
+	on(RecipesActions.serviceRemoveRecipe, (state: RecipesState, { id }) => {
+		return adapter.removeOne(id, state);
 	})
 );
 
