@@ -3,42 +3,34 @@ import Recipe from '@models/recipe.model';
 import { Update } from '@ngrx/entity';
 import { DocumentChangeType } from '@angular/fire/compat/firestore';
 
-const loadRecipes = createAction('[Router] Load recipes');
+const loadRecipesStart = createAction('[Router] Start recipes');
 
-const loadRecipesSuccess = createAction(
-	'[Router] Load recipes success',
-	props<{ action: DocumentChangeType; recipe: Recipe }>()
-);
+const loadRecipesSuccess = createAction('[Router] Load recipes success');
 
 const loadRecipesFailed = createAction('[Router] Load recipes failed');
 
-const firestoreAddRecipe = createAction(
-	'[Firestore] Add recipe',
+const serviceAddRecipe = createAction(
+	'[RecipeService] Add recipe',
 	props<{ recipe: Recipe }>()
 );
 
-const firestoreModifyRecipe = createAction(
+const serviceModifyRecipe = createAction(
 	'[Firestore] Recipe modified',
 	props<{ recipe: Recipe }>()
 );
 
-const firebaseRemoveRecipe = createAction(
+const serviceRemoveRecipe = createAction(
 	'[Firestore] Recipe removed',
 	props<{ id: string }>()
 );
 
-const updateRecipes = createAction(
-	'[Firestore] Update recipes',
-	props<{ recipe: Update<Recipe> }>()
-);
-
 const RecipesActions = {
-	loadRecipes,
+	loadRecipesStart,
 	loadRecipesSuccess,
 	loadRecipesFailed,
-	firestoreAddRecipe,
-	firebaseRemoveRecipe,
-	firestoreModifyRecipe,
+	serviceAddRecipe,
+	serviceRemoveRecipe,
+	serviceModifyRecipe,
 };
 
 export default RecipesActions;
