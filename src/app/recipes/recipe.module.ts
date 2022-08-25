@@ -9,8 +9,9 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { recipesReducer } from '@store/recipes/recipes.reducer';
 import { RecipesService } from '@services/recipes/recipes.service';
-import { RecipeResolver } from './resolvers/recipe.resolver';
+import { LoadRecipeResolver } from './resolvers/load-recipe.resolver';
 import { loadRecipesStartEffect } from '@store/recipes/effect/load-recipe-start.effect';
+import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { RecipeCardComponent } from './recipe-card/recipe-card.component';
 
 @NgModule({
@@ -18,9 +19,10 @@ import { RecipeCardComponent } from './recipe-card/recipe-card.component';
 		RecipesEditComponent,
 		RecipesAddComponent,
 		RecipesCardsComponent,
+		RecipeDetailComponent,
 		RecipeCardComponent,
 	],
-	providers: [RecipesService, RecipeResolver],
+	providers: [RecipesService, LoadRecipeResolver],
 	imports: [
 		CommonModule,
 		TranslateModule,

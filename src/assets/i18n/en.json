@@ -1,6 +1,7 @@
 {
 	"Recipes": {
-		"LatestRecipes": "Latest recipes"
+		"LatestRecipes": "Latest recipes",
+		"NoIngredients": "No ingredients are needed"
 	},
 	"Time": {
 		"minutesShort": "min"

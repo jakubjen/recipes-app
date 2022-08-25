@@ -1,0 +1,49 @@
+<div class="row" *ngIf="recipe$ | async as recipe">
+	<div class="col-12 col-md-8 card-wrapper">
+		<app-recipe-card [recipe]="recipe"></app-recipe-card>
+	</div>
+	<div class="col-12 col-md-8 mt-4 description">
+		<p class="fs-6">
+			Lorem iosum dolor sit amet, consectetur adipiscing elit. Praesent
+			tincidunt sit amet augue dignissim bibendum. Suspendisse potent Phasellus
+			rutrum risus tortor, vulputate lobortis nibh vestibulum vel Donec eu
+			malesuada lusto ac allauam du. Vivamus vitae dul et acus lacinia prenum eu
+			at lusto. Aenean consequat accumsan matts Vivamus pretium sed turps nec
+			reugiat.
+		</p>
+	</div>
+	<div class="col-12 col-md-4 ingredients">
+		<div class="row">
+			<div class="col-6">
+				<a routerLink="#" class="btn btn-outline-primary btn-lg w-100">Edit</a>
+			</div>
+		</div>
+		<h3 class="fs-4 mt-5 mt-md-3">Ingredients</h3>
+		<div class="row">
+			<ng-template [ngIf]="recipe.ingredients" [ngIfElse]="empty">
+				<ng-container *ngFor="let ingredient of recipe.ingredients">
+					<div class="col-4">{{ ingredient.amount }} {{ ingredient.unit }}</div>
+					<div class="col-8">{{ ingredient.name }}</div>
+				</ng-container>
+			</ng-template>
+			<ng-template #empty>
+				<div class="col-12">{{ 'Recipes.NoIngredients' | translate }}</div>
+			</ng-template>
+		</div>
+	</div>
+	<ng-container *ngIf="recipe.instructions.length > 0">
+		<div class="col-12 col-md-8 mt-5 mt-md-4 recipe pb-3">
+			<h3 class="fs-4">Preparing</h3>
+			<p *ngFor="let instruction of recipe.instructions; let i = index">
+				<span>{{ i + 1 }}</span>
+				{{ instruction }}
+			</p>
+		</div>
+	</ng-container>
+</div>
+
+<div class="d-flex justify-content-center mt-3" *ngIf="recipe$ === undefined">
+	<div class="spinner-border text-primary" role="status">
+		<span class="visually-hidden">{{ 'App.Loading' | translate }} </span>
+	</div>
+</div>

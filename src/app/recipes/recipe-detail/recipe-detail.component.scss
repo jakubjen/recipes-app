@@ -1,0 +1,45 @@
+@import '~bootstrap/scss/mixins';/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/functions';/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/variables';/* Importing Bootstrap SCSS file. */
+
+.card-wrapper {
+    height: 400px;
+}
+
+.description {
+    color: $gray-600;
+}
+
+.recipe p {
+    color: $gray-600;
+    margin-top: 20px;
+
+    span::after {
+        content: '.';
+        margin-right: 15px;
+    }
+}
+
+.ingredients {
+    .cal {
+        overflow-wrap: break-word;
+    }
+
+    .row {
+        color: $gray-600;
+    }
+}
+
+@include media-breakpoint-up(md) {
+    .description {
+        order: 3;
+    }
+
+    .ingredients {
+        order: 2;
+    }
+    
+    .recipe {
+        order: 4;
+    }
+}
