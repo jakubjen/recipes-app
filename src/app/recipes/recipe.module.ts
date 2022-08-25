@@ -11,12 +11,14 @@ import { recipesReducer } from '@store/recipes/recipes.reducer';
 import { RecipesService } from '@services/recipes/recipes.service';
 import { RecipeResolver } from './resolvers/recipe.resolver';
 import { loadRecipesStartEffect } from '@store/recipes/effect/load-recipe-start.effect';
+import { RecipeCardComponent } from './recipe-card/recipe-card.component';
 
 @NgModule({
 	declarations: [
 		RecipesEditComponent,
 		RecipesAddComponent,
 		RecipesCardsComponent,
+		RecipeCardComponent,
 	],
 	providers: [RecipesService, RecipeResolver],
 	imports: [

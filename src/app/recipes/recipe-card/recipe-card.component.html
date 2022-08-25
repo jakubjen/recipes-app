@@ -1,0 +1,9 @@
+<div class="recipe-card" *ngIf="recipe">
+	<img [src]="recipe.imageUrl" [alt]="recipe.title" />
+	<div class="text">
+		<div class="time">
+			{{ recipe.time }} {{ 'Time.minutesShort' | translate }}
+		</div>
+		<div class="title fs-4 fw-bolder">{{ recipe.title }}</div>
+	</div>
+</div>
