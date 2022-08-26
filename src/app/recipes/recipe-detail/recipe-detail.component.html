@@ -4,12 +4,7 @@
 	</div>
 	<div class="col-12 col-md-8 mt-4 description">
 		<p class="fs-6">
-			Lorem iosum dolor sit amet, consectetur adipiscing elit. Praesent
-			tincidunt sit amet augue dignissim bibendum. Suspendisse potent Phasellus
-			rutrum risus tortor, vulputate lobortis nibh vestibulum vel Donec eu
-			malesuada lusto ac allauam du. Vivamus vitae dul et acus lacinia prenum eu
-			at lusto. Aenean consequat accumsan matts Vivamus pretium sed turps nec
-			reugiat.
+			{{ recipe.description }}
 		</p>
 	</div>
 	<div class="col-12 col-md-4 ingredients">
@@ -18,7 +13,7 @@
 				<a routerLink="#" class="btn btn-outline-primary w-100">Edit</a>
 			</div>
 		</div>
-		<h3 class="fs-4 mt-5 mt-md-3">Ingredients</h3>
+		<h3 class="fs-4 mt-5 mt-md-3">{{ 'Recipes.Ingredients' | translate }}</h3>
 		<div class="row">
 			<ng-template [ngIf]="recipe.ingredients" [ngIfElse]="empty">
 				<ng-container *ngFor="let ingredient of recipe.ingredients">
@@ -33,7 +28,7 @@
 	</div>
 	<ng-container *ngIf="recipe.instructions.length > 0">
 		<div class="col-12 col-md-8 mt-5 mt-md-4 recipe pb-3">
-			<h3 class="fs-4">Preparing</h3>
+			<h3 class="fs-4">{{ 'Preparing' | translate }}</h3>
 			<p *ngFor="let instruction of recipe.instructions; let i = index">
 				<span>{{ i + 1 }}</span>
 				{{ instruction }}
