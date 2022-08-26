@@ -10,6 +10,11 @@
 		"AddRecipe": "Add Recipe"
 	},
 	"App": {
-		"'Loading": "Loading..."
+		"'Loading": "Loading...",
+		"PageNotFound": {
+			"Heading": "Page Not Found",
+			"GoTo": "Go to",
+			"HomePage": "home page"
+		}
 	}
 }
