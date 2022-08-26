@@ -7,6 +7,6 @@ import Constants from 'src/app/constants';
 	styleUrls: ['./not-found-page.component.scss'],
 })
 export class NotFoundPageComponent {
-	public images = Constants.assets.images;
+	public image404 = Constants.assets.images.image404;
 	constructor() {}
 }
