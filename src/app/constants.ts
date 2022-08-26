@@ -1,7 +1,10 @@
+const assetsUrls = '/assets';
+const imagePath = `${assetsUrls}/images`;
 const Constants = {
-	API: {
-		BASE_URL: 'http://localhost:3000',
-		RECIPES_URL: '/recipe',
+	assets: {
+		images: {
+			image404: `${imagePath}/page_not_found.svg`,
+		},
 	},
 };
 export default Constants;
