@@ -1,6 +1,14 @@
 {
 	"Recipes": {
-		"LatestRecipes": "Latest recipes"
+		"LatestRecipes": "Latest recipes",
+		"Title": "Title",
+		"Recipe": "Recipe",
+		"Ingredients": "Ingredients",
+		"Description": "Description",
+		"ImageUrl": "Image Url",
+		"AddIngredient": "Add ingredient",
+		"AddInstruction": "Add instruction",
+		"Time": "Time to prepare dish"
 	},
 	"Time": {
 		"minutesShort": "min"
@@ -10,6 +18,10 @@
 		"AddRecipe": "Add Recipe"
 	},
 	"App": {
-		"'Loading": "Loading..."
+		"'Loading": "Loading...",
+		"Validation": {
+			"Required": "{{ field }} is required.",
+			"Length": "{{ field }} must be {{ min }}-{{ max }} characters long."
+		}
 	}
 }
