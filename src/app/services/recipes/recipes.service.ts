@@ -47,6 +47,12 @@ export class RecipesService {
 			});
 	}
 
+	public addRecipe(recipe: Recipe): void {
+		console.log('send');
+
+		this.firestore.collection<Recipe>('recipes').add(recipe);
+	}
+
 	public loadRecipes(): void {
 		this.connectToFirestore();
 	}
