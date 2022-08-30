@@ -1,0 +1,291 @@
+<h2 class="mb-3">Recipe</h2>
+<form
+	[formGroup]="recipeForm"
+	#ngForm="ngForm"
+	(ngSubmit)="handleSubmit()"
+	*ngIf="!loading">
+	<div class="row">
+		<div class="col-12 col-md-9 col-xl-8">
+			<div class="title">
+				<label for="title" class="form-label fs-5 fw-bold">{{
+					'Recipes.Title' | translate
+				}}</label>
+				<input
+					type="text"
+					formControlName="title"
+					[placeholder]="'Recipes.Title' | translate"
+					class="form-control"
+					[class.is-invalid]="
+						(title?.touched || ngForm.submitted) && !!title?.errors
+					"
+					id="title" />
+				<div
+					class="erros"
+					*ngIf="(title?.touched || ngForm.submitted) && !!title?.errors">
+					<div class="text-danger" *ngIf="title?.errors?.['required']">
+						<small>{{
+							'App.Validation.Required' | translate: { field: 'Title' }
+						}}</small>
+					</div>
+					<div
+						class="text-danger"
+						*ngIf="!!title?.errors?.['minlength'] || !!title?.errors?.['maxLength']">
+						<small>
+							{{
+								'App.Validation.Length'
+									| translate: { field: 'Title', min: 10, max: 100 }
+							}}
+						</small>
+					</div>
+				</div>
+			</div>
+
+			<div class="mt-4 imageUrl">
+				<label for="imageUrl" class="form-label fs-5 fw-bold">{{
+					'Recipes.ImageUrl' | translate
+				}}</label>
+				<input
+					type="text"
+					formControlName="imageUrl"
+					[placeholder]="'Recipes.ImageUrl' | translate"
+					class="form-control"
+					[class.is-invalid]="
+						(imageUrl?.touched || ngForm.submitted) && !!imageUrl?.errors
+					"
+					id="imageUrl" />
+				<div
+					class="erros"
+					*ngIf="(imageUrl?.touched || ngForm.submitted) && !!imageUrl?.errors">
+					<div class="text-danger" *ngIf="imageUrl?.errors?.['required']">
+						<small>{{
+							'App.Validation.Required' | translate: { field: 'Image url' }
+						}}</small>
+					</div>
+					<div
+						class="text-danger"
+						*ngIf="!!imageUrl?.errors?.['minlength'] || !!imageUrl?.errors?.['maxLength']">
+						<small>
+							{{
+								'App.Validation.Length'
+									| translate: { field: 'Image Url', min: 10, max: 100 }
+							}}
+						</small>
+					</div>
+				</div>
+			</div>
+
+			<div class="time mt-4">
+				<label for="tile" class="form-label fs-5 fw-bold">{{
+					'Recipes.Time' | translate
+				}}</label>
+				<div class="row">
+					<div class="col-10 col-sm-8 col-md-6">
+						<div class="input-group">
+							<input
+								type="number"
+								formControlName="time"
+								class="form-control"
+								[class.is-invalid]="
+									(time?.touched || ngForm.submitted) && !!time?.errors
+								"
+								id="time" />
+							<span class="input-group-text">min</span>
+						</div>
+					</div>
+				</div>
+				<div
+					class="erros"
+					*ngIf="(time?.touched || ngForm.submitted) && !!time?.errors">
+					<div class="text-danger" *ngIf="time?.errors?.['required']">
+						<small>{{
+							'App.Validation.Required' | translate: { field: 'Time' }
+						}}</small>
+					</div>
+				</div>
+			</div>
+
+			<div class="description mt-4">
+				<label for="description" class="form-label fs-5 fw-bold">{{
+					'Recipes.Description' | translate
+				}}</label>
+				<textarea
+					formControlName="description"
+					class="form-control"
+					id="description"
+					[placeholder]="'Recipes.Description' | translate"
+					[class.is-invalid]="
+						(description?.touched || ngForm.submitted) && !!description?.errors
+					"
+					rows="5"></textarea>
+				<div
+					class="erros"
+					*ngIf="
+						(description?.touched || ngForm.submitted) && !!description?.errors
+					">
+					<div class="text-danger" *ngIf="description?.errors?.['required']">
+						<small>{{
+							'App.Validation.Required' | translate: { field: 'Description' }
+						}}</small>
+					</div>
+					<div
+						class="text-danger"
+						*ngIf="!!description?.errors?.['minlength'] || !!description?.errors?.['maxLength']">
+						<small>
+							{{
+								'App.Validation.Length'
+									| translate: { field: 'Description', min: 50, max: 2000 }
+							}}
+						</small>
+					</div>
+				</div>
+			</div>
+
+			<div class="ingredients mt-4" formArrayName="ingredients">
+				<h3 class="fs-5 fw-bold">
+					{{ 'Recipes.Ingredients' | translate }}
+				</h3>
+				<div
+					class="row mt-3"
+					*ngFor="let ingredientsForm of ingredients.controls; let i = index">
+					<ng-container [formGroupName]="i">
+						<div class="col-6 col-lg-3 amount">
+							<input
+								type="number"
+								class="form-control"
+								placeholder="Amount"
+								[class.is-invalid]="
+									(ngForm.submitted || ingredients.controls[i].get('amount')?.touched) &&
+									!!ingredients.controls[i].get('amount')?.errors?.['required']"
+								formControlName="amount" />
+							<div
+								class="text-danger"
+								*ngIf="
+							(ngForm.submitted || ingredients.controls[i].get('amount')?.touched) &&
+							!!ingredients.controls[i].get('amount')?.errors?.['required']">
+								<small>{{
+									'App.Validation.Required' | translate: { field: 'Amount' }
+								}}</small>
+							</div>
+						</div>
+						<div class="col-6 col-lg-3">
+							<select
+								class="form-select"
+								aria-label="select unit"
+								formControlName="unit">
+								<option
+									*ngFor="let unit of units.weight | keyvalue"
+									[value]="unit.key">
+									{{ unit.key }}
+								</option>
+								<option
+									*ngFor="let unit of units.volume | keyvalue"
+									[value]="unit.key">
+									{{ unit.key }}
+								</option>
+								<option *ngFor="let unit of units.other" [value]="unit">
+									{{ unit }}
+								</option>
+							</select>
+						</div>
+						<div class="col-12 col-lg-6 mt-3 mt-lg-0">
+							<div class="input-group">
+								<input
+									type="text"
+									class="form-control"
+									placeholder="Name"
+									[class.is-invalid]="
+									(ngForm.submitted || ingredients.controls[i].get('name')?.touched) &&
+									!!ingredients.controls[i].get('name')?.errors?.['required']"
+									formControlName="name" />
+
+								<button
+									type="button"
+									class="btn btn-danger"
+									aria-label="Close"
+									(click)="removeIngredient(i)">
+									<i class="bi bi-x-lg"></i>
+								</button>
+							</div>
+							<div
+								class="text-danger"
+								*ngIf="
+						(ngForm.submitted || ingredients.controls[i].get('name')?.touched) &&
+						!!ingredients.controls[i].get('name')?.errors?.['required']">
+								<small>{{
+									'App.Validation.Required' | translate: { field: 'Name' }
+								}}</small>
+							</div>
+						</div>
+					</ng-container>
+				</div>
+				<button
+					type="button"
+					class="btn btn-outline-primary mt-3"
+					(click)="addIngredient()">
+					{{ 'Recipes.AddIngredient' | translate }}
+				</button>
+			</div>
+
+			<div class="instructions mt-4" formArrayName="instructions">
+				<h3 class="fs-4">instructions</h3>
+				<div
+					*ngFor="let instructionForm of instructions.controls; let i = index"
+					class="instruction">
+					<textarea
+						[formControlName]="i"
+						class="form-control mt-2"
+						[id]="'instruction' + i"
+						[placeholder]="'instruction ' + (i + 1)"
+						[class.is-invalid]="
+							(instructions.controls[i].touched || ngForm.submitted) &&
+							!!instructions.controls[i].errors
+						"
+						rows="3"></textarea>
+					<button
+						type="button"
+						class="btn btn-danger btn-sm"
+						aria-label="Close"
+						(click)="removeInstruction(i)">
+						<i class="bi bi-x"></i>
+					</button>
+					<div
+						class="errors"
+						*ngIf="ngForm.submitted || instructions.controls[i].touched">
+						<div
+							class="text-danger"
+							*ngIf="
+									!!instructions.controls[i].errors?.['required']">
+							<small>{{
+								'App.Validation.Required' | translate: { field: 'instruction' }
+							}}</small>
+						</div>
+						<div
+							class="text-danger"
+							*ngIf="
+									instructions.controls[i].errors?.['minlength'] || instructions.controls[i].errors?.['maxLength']">
+							<small>{{
+								'App.Validation.Length'
+									| translate: { field: 'instruction', min: 50, max: 2000 }
+							}}</small>
+						</div>
+					</div>
+				</div>
+				<button
+					type="button"
+					class="btn btn-outline-primary mt-2"
+					(click)="addInstruction()">
+					{{ 'Recipes.AddInstruction' | translate }}
+				</button>
+			</div>
+			<button type="submit" class="btn btn-primary mt-4">
+				{{ action }}
+			</button>
+		</div>
+	</div>
+</form>
+
+<div class="d-flex justify-content-center mt-3" *ngIf="loading">
+	<div class="spinner-border text-primary" role="status">
+		<span class="visually-hidden">{{ 'App.Loading' | translate }} </span>
+	</div>
+</div>
