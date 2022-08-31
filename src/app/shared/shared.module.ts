@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { FormErrorComponent } from './form-error/form-error.component';
 import { TranslateModule } from '@ngx-translate/core';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
 	declarations: [NotFoundPageComponent, FormErrorComponent],
-	imports: [CommonModule, TranslateModule],
+	imports: [CommonModule, RouterModule, TranslateModule],
 	exports: [NotFoundPageComponent, FormErrorComponent],
 })
 export class SharedModule {}

@@ -23,6 +23,11 @@
 			"Required": "This filed is required.",
 			"MinLength": "Field required min length {{ length }}.",
 			"MaxLength": "Field required max length {{ length }}."
+   },
+		"PageNotFound": {
+			"Heading": "Page Not Found",
+			"GoTo": "Go to",
+			"HomePage": "home page"
 		}
 	}
 }
