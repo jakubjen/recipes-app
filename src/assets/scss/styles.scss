@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
 * {
 	padding: 0;
 	margin: 0;
@@ -19,9 +21,8 @@ body {
 	font-family: Roboto, 'Helvetica Neue', sans-serif;
 }
 
-$theme-colors: (
-	'primary': rgb(246 189 65),
-);
+$primary: rgb(246 189 65);
 
 /* Importing Bootstrap SCSS file. */
+/* stylelint-disable-next-line no-invalid-position-at-import-rule */
 @import '~bootstrap/scss/bootstrap';

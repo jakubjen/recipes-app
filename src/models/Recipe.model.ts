@@ -1,4 +1,4 @@
-import Ingredients from './Ingredients.model';
+import Ingredients from './ingredients.model';
 
 export default interface Recipe {
 	id: string;
@@ -7,5 +7,5 @@ export default interface Recipe {
 	imageUrl: string;
 	time: number;
 	ingredients: Ingredients[];
-	instructions: string;
+	instructions: string[];
 }

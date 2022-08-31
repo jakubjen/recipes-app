@@ -1,7 +1,5 @@
 import { createAction, props } from '@ngrx/store';
 import Recipe from '@models/recipe.model';
-import { Update } from '@ngrx/entity';
-import { DocumentChangeType } from '@angular/fire/compat/firestore';
 
 const loadRecipesStart = createAction('[Router] Start recipes');
 
@@ -24,6 +22,11 @@ const serviceRemoveRecipe = createAction(
 	props<{ id: string }>()
 );
 
+const addRecipe = createAction(
+	'[Add recipe] Add recipe',
+	props<{ recipe: Recipe }>()
+);
+
 const RecipesActions = {
 	loadRecipesStart,
 	loadRecipesSuccess,
@@ -31,6 +34,7 @@ const RecipesActions = {
 	serviceAddRecipe,
 	serviceRemoveRecipe,
 	serviceModifyRecipe,
+	addRecipe,
 };
 
 export default RecipesActions;

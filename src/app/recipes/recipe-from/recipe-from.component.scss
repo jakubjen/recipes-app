@@ -1,0 +1,18 @@
+@import '~bootstrap/scss/mixins'; /* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/functions'; /* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/variables'; /* Importing Bootstrap SCSS file. */
+
+.instruction {
+	position: relative;
+
+	button {
+		position: absolute;
+		top: 8px;
+		right: 8px;
+		visibility: hidden;
+	}
+
+	&:hover button {
+		visibility: visible;
+	}
+}
