@@ -1,5 +1,11 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { FormControl, FormGroup, FormArray, Validators } from '@angular/forms';
+import {
+	FormControl,
+	FormGroup,
+	FormArray,
+	Validators,
+	AbstractControl,
+} from '@angular/forms';
 import Recipe from '@models/recipe.model';
 import { IngredientsUnit } from '@models/ingredients-units.model';
 
@@ -41,15 +47,13 @@ export class RecipeFromComponent {
 		instructions: new FormArray<FormControl<string>>([]),
 	});
 
-	constructor() {}
-
 	public handleSubmit(): void {
 		if (this.recipeForm.valid) {
 			this.submitRecipe.emit(this.recipeForm.value as Recipe);
 		}
 	}
 
-	get ingredients() {
+	get ingredients(): FormArray {
 		return this.recipeForm.get('ingredients') as FormArray;
 	}
 
@@ -66,22 +70,22 @@ export class RecipeFromComponent {
 		this.ingredients.removeAt(index);
 	}
 
-	get title() {
+	get title(): AbstractControl<string | null, string | null> | null {
 		return this.recipeForm.get('title');
 	}
 
-	get imageUrl() {
+	get imageUrl(): AbstractControl<string | null, string | null> | null {
 		return this.recipeForm.get('imageUrl');
 	}
 
-	get description() {
+	get description(): AbstractControl<string | null, string | null> | null {
 		return this.recipeForm.get('description');
 	}
 
-	get time() {
+	get time(): AbstractControl<number | null, number | null> | null {
 		return this.recipeForm.get('time');
 	}
-	get instructions() {
+	get instructions(): FormArray {
 		return this.recipeForm.get('instructions') as FormArray;
 	}
 	public addInstruction(): void {
