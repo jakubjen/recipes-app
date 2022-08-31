@@ -20,8 +20,9 @@
 	"App": {
 		"'Loading": "Loading...",
 		"Validation": {
-			"Required": "{{ field }} is required.",
-			"Length": "{{ field }} must be {{ min }}-{{ max }} characters long."
+			"Required": "This filed is required.",
+			"MinLength": "Field required min length {{ length }}.",
+			"MaxLength": "Field required max length {{ length }}."
 		}
 	}
 }

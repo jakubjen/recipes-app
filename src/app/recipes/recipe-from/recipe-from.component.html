@@ -19,25 +19,7 @@
 						(title?.touched || ngForm.submitted) && !!title?.errors
 					"
 					id="title" />
-				<div
-					class="erros"
-					*ngIf="(title?.touched || ngForm.submitted) && !!title?.errors">
-					<div class="text-danger" *ngIf="title?.errors?.['required']">
-						<small>{{
-							'App.Validation.Required' | translate: { field: 'Title' }
-						}}</small>
-					</div>
-					<div
-						class="text-danger"
-						*ngIf="!!title?.errors?.['minlength'] || !!title?.errors?.['maxLength']">
-						<small>
-							{{
-								'App.Validation.Length'
-									| translate: { field: 'Title', min: 10, max: 100 }
-							}}
-						</small>
-					</div>
-				</div>
+				<app-form-error [input]="title" [form]="ngForm"></app-form-error>
 			</div>
 
 			<div class="mt-4 imageUrl">
@@ -53,25 +35,7 @@
 						(imageUrl?.touched || ngForm.submitted) && !!imageUrl?.errors
 					"
 					id="imageUrl" />
-				<div
-					class="erros"
-					*ngIf="(imageUrl?.touched || ngForm.submitted) && !!imageUrl?.errors">
-					<div class="text-danger" *ngIf="imageUrl?.errors?.['required']">
-						<small>{{
-							'App.Validation.Required' | translate: { field: 'Image url' }
-						}}</small>
-					</div>
-					<div
-						class="text-danger"
-						*ngIf="!!imageUrl?.errors?.['minlength'] || !!imageUrl?.errors?.['maxLength']">
-						<small>
-							{{
-								'App.Validation.Length'
-									| translate: { field: 'Image Url', min: 10, max: 100 }
-							}}
-						</small>
-					</div>
-				</div>
+				<app-form-error [input]="imageUrl" [form]="ngForm"></app-form-error>
 			</div>
 
 			<div class="time mt-4">
@@ -93,15 +57,7 @@
 						</div>
 					</div>
 				</div>
-				<div
-					class="erros"
-					*ngIf="(time?.touched || ngForm.submitted) && !!time?.errors">
-					<div class="text-danger" *ngIf="time?.errors?.['required']">
-						<small>{{
-							'App.Validation.Required' | translate: { field: 'Time' }
-						}}</small>
-					</div>
-				</div>
+				<app-form-error [input]="time" [form]="ngForm"></app-form-error>
 			</div>
 
 			<div class="description mt-4">
@@ -117,27 +73,7 @@
 						(description?.touched || ngForm.submitted) && !!description?.errors
 					"
 					rows="5"></textarea>
-				<div
-					class="erros"
-					*ngIf="
-						(description?.touched || ngForm.submitted) && !!description?.errors
-					">
-					<div class="text-danger" *ngIf="description?.errors?.['required']">
-						<small>{{
-							'App.Validation.Required' | translate: { field: 'Description' }
-						}}</small>
-					</div>
-					<div
-						class="text-danger"
-						*ngIf="!!description?.errors?.['minlength'] || !!description?.errors?.['maxLength']">
-						<small>
-							{{
-								'App.Validation.Length'
-									| translate: { field: 'Description', min: 50, max: 2000 }
-							}}
-						</small>
-					</div>
-				</div>
+				<app-form-error [input]="description" [form]="ngForm"></app-form-error>
 			</div>
 
 			<div class="ingredients mt-4" formArrayName="ingredients">
@@ -157,15 +93,9 @@
 									(ngForm.submitted || ingredients.controls[i].get('amount')?.touched) &&
 									!!ingredients.controls[i].get('amount')?.errors?.['required']"
 								formControlName="amount" />
-							<div
-								class="text-danger"
-								*ngIf="
-							(ngForm.submitted || ingredients.controls[i].get('amount')?.touched) &&
-							!!ingredients.controls[i].get('amount')?.errors?.['required']">
-								<small>{{
-									'App.Validation.Required' | translate: { field: 'Amount' }
-								}}</small>
-							</div>
+							<app-form-error
+								[input]="ingredients.controls[i].get('amount')"
+								[form]="ngForm"></app-form-error>
 						</div>
 						<div class="col-6 col-lg-3">
 							<select
@@ -206,15 +136,9 @@
 									<i class="bi bi-x-lg"></i>
 								</button>
 							</div>
-							<div
-								class="text-danger"
-								*ngIf="
-						(ngForm.submitted || ingredients.controls[i].get('name')?.touched) &&
-						!!ingredients.controls[i].get('name')?.errors?.['required']">
-								<small>{{
-									'App.Validation.Required' | translate: { field: 'Name' }
-								}}</small>
-							</div>
+							<app-form-error
+								[input]="ingredients.controls[i].get('name')"
+								[form]="ngForm"></app-form-error>
 						</div>
 					</ng-container>
 				</div>
@@ -248,27 +172,9 @@
 						(click)="removeInstruction(i)">
 						<i class="bi bi-x"></i>
 					</button>
-					<div
-						class="errors"
-						*ngIf="ngForm.submitted || instructions.controls[i].touched">
-						<div
-							class="text-danger"
-							*ngIf="
-									!!instructions.controls[i].errors?.['required']">
-							<small>{{
-								'App.Validation.Required' | translate: { field: 'instruction' }
-							}}</small>
-						</div>
-						<div
-							class="text-danger"
-							*ngIf="
-									instructions.controls[i].errors?.['minlength'] || instructions.controls[i].errors?.['maxLength']">
-							<small>{{
-								'App.Validation.Length'
-									| translate: { field: 'instruction', min: 50, max: 2000 }
-							}}</small>
-						</div>
-					</div>
+					<app-form-error
+						[input]="instructions.controls[i]"
+						[form]="ngForm"></app-form-error>
 				</div>
 				<button
 					type="button"

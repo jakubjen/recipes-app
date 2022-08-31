@@ -14,6 +14,7 @@ import { RecipeFromComponent } from './recipe-from/recipe-from.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecipesAddComponent } from './recipes-add/recipes-add.component';
 import { addRecipeEffect } from '@store/recipes/effect/add-recipe.effect';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
 	declarations: [
@@ -31,6 +32,7 @@ import { addRecipeEffect } from '@store/recipes/effect/add-recipe.effect';
 		EffectsModule.forFeature([loadRecipesStartEffect, addRecipeEffect]),
 		FormsModule,
 		ReactiveFormsModule,
+		SharedModule,
 	],
 	exports: [RecipesAddComponent, RecipesEditComponent, RecipesCardsComponent],
 })
