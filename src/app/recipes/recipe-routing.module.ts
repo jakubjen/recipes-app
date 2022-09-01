@@ -12,13 +12,13 @@ const routes: Routes = [
 		component: RecipesCardsComponent,
 	},
 	{
+		path: 'recipe/add',
+		component: RecipesAddComponent,
+	},
+	{
 		path: 'recipe/:id',
 		resolve: [LoadRecipeResolver],
 		component: RecipeDetailComponent,
-},
-{
-path: 'recipe/add',
-		component: RecipesAddComponent,
 	},
 ];
 
