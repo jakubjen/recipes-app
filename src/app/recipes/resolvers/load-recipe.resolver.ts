@@ -9,7 +9,7 @@ import { finalize, first, Observable, tap } from 'rxjs';
 import DataState from '@models/data-store.enum';
 
 @Injectable()
-export class RecipeResolver implements Resolve<void> {
+export class LoadRecipeResolver implements Resolve<void> {
 	private loading = false;
 
 	constructor(private store: Store<AppState>) {}

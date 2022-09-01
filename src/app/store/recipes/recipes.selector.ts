@@ -17,8 +17,15 @@ const selectDataState = createSelector(
 	state => state.dataState
 );
 
+const selectById = (recipeId: string) =>
+	createSelector(selectAll, recipes =>
+		recipes.find(recipe => recipe.id === recipeId)
+	);
+
 const RecipesSelectors = {
+	selectRecipesState,
 	selectAll,
 	selectDataState,
+	selectById,
 };
 export default RecipesSelectors;

@@ -1,17 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { RecipesAddComponent } from './recipes-add/recipes-add.component';
 import { RecipesCardsComponent } from './recipes-cards/recipes-cards.component';
-import { RecipeResolver } from './resolvers/recipe.resolver';
+import { LoadRecipeResolver } from './resolvers/load-recipe.resolver';
 
 const routes: Routes = [
 	{
 		path: '',
-		resolve: [RecipeResolver],
+		resolve: [LoadRecipeResolver],
 		component: RecipesCardsComponent,
 	},
 	{
-		path: 'recipe/add',
+		path: 'recipe/:id',
+		resolve: [LoadRecipeResolver],
+		component: RecipeDetailComponent,
+},
+{
+path: 'recipe/add',
 		component: RecipesAddComponent,
 	},
 ];

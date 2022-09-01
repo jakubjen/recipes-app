@@ -2,8 +2,9 @@
     "plugins": [
 		"stylelint-order"
 	],
-    "extends": ["stylelint-config-standard-scss", "stylelint-config-prettier"],
+    "extends": ["stylelint-config-standard-scss", "stylelint-config-prettier", "stylelint-config-idiomatic-order"],
     "rules": {
+		"block-closing-brace-empty-line-before": "never",
 		"order/order": [
 			"custom-properties",
 			"declarations"

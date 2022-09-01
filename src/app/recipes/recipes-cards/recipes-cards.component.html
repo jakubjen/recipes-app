@@ -1,13 +1,9 @@
 <h3 class="mb-4">{{ 'Recipes.LatestRecipes' | translate }}</h3>
-<div class="recipes-cards m" *ngIf="recipes$ | async as recipes">
-	<div class="recipe-card" *ngFor="let recipe of recipes">
-		<img [src]="recipe.imageUrl" [alt]="recipe.title" />
-		<div class="text">
-			<div class="time">
-				{{ recipe.time }} {{ 'Time.minutesShort' | translate }}
-			</div>
-			<div class="title">{{ recipe.title }}</div>
-		</div>
+<div class="recipes-cards pb-3" *ngIf="recipes$ | async as recipes">
+	<div class="card-wrapper" *ngFor="let recipe of recipes">
+		<a [routerLink]="'/recipe/' + recipe.id">
+			<app-recipe-card [recipe]="recipe"></app-recipe-card>
+		</a>
 	</div>
 </div>
 

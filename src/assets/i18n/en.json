@@ -1,6 +1,8 @@
 {
 	"Recipes": {
 		"LatestRecipes": "Latest recipes",
+		"NoIngredients": "No ingredients are needed",
+		"Preparing": "Preparing",
 		"Title": "Title",
 		"Recipe": "Recipe",
 		"Ingredients": "Ingredients",

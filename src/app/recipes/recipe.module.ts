@@ -8,8 +8,10 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { recipesReducer } from '@store/recipes/recipes.reducer';
 import { RecipesService } from '@services/recipes/recipes.service';
-import { RecipeResolver } from './resolvers/recipe.resolver';
+import { LoadRecipeResolver } from './resolvers/load-recipe.resolver';
 import { loadRecipesStartEffect } from '@store/recipes/effect/load-recipe-start.effect';
+import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
+import { RecipeCardComponent } from './recipe-card/recipe-card.component';
 import { RecipeFromComponent } from './recipe-from/recipe-from.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecipesAddComponent } from './recipes-add/recipes-add.component';
@@ -21,9 +23,11 @@ import { SharedModule } from '../shared/shared.module';
 		RecipesEditComponent,
 		RecipesAddComponent,
 		RecipesCardsComponent,
+		RecipeDetailComponent,
+		RecipeCardComponent,
 		RecipeFromComponent,
 	],
-	providers: [RecipesService, RecipeResolver],
+	providers: [RecipesService, LoadRecipeResolver],
 	imports: [
 		CommonModule,
 		TranslateModule,
