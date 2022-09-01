@@ -1,1 +1,22 @@
-/* stylelint-disable */
+@use 'styles';
+@import '~bootstrap/scss/mixins';/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/functions';/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/variables';/* Importing Bootstrap SCSS file. */
+:host {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    img {
+        width: 90%;
+        margin-top: 20px;
+
+        @include media-breakpoint-up(md) {
+            width: 50%;
+        }
+    }
+
+    .text {
+        text-align: center;
+    }
+}

@@ -1,1 +1,9 @@
-Page not found.
+<img class="mt-3" [src]="image404" alt="Page not found" />
+<div class="text mt-4 mb-4">
+	<h3>{{ 'App.PageNotFound.Heading' | translate }}</h3>
+	{{ 'App.PageNotFound.GoTo' | translate }}
+	<a routerLink="/" class="link-primary">{{
+		'App.PageNotFound.HomePage' | translate
+	}}</a
+	>.
+</div>

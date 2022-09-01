@@ -2,8 +2,15 @@
 	"Recipes": {
 		"LatestRecipes": "Latest recipes",
 		"NoIngredients": "No ingredients are needed",
+		"Preparing": "Preparing",
+		"Title": "Title",
+		"Recipe": "Recipe",
 		"Ingredients": "Ingredients",
-		"Preparing": "Preparing"
+		"Description": "Description",
+		"ImageUrl": "Image Url",
+		"AddIngredient": "Add ingredient",
+		"AddInstruction": "Add instruction",
+		"Time": "Time to prepare dish"
 	},
 	"Time": {
 		"minutesShort": "min"
@@ -13,6 +20,16 @@
 		"AddRecipe": "Add Recipe"
 	},
 	"App": {
-		"'Loading": "Loading..."
+		"'Loading": "Loading...",
+		"Validation": {
+			"Required": "This filed is required.",
+			"MinLength": "Field required min length {{ length }}.",
+			"MaxLength": "Field required max length {{ length }}."
+   },
+		"PageNotFound": {
+			"Heading": "Page Not Found",
+			"GoTo": "Go to",
+			"HomePage": "home page"
+		}
 	}
 }

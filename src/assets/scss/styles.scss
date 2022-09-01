@@ -1,5 +1,8 @@
 @import 'https://fonts.googleapis.com/css2?family=Epilogue:wght@300;400;600&display=swap';
 
+/* You can add global styles to this file, and also import other style files */
+@import "~bootstrap-icons/font/bootstrap-icons.css";
+
 * {
 	padding: 0;
 	margin: 0;
@@ -17,6 +20,6 @@ body {
 }
 
 $primary: rgb(246 189 65);
+
 /* stylelint-disable-next-line no-invalid-position-at-import-rule */
 @import '~bootstrap/scss/bootstrap';/* Importing Bootstrap SCSS file. */
-

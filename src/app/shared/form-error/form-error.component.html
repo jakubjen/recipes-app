@@ -1,0 +1,23 @@
+<ng-container *ngIf="!!input && !!form">
+	<div class="error" *ngIf="input.touched || form.submitted">
+		<div class="text-danger" *ngIf="input?.errors?.['required']">
+			<small>{{ 'App.Validation.Required' | translate }}</small>
+		</div>
+		<div class="text-danger" *ngIf="!!input?.errors?.['minlength']">
+			<small>
+				{{
+					'App.Validation.MinLength'
+						| translate: { length: input.errors?.['minlength']?.requiredLength}
+				}}
+			</small>
+		</div>
+		<div class="text-danger" *ngIf="!!input?.errors?.['maxlength']">
+			<small>
+				{{
+					'App.Validation.MaxLength'
+						| translate: { length: input.errors?.['maxlength']?.requiredLength}
+				}}
+			</small>
+		</div>
+	</div>
+</ng-container>

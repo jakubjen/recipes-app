@@ -23,6 +23,7 @@ import {
 } from '@angular/fire/compat/analytics';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http);
@@ -58,6 +59,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 		AngularFirestoreModule,
 		AngularFireAnalyticsModule,
 		AngularFireAuthModule,
+		FormsModule,
+		ReactiveFormsModule,
 	],
 	providers: [ScreenTrackingService, UserTrackingService],
 	exports: [TranslateModule],
