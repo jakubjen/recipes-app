@@ -20,6 +20,7 @@
 		"AddRecipe": "Add Recipe"
 	},
 	"App": {
+		"Edit":"Edit",
 		"'Loading": "Loading...",
 		"Validation": {
 			"Required": "This filed is required.",
