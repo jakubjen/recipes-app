@@ -32,6 +32,31 @@
 						>{{ 'Navigation.AddRecipe' | translate }}
 					</a>
 				</li>
+				<ng-container *ngIf="(userIsLogin$ | async) === false">
+					<li class="nav-item">
+						<a
+							class="nav-link"
+							routerLink="/auth/login"
+							routerLinkActive="active"
+							>{{ 'Navigation.Login' | translate }}
+						</a>
+					</li>
+					<li class="nav-item">
+						<a
+							class="nav-link"
+							routerLink="/auth/register"
+							routerLinkActive="active"
+							>{{ 'Navigation.Register' | translate }}
+						</a>
+					</li>
+				</ng-container>
+				<ng-container *ngIf="userIsLogin$ | async">
+					<li class="nav-item">
+						<a class="nav-link" (click)="logOut()" routerLink="/"
+							>{{ 'Navigation.LogOut' | translate }}
+						</a>
+					</li>
+				</ng-container>
 			</ul>
 		</div>
 	</div>
