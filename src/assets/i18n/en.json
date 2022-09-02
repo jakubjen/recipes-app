@@ -17,7 +17,10 @@
 	},
 	"Navigation": {
 		"Home": "Home",
-		"AddRecipe": "Add Recipe"
+		"AddRecipe": "Add Recipe",
+		"Register": "Register",
+		"Login": "Login",
+		"LogOut": "Log Out"
 	},
 	"App": {
 		"Edit":"Edit",
@@ -27,6 +30,7 @@
 			"MinLength": "Field required min length {{ length }}.",
 			"MaxLength": "Field required max length {{ length }}.",
 			"MinValue": "Field must be greater than or equal to {{ min }}."
+			"Email": "Provide current email address."
    },
 		"PageNotFound": {
 			"Heading": "Page Not Found",

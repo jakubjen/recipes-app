@@ -3,6 +3,7 @@
 		<div class="text-danger" *ngIf="input?.errors?.['required']">
 			<small>{{ 'App.Validation.Required' | translate }}</small>
 		</div>
+
 		<div class="text-danger" *ngIf="!!input?.errors?.['minlength']">
 			<small>
 				{{
@@ -11,6 +12,7 @@
 				}}
 			</small>
 		</div>
+
 		<div class="text-danger" *ngIf="!!input?.errors?.['maxlength']">
 			<small>
 				{{
@@ -25,6 +27,12 @@
 					'App.Validation.MinValue'
 						| translate: { min: input.errors?.['min']?.min}
 				}}
+			</small>
+		</div>
+    
+		<div class="text-danger" *ngIf="!!input?.errors?.['email']">
+			<small>
+				{{ 'App.Validation.Email' | translate }}
 			</small>
 		</div>
 	</div>
