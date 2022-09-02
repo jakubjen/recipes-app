@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Router } from '@angular/router';
 import FirebaseActions from '@models/firebase-actions.enum';
-import Recipe from '@models/recipe.model';
+import Recipe, { NewRecipe } from '@models/recipe.model';
 import { Store } from '@ngrx/store';
 import RecipesActions from '@store/recipes/recipes.actions';
 import { AppState } from '@store/store';
@@ -10,7 +11,8 @@ import { AppState } from '@store/store';
 export class RecipesService {
 	constructor(
 		private store: Store<AppState>,
-		private firestore: AngularFirestore
+		private firestore: AngularFirestore,
+		private router: Router
 	) {}
 
 	private connectToFirestore(): void {
@@ -49,6 +51,13 @@ export class RecipesService {
 
 	public addRecipe(recipe: Recipe): void {
 		this.firestore.collection<Recipe>('recipes').add(recipe);
+	public update(recipe: Recipe): void {
+		console.log(recipe);
+
+		try {
+			this.firestore.doc<Recipe>(`recipes/${recipe.id}`).update(recipe);
+			this.router.navigate(['/']);
+		} catch (err: any) {}
 	}
 
 	public loadRecipes(): void {
