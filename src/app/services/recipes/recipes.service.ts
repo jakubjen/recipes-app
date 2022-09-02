@@ -49,8 +49,14 @@ export class RecipesService {
 			});
 	}
 
-	public addRecipe(recipe: Recipe): void {
-		this.firestore.collection<Recipe>('recipes').add(recipe);
+	public addRecipe(recipe: NewRecipe): void {
+		const { id, ...recipeToAdd } = recipe;
+		try {
+			this.firestore.collection('recipes').add(recipeToAdd);
+			this.router.navigate(['/']);
+		} catch (err) {}
+	}
+
 	public update(recipe: Recipe): void {
 		console.log(recipe);
 

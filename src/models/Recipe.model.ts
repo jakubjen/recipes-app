@@ -9,3 +9,7 @@ export default interface Recipe {
 	ingredients: Ingredients[];
 	instructions: string[];
 }
+
+export interface NewRecipe extends Omit<Recipe, 'id'> {
+	id?: string;
+}

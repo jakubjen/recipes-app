@@ -19,5 +19,13 @@
 				}}
 			</small>
 		</div>
+		<div class="text-danger" *ngIf="!!input?.errors?.['min']">
+			<small>
+				{{
+					'App.Validation.MinValue'
+						| translate: { min: input.errors?.['min']?.min}
+				}}
+			</small>
+		</div>
 	</div>
 </ng-container>

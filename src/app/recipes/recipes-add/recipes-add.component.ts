@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import Recipe from '@models/recipe.model';
+import Recipe, { NewRecipe } from '@models/recipe.model';
 import { Store } from '@ngrx/store';
 import RecipesActions from '@store/recipes/recipes.actions';
 import { AppState } from '@store/store';
@@ -12,7 +12,7 @@ import { AppState } from '@store/store';
 export class RecipesAddComponent {
 	constructor(private store: Store<AppState>) {}
 
-	addRecipe(recipe: Recipe) {
+	addRecipe(recipe: NewRecipe) {
 		this.store.dispatch(RecipesActions.addRecipe({ recipe }));
 	}
 }
