@@ -25,6 +25,8 @@ import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { snackbarReducer } from '@store/shared/snackbar.reducer';
+import { userReducer } from '@store/auth/auth.reducer';
+import { AuthService } from '@services/auth/auth.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http);
@@ -63,7 +65,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 		FormsModule,
 		ReactiveFormsModule,
 	],
-	providers: [ScreenTrackingService, UserTrackingService],
+	providers: [ScreenTrackingService, UserTrackingService, AuthService],
 	exports: [TranslateModule],
 	bootstrap: [AppComponent],
 })
