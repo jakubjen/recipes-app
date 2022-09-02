@@ -10,7 +10,11 @@
 	<div class="col-12 col-md-4 ingredients">
 		<div class="row">
 			<div class="col-6">
-				<a routerLink="#" class="btn btn-outline-primary w-100">Edit</a>
+				<a
+					[routerLink]="'/recipe/edit/' + recipe.id"
+					class="btn btn-outline-primary w-100"
+					>{{ 'App.Edit' | translate }}</a
+				>
 			</div>
 		</div>
 		<h3 class="fs-4 mt-5 mt-md-3">{{ 'Recipes.Ingredients' | translate }}</h3>

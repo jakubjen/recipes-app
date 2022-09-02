@@ -23,11 +23,13 @@
 		"LogOut": "Log Out"
 	},
 	"App": {
+		"Edit":"Edit",
 		"'Loading": "Loading...",
 		"Validation": {
 			"Required": "This filed is required.",
 			"MinLength": "Field required min length {{ length }}.",
 			"MaxLength": "Field required max length {{ length }}.",
+			"MinValue": "Field must be greater than or equal to {{ min }}."
 			"Email": "Provide current email address."
    },
 		"PageNotFound": {
