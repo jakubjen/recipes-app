@@ -20,7 +20,7 @@
 		"AddRecipe": "Add Recipe"
 	},
 	"App": {
-		"'Loading": "Loading...",
+		"Loading": "Loading...",
 		"Validation": {
 			"Required": "This filed is required.",
 			"MinLength": "Field required min length {{ length }}.",
