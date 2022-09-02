@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import Recipe from '@models/recipe.model';
+import Recipe, { NewRecipe } from '@models/recipe.model';
 
 const loadRecipesStart = createAction('[Router] Start recipes');
 
@@ -24,7 +24,7 @@ const serviceRemoveRecipe = createAction(
 
 const addRecipe = createAction(
 	'[Add recipe] Add recipe',
-	props<{ recipe: Recipe }>()
+	props<{ recipe: NewRecipe }>()
 );
 
 const RecipesActions = {

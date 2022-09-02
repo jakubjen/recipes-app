@@ -20,11 +20,13 @@
 		"AddRecipe": "Add Recipe"
 	},
 	"App": {
+		"Edit":"Edit",
 		"'Loading": "Loading...",
 		"Validation": {
 			"Required": "This filed is required.",
 			"MinLength": "Field required min length {{ length }}.",
-			"MaxLength": "Field required max length {{ length }}."
+			"MaxLength": "Field required max length {{ length }}.",
+			"MinValue": "Field must be greater than or equal to {{ min }}."
    },
 		"PageNotFound": {
 			"Heading": "Page Not Found",
