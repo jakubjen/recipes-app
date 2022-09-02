@@ -24,6 +24,7 @@ import {
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { snackbarReducer } from '@store/shared/snackbar.reducer';
 
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http);
@@ -48,7 +49,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 		BrowserAnimationsModule,
 		NgbModule,
 		StoreRouterConnectingModule.forRoot(),
-		StoreModule.forRoot({}),
+		StoreModule.forRoot({ snackbar: snackbarReducer }),
 		EffectsModule.forRoot([]),
 		StoreDevtoolsModule.instrument({
 			maxAge: 25,

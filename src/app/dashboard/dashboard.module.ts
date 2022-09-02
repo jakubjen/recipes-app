@@ -3,10 +3,11 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 @NgModule({
-	declarations: [HeaderComponent],
+	declarations: [HeaderComponent, NotificationsComponent],
 	imports: [CommonModule, RouterModule, TranslateModule],
-	exports: [HeaderComponent],
+	exports: [HeaderComponent, NotificationsComponent],
 })
 export class DashboardModule {}
