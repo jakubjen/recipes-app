@@ -32,7 +32,8 @@
 						>{{ 'Navigation.AddRecipe' | translate }}
 					</a>
 				</li>
-				<ng-container *ngIf="(userIsLogin$ | async) === false">
+				<ng-container
+					*ngIf="(userIsLogin$ | async) === false; else userIsLogout">
 					<li class="nav-item">
 						<a
 							class="nav-link"
@@ -50,13 +51,13 @@
 						</a>
 					</li>
 				</ng-container>
-				<ng-container *ngIf="userIsLogin$ | async">
+				<ng-template #userIsLogout>
 					<li class="nav-item">
 						<a class="nav-link" (click)="logOut()" routerLink="/"
 							>{{ 'Navigation.LogOut' | translate }}
 						</a>
 					</li>
-				</ng-container>
+				</ng-template>
 			</ul>
 		</div>
 	</div>

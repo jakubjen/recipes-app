@@ -23,13 +23,29 @@
 		"LogOut": "Log Out"
 	},
 	"App": {
+		"Delete":"Delete",
 		"Edit":"Edit",
 		"'Loading": "Loading...",
+		"Snackbar":{
+			"EditNotAllowed": "You are not allowed to edit this recipe",
+			"UserCreatedSuccess": "User created successfully",
+			"LoginSuccessfully": "Login successfully",
+			"LogoutSuccessfully": "Logout successfully",
+			"UserNotAuthorized": "User not authorized",
+			"RecipeAddedSuccessfully": "Recipe added successfully",
+			"RecipeUpdatedSuccessfully": "Recipe updated successfully",
+			"RecipeRemoveSuccessfully": "Recipe remove successfully"
+		},
+		"Auth": {
+			"Register": "Register",
+			"Login": "Login",
+			"LoginWithGoogle": "Login with Google"
+		},
 		"Validation": {
 			"Required": "This filed is required.",
 			"MinLength": "Field required min length {{ length }}.",
 			"MaxLength": "Field required max length {{ length }}.",
-			"MinValue": "Field must be greater than or equal to {{ min }}."
+			"MinValue": "Field must be greater than or equal to {{ min }}.",
 			"Email": "Provide current email address."
    },
 		"PageNotFound": {

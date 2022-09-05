@@ -51,7 +51,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 		BrowserAnimationsModule,
 		NgbModule,
 		StoreRouterConnectingModule.forRoot(),
-		StoreModule.forRoot({ snackbar: snackbarReducer }),
+		StoreModule.forRoot({ snackbar: snackbarReducer, user: userReducer }),
 		EffectsModule.forRoot([]),
 		StoreDevtoolsModule.instrument({
 			maxAge: 25,
