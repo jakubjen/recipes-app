@@ -13,12 +13,16 @@ export class SnackbarService {
 	constructor(private store: Store<AppState>) {}
 
 	public addSnackbar(type: SnackbarType, text: string): void {
+		const id = this.nextSnackbarId;
 		const snackbar: Snackbar = {
-			id: this.nextSnackbarId,
+			id,
 			type,
 			text: text,
 		};
 		this.store.dispatch(SnackbarActions.createSnackbar({ snackbar }));
+		setTimeout(() => {
+			this.removeSnackbar(id);
+		}, 6000);
 		this.nextSnackbarId += 1;
 	}
 
