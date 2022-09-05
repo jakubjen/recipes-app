@@ -23,6 +23,7 @@
 		"LogOut": "Log Out"
 	},
 	"App": {
+		"Loading": "Loading...",
 		"Delete":"Delete",
 		"Edit":"Edit",
 		"'Loading": "Loading...",
