@@ -5,6 +5,12 @@ import { RecipesAddComponent } from './recipes-add/recipes-add.component';
 import { RecipesCardsComponent } from './recipes-cards/recipes-cards.component';
 import { RecipesEditComponent } from './recipes-edit/recipes-edit.component';
 import { LoadRecipeResolver } from './resolvers/load-recipe.resolver';
+import {
+	AngularFireAuthGuard,
+	redirectUnauthorizedTo,
+} from '@angular/fire/compat/auth-guard';
+const redirectUnauthorizedToLogin = () =>
+	redirectUnauthorizedTo(['/auth/login']);
 
 const routes: Routes = [
 	{
@@ -15,6 +21,8 @@ const routes: Routes = [
 	{
 		path: 'recipe/add',
 		component: RecipesAddComponent,
+		canActivate: [AngularFireAuthGuard],
+		data: { authGuardPipe: redirectUnauthorizedToLogin },
 	},
 	{
 		path: 'recipe/edit/:id',
