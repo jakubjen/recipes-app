@@ -3,7 +3,7 @@
 		[formGroup]="loginForm"
 		#ngForm="ngForm"
 		(ngSubmit)="loginWithPassword()">
-		<h3 class="mb-3">Register</h3>
+		<h3 class="mb-3">{{ 'App.Auth.Login' | translate }}</h3>
 		<div class="mb-3">
 			<label for="emailInput" class="form-label">Email address</label>
 			<input
@@ -32,13 +32,15 @@
 			<app-form-error [form]="ngForm" [input]="password"></app-form-error>
 		</div>
 
-		<button type="submit" class="btn btn-outline-primary">Login</button>
+		<button type="submit" class="btn btn-outline-primary">
+			{{ 'App.Auth.Login' | translate }}
+		</button>
 		<button
 			type="button"
 			class="btn btn-primary"
 			(click)="loginWithGoogle()"
 			style="margin-left: 20px">
-			Login wih Google
+			{{ 'App.Auth.LoginWithGoogle' | translate }}
 		</button>
 	</form>
 </div>
