@@ -28,6 +28,8 @@ const routes: Routes = [
 		path: 'recipe/edit/:id',
 		resolve: [LoadRecipeResolver],
 		component: RecipesEditComponent,
+		canActivate: [AngularFireAuthGuard],
+		data: { authGuardPipe: redirectUnauthorizedToLogin },
 	},
 	{
 		path: 'recipe/:id',
