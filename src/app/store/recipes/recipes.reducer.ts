@@ -26,15 +26,18 @@ export const recipesReducer = createReducer(
 		return { ...state, dataState: DataState.Error };
 	}),
 
-	on(RecipesActions.serviceAddRecipe, (state: RecipesState, { recipe }) => {
+	on(RecipesActions.firestoreAddRecipe, (state: RecipesState, { recipe }) => {
 		return adapter.addOne(recipe, state);
 	}),
 
-	on(RecipesActions.serviceModifyRecipe, (state: RecipesState, { recipe }) => {
-		return adapter.setOne(recipe, state);
-	}),
+	on(
+		RecipesActions.firestoreModifyRecipe,
+		(state: RecipesState, { recipe }) => {
+			return adapter.setOne(recipe, state);
+		}
+	),
 
-	on(RecipesActions.serviceRemoveRecipe, (state: RecipesState, { id }) => {
+	on(RecipesActions.firestoreRemoveRecipe, (state: RecipesState, { id }) => {
 		return adapter.removeOne(id, state);
 	})
 );

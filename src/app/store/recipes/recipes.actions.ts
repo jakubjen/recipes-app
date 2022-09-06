@@ -1,23 +1,23 @@
 import { createAction, props } from '@ngrx/store';
 import Recipe from '@models/recipe.model';
 
-const loadRecipesStart = createAction('[Router] Start recipes');
+const loadRecipesStart = createAction('[App component] Start recipes');
 
-const loadRecipesSuccess = createAction('[Router] Load recipes success');
+const loadRecipesSuccess = createAction('[App component] Load recipes success');
 
-const loadRecipesFailed = createAction('[Router] Load recipes failed');
+const loadRecipesFailed = createAction('[App component] Load recipes failed');
 
-const serviceAddRecipe = createAction(
-	'[RecipeService] Add recipe',
+const firestoreAddRecipe = createAction(
+	'[firestore] Add recipe',
 	props<{ recipe: Recipe }>()
 );
 
-const serviceModifyRecipe = createAction(
+const firestoreModifyRecipe = createAction(
 	'[Firestore] Recipe modified',
 	props<{ recipe: Recipe }>()
 );
 
-const serviceRemoveRecipe = createAction(
+const firestoreRemoveRecipe = createAction(
 	'[Firestore] Recipe removed',
 	props<{ id: string }>()
 );
@@ -31,9 +31,9 @@ const RecipesActions = {
 	loadRecipesStart,
 	loadRecipesSuccess,
 	loadRecipesFailed,
-	serviceAddRecipe,
-	serviceRemoveRecipe,
-	serviceModifyRecipe,
+	firestoreAddRecipe,
+	firestoreRemoveRecipe,
+	firestoreModifyRecipe,
 	addRecipe,
 };
 

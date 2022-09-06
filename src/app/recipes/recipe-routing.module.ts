@@ -3,12 +3,10 @@ import { RouterModule, Routes } from '@angular/router';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { RecipesAddComponent } from './recipes-add/recipes-add.component';
 import { RecipesCardsComponent } from './recipes-cards/recipes-cards.component';
-import { LoadRecipeResolver } from './resolvers/load-recipe.resolver';
 
 const routes: Routes = [
 	{
 		path: '',
-		resolve: [LoadRecipeResolver],
 		component: RecipesCardsComponent,
 	},
 	{
@@ -17,7 +15,6 @@ const routes: Routes = [
 	},
 	{
 		path: 'recipe/:id',
-		resolve: [LoadRecipeResolver],
 		component: RecipeDetailComponent,
 	},
 ];
