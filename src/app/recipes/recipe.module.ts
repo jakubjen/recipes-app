@@ -17,6 +17,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecipesAddComponent } from './recipes-add/recipes-add.component';
 import { addRecipeEffect } from '@store/recipes/effect/add-recipe.effect';
 import { SharedModule } from '../shared/shared.module';
+import { FilterRecipesPipe } from './filter-recipes.pipe';
+import { SortRecipesPipe } from './sort-recipes.pipe';
 
 @NgModule({
 	declarations: [
@@ -26,6 +28,8 @@ import { SharedModule } from '../shared/shared.module';
 		RecipeDetailComponent,
 		RecipeCardComponent,
 		RecipeFromComponent,
+		FilterRecipesPipe,
+		SortRecipesPipe,
 	],
 	providers: [RecipesService, LoadRecipeResolver],
 	imports: [

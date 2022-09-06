@@ -1,6 +1,46 @@
 <h3 class="mb-4">{{ 'Recipes.LatestRecipes' | translate }}</h3>
-<div class="recipes-cards pb-3" *ngIf="recipes$ | async as recipes">
-	<div class="card-wrapper" *ngFor="let recipe of recipes">
+<div class="row">
+	<div class="col-12 col-md-5 searcher">
+		<label for="seachInput" class="form-label">Search</label>
+		<input
+			type="email"
+			class="form-control"
+			id="seachInput"
+			(input)="handleTextSearchInput($event)" />
+		<div class="icon">
+			<i class="bi bi-search"></i>
+		</div>
+	</div>
+	<div class="col-12 col-md-3">
+		<label for="sortBySelect" class="form-label">Sort by</label>
+		<div class="input-group mb-3">
+			<select
+				class="form-select"
+				id="sortBySelect"
+				aria-label="Default select example"
+				(change)="selectFileToSort($event)">
+				<option
+					*ngFor="let category of sortingCategories"
+					[value]="category"
+					[selected]="sortCategory === category">
+					{{ 'Sorting.' + (category | titlecase) | translate }}
+				</option>
+			</select>
+			<button class="icon input-group-text" (click)="changeSortDirection()">
+				<i class="bi bi-sort-down" *ngIf="sortDirection === 'asc'"></i>
+				<i class="bi bi-sort-up" *ngIf="sortDirection === 'desc'"></i>
+			</button>
+		</div>
+	</div>
+</div>
+<div class="recipes-cards pb-3 mt-4" *ngIf="recipes$ | async as recipes">
+	<div
+		class="card-wrapper"
+		*ngFor="
+			let recipe of recipes
+				| filterRecipes: searchText
+				| sortRecipes: sortCategory:sortDirection
+		">
 		<a [routerLink]="'/recipe/' + recipe.id">
 			<app-recipe-card [recipe]="recipe"></app-recipe-card>
 		</a>

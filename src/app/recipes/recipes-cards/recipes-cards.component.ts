@@ -15,6 +15,11 @@ export class RecipesCardsComponent implements OnInit {
 	public recipes$: Observable<Recipe[]> | undefined;
 	public recipesAreLoaded$: Observable<DataState> | undefined;
 	public dataState: typeof DataState = DataState;
+	public searchText = '';
+	public sortCategory: keyof Recipe = 'title';
+	public sortingCategories: (keyof Recipe)[] = ['title', 'time'];
+	public sortDirection: 'asc' | 'desc' = 'asc';
+
 	constructor(private store: Store<AppState>) {}
 
 	ngOnInit(): void {
@@ -22,5 +27,21 @@ export class RecipesCardsComponent implements OnInit {
 		this.recipesAreLoaded$ = this.store.select(
 			RecipesSelectors.selectDataState
 		);
+	}
+
+	public handleTextSearchInput(value: Event): void {
+		this.searchText = (<HTMLInputElement>value.target).value;
+	}
+
+	public selectFileToSort(event: Event): void {
+		this.sortCategory = (<HTMLInputElement>event.target).value as keyof Recipe;
+	}
+
+	public changeSortDirection(): void {
+		if (this.sortDirection === 'asc') {
+			this.sortDirection = 'desc';
+			return;
+		}
+		if (this.sortDirection === 'desc') this.sortDirection = 'asc';
 	}
 }
