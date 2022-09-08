@@ -18,9 +18,12 @@ export const userReducer = createReducer(
 		return { user, isLogin: true };
 	}),
 
-	on(userActions.loginOnInit, (state: UserState, { user }): UserState => {
-		return { user, isLogin: true };
-	}),
+	on(
+		userActions.loginOnAppInitSuccess,
+		(state: UserState, { user }): UserState => {
+			return { user, isLogin: true };
+		}
+	),
 
 	on(userActions.loginFailed, (state: UserState): UserState => {
 		return { user: undefined, isLogin: false };

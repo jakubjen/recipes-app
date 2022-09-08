@@ -5,7 +5,9 @@ import {
 	FormGroup,
 	Validators,
 } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { AuthService } from '@services/auth/auth.service';
+import userActions from '@store/auth/user.actions';
 
 @Component({
 	selector: 'app-register',
@@ -22,12 +24,14 @@ export class RegisterComponent {
 		]),
 	});
 
-	constructor(private authService: AuthService) {}
+	constructor(private authService: AuthService, private store: Store) {}
 
 	public register(): void {
 		if (!this.registerForm.valid) return;
 		const { email, password } = this.registerForm.value;
-		this.authService.registerUser(email!, password!);
+		this.store.dispatch(
+			userActions.registerUser({ email: email!, password: password! })
+		);
 	}
 
 	get email(): AbstractControl<string | null, string | null> | null {

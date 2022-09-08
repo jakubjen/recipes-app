@@ -5,7 +5,9 @@ import {
 	FormGroup,
 	Validators,
 } from '@angular/forms';
+import { Store } from '@ngrx/store';
 import { AuthService } from '@services/auth/auth.service';
+import userActions from '@store/auth/user.actions';
 
 @Component({
 	selector: 'app-login',
@@ -22,16 +24,18 @@ export class LoginComponent {
 		]),
 	});
 
-	constructor(private authService: AuthService) {}
+	constructor(private authService: AuthService, private store: Store) {}
 
 	public loginWithPassword(): void {
 		if (!this.loginForm.valid) return;
 		const { email, password } = this.loginForm.value;
-		this.authService.loginWithPassword(email!, password!);
+		this.store.dispatch(
+			userActions.loginWithPassword({ email: email!, password: password! })
+		);
 	}
 
 	public loginWithGoogle(): void {
-		this.authService.loginWithGoogle();
+		this.store.dispatch(userActions.loginWithGoogle());
 	}
 
 	get email(): AbstractControl<string | null, string | null> | null {
