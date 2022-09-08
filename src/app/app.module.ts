@@ -27,6 +27,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { snackbarReducer } from '@store/shared/snackbar.reducer';
 import { userReducer } from '@store/auth/auth.reducer';
 import { AuthService } from '@services/auth/auth.service';
+import { UserEffects } from '@store/auth/user.effects';
+import { SnackbarEffects } from '@store/shared/snackbar.effects';
+import { AppEffects } from '@store/app.effect';
 
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http);
@@ -52,7 +55,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 		NgbModule,
 		StoreRouterConnectingModule.forRoot(),
 		StoreModule.forRoot({ snackbar: snackbarReducer, user: userReducer }),
-		EffectsModule.forRoot([]),
+		EffectsModule.forRoot([UserEffects, SnackbarEffects, AppEffects]),
 		StoreDevtoolsModule.instrument({
 			maxAge: 25,
 			logOnly: environment.production,

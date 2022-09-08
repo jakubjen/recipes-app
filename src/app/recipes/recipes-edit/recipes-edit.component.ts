@@ -3,15 +3,15 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import DataState from '@models/data-store.enum';
 import Recipe, { NewRecipe } from '@models/recipe.model';
 import { Store } from '@ngrx/store';
-import { RecipesService } from '@services/recipes/recipes.service';
 import RecipesSelectors from '@store/recipes/recipes.selector';
 import { AppState } from '@store/store';
-import { firstValueFrom, Observable, Subscription, tap } from 'rxjs';
-import firebase from 'firebase/compat/app';
+import { tap, takeUntil, filter, withLatestFrom, Subject } from 'rxjs';
 import { AuthService } from '@services/auth/auth.service';
-import { SnackbarService } from '@services/shared/snackbar.service';
-import { SnackbarType } from '@models/snackbar.model';
+import { SnackbarVariant } from '@models/snackbar.model';
 import { TranslateService } from '@ngx-translate/core';
+import SnackbarActions from '@store/shared/snackbar.actions';
+import RecipesActions from '@store/recipes/recipes.actions';
+import { userSelectors } from '@store/auth/selectors';
 
 @Component({
 	selector: 'app-recipes-edit',
@@ -19,53 +19,56 @@ import { TranslateService } from '@ngx-translate/core';
 	styleUrls: ['./recipes-edit.component.scss'],
 })
 export class RecipesEditComponent implements OnInit, OnDestroy {
-	public recipe$: Observable<Recipe | undefined> | undefined;
-	private recipeState$: Observable<DataState> | undefined;
-	private isLoadedSubscription?: Subscription;
+	public recipe?: Recipe;
+	private ngDestroyed$ = new Subject();
+
 	constructor(
 		private route: ActivatedRoute,
 		private store: Store<AppState>,
 		private router: Router,
-		private recipeService: RecipesService,
 		private authService: AuthService,
-		private snackbarService: SnackbarService,
 		private translate: TranslateService
 	) {}
 
 	ngOnInit(): void {
-		this.route.paramMap.subscribe((params: ParamMap) => {
-			const id = params.get('id')!;
-			this.recipeState$ = this.store.select(RecipesSelectors.selectDataState);
-			this.isLoadedSubscription = this.recipeState$.subscribe(state => {
-				if (state === DataState.Loaded) {
-					this.recipe$ = this.store
-						.select(RecipesSelectors.selectById(id))
-						.pipe(
-							tap(async recipe => {
-								if (!recipe) this.router.navigate([404]);
-								const user = await this.authService.getUser();
-								if (recipe?.ownerId !== user?.uid)
-									this.snackbarService.addSnackbar(
-										SnackbarType.Error,
-										await firstValueFrom(
-											this.translate.get('App.Snackbar.EditNotAllowed')
-										)
-									);
-								this.router.navigate([`/recipe/${recipe?.id}`]);
+		const id = this.route.snapshot.paramMap.get('id')!;
+		this.store
+			.select(RecipesSelectors.selectDataState)
+			.pipe(
+				takeUntil(this.ngDestroyed$),
+				filter((state: DataState) => state === DataState.Loaded),
+				withLatestFrom(
+					this.store.select(RecipesSelectors.selectById(id)),
+					this.store.select(userSelectors.selectUser)
+				),
+				tap(([_, recipe, user]) => {
+					if (!recipe) return this.router.navigate(['/404']);
+					if (user?.uid !== recipe.ownerId) {
+						this.store.dispatch(
+							SnackbarActions.createSnackbar({
+								variant: SnackbarVariant.Error,
+								text: this.translate.instant('App.Snackbar.EditNotAllowed'),
 							})
 						);
-				}
+						return this.router.navigate(['/recipe', recipe.id]);
+					}
+					return;
+				})
+			)
+			.subscribe(([_, recipe, user]) => {
+				this.recipe = recipe;
 			});
-		});
 	}
 
-	ngOnDestroy(): void {
-		if (!this.isLoadedSubscription) return;
-		this.isLoadedSubscription.unsubscribe();
+	public ngOnDestroy(): void {
+		this.ngDestroyed$.next('');
+		this.ngDestroyed$.complete();
 	}
 
 	public update(recipe: NewRecipe): void {
 		if (!recipe.id) return;
-		this.recipeService.update(recipe as Recipe);
+		this.store.dispatch(
+			RecipesActions.updateRecipe({ recipe: recipe as Recipe })
+		);
 	}
 }

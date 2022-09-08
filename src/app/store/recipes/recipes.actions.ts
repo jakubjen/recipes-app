@@ -1,40 +1,83 @@
 import { createAction, props } from '@ngrx/store';
 import Recipe, { NewRecipe } from '@models/recipe.model';
 
-const loadRecipesStart = createAction('[Router] Start recipes');
+const loadRecipesStart = createAction('[App component] Start recipes');
 
-const loadRecipesSuccess = createAction('[Router] Load recipes success');
+const loadRecipesSuccess = createAction('[App component] Load recipes success');
 
-const loadRecipesFailed = createAction('[Router] Load recipes failed');
+const loadRecipesFailed = createAction('[App component] Load recipes failed');
 
-const serviceAddRecipe = createAction(
-	'[RecipeService] Add recipe',
+const addRecipe = createAction(
+	'[Add recipe component] Add recipe',
+	props<{ recipe: NewRecipe }>()
+);
+
+const addRecipeSuccess = createAction(
+	'[Add recipe component] Add recipe success'
+);
+
+const addRecipeFailed = createAction(
+	'[Add recipe component] Add recipe failed',
+	props<{ text: string }>()
+);
+const firestoreAddRecipe = createAction(
+	'[firestore] Add recipe',
 	props<{ recipe: Recipe }>()
 );
 
-const serviceModifyRecipe = createAction(
+const firestoreModifyRecipe = createAction(
 	'[Firestore] Recipe modified',
 	props<{ recipe: Recipe }>()
 );
 
-const serviceRemoveRecipe = createAction(
+const firestoreRemoveRecipe = createAction(
 	'[Firestore] Recipe removed',
 	props<{ id: string }>()
 );
 
-const addRecipe = createAction(
-	'[Add recipe] Add recipe',
-	props<{ recipe: NewRecipe }>()
+const removeRecipe = createAction(
+	'[Recipe effect] Recipe removed',
+	props<{ id: string }>()
+);
+const removeRecipeSuccess = createAction(
+	'[Recipe effect] Recipe removed success'
+);
+
+const removeRecipeFailed = createAction(
+	'[Recipe effect] Recipe removed failed',
+	props<{ text: string }>()
+);
+
+const updateRecipe = createAction(
+	'[Recipe effect] Recipe update',
+	props<{ recipe: Recipe }>()
+);
+
+const updateRecipeFailed = createAction(
+	'[Recipe effect] Recipe update',
+	props<{ text: string }>()
+);
+
+const updateRecipeSuccess = createAction(
+	'[Recipe effect] Recipe update success'
 );
 
 const RecipesActions = {
 	loadRecipesStart,
 	loadRecipesSuccess,
 	loadRecipesFailed,
-	serviceAddRecipe,
-	serviceRemoveRecipe,
-	serviceModifyRecipe,
 	addRecipe,
+	addRecipeSuccess,
+	addRecipeFailed,
+	firestoreAddRecipe,
+	firestoreRemoveRecipe,
+	firestoreModifyRecipe,
+	removeRecipe,
+	removeRecipeSuccess,
+	removeRecipeFailed,
+	updateRecipe,
+	updateRecipeSuccess,
+	updateRecipeFailed,
 };
 
 export default RecipesActions;

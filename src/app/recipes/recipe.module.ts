@@ -7,16 +7,13 @@ import { RecipeRouterModule } from './recipe-routing.module';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
 import { recipesReducer } from '@store/recipes/recipes.reducer';
-import { RecipesService } from '@services/recipes/recipes.service';
-import { LoadRecipeResolver } from './resolvers/load-recipe.resolver';
-import { loadRecipesStartEffect } from '@store/recipes/effect/load-recipe-start.effect';
 import { RecipeDetailComponent } from './recipe-detail/recipe-detail.component';
 import { RecipeCardComponent } from './recipe-card/recipe-card.component';
 import { RecipeFromComponent } from './recipe-from/recipe-from.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecipesAddComponent } from './recipes-add/recipes-add.component';
-import { addRecipeEffect } from '@store/recipes/effect/add-recipe.effect';
 import { SharedModule } from '../shared/shared.module';
+import { RecipeEffects } from '@store/recipes/effect/recipes.effects';
 
 @NgModule({
 	declarations: [
@@ -27,13 +24,12 @@ import { SharedModule } from '../shared/shared.module';
 		RecipeCardComponent,
 		RecipeFromComponent,
 	],
-	providers: [RecipesService, LoadRecipeResolver],
 	imports: [
 		CommonModule,
 		TranslateModule,
 		RecipeRouterModule,
 		StoreModule.forFeature('recipes', recipesReducer),
-		EffectsModule.forFeature([loadRecipesStartEffect, addRecipeEffect]),
+		EffectsModule.forFeature([RecipeEffects]),
 		FormsModule,
 		ReactiveFormsModule,
 		SharedModule,
