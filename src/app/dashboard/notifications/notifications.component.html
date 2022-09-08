@@ -1,6 +1,6 @@
 <div class="notifications" *ngIf="snackbars$ | async as snackbars">
 	<div
-		[class]="'notification ' + snackbar.type"
+		[class]="'notification ' + snackbar.variant"
 		*ngFor="let snackbar of snackbars">
 		<small
 			><div>{{ snackbar.text }}</div></small

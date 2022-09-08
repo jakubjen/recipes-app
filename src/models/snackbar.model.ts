@@ -1,10 +1,10 @@
 export interface Snackbar {
-	id: number;
-	type: SnackbarType;
+	id: string;
+	variant: SnackbarVariant;
 	text: string;
 }
 
-export enum SnackbarType {
+export enum SnackbarVariant {
 	Info = 'info',
 	Success = 'success',
 	Error = 'error',

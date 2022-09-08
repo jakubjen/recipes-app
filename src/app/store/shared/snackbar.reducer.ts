@@ -11,7 +11,7 @@ export const snackbarReducer = createReducer(
 	initialState,
 
 	on(
-		SnackbarActions.createSnackbar,
+		SnackbarActions.addSnackbar,
 		(state: SnackbarState, { snackbar }): SnackbarState => {
 			return adapter.addOne(snackbar, state);
 		}
