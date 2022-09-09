@@ -14,6 +14,8 @@ export class shoppingListEffects {
 			return this.actions$.pipe(
 				ofType(
 					shoppingListActions.addIngredient,
+					shoppingListActions.addManyIngredientsFromRecipe,
+					shoppingListActions.addIngredientFromRecipe,
 					shoppingListActions.removeIngredient,
 					shoppingListActions.updateIngredient
 				),

@@ -6,6 +6,8 @@ import { Store } from '@ngrx/store';
 import { AppState } from '@store/store';
 import RecipesSelectors from '@store/recipes/recipes.selector';
 import DataState from '@models/data-store.enum';
+import { shoppingListActions } from '@store/shopping-list/shopping-list.actions';
+import Ingredients from '@models/ingredients.model';
 
 @Component({
 	selector: 'app-recipe-detail',
@@ -38,5 +40,25 @@ export class RecipeDetailComponent implements OnInit {
 				}
 			});
 		});
+	}
+
+	public addAllIngredientsToShippingList(ingredients: Ingredients[]): void {
+		this.store.dispatch(
+			shoppingListActions.addManyIngredientsFromRecipe({
+				ingredients,
+			})
+		);
+		//TODO: Change to snackbar instead alert
+		alert('Ingredients are added to shopping list.');
+	}
+
+	public addIngredientToShippingList(ingredient: Ingredients): void {
+		this.store.dispatch(
+			shoppingListActions.addIngredientFromRecipe({
+				ingredient,
+			})
+		);
+		//TODO: Change to snackbar instead alert
+		alert('Ingredient is added to shopping list.');
 	}
 }

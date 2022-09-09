@@ -23,10 +23,22 @@ const loadIngredientsSuccess = createAction(
 	props<{ ingredients: IngredientsInStore[] }>()
 );
 
+const addIngredientFromRecipe = createAction(
+	'[Recipe page] Add ingredient from recipe',
+	props<{ ingredient: Ingredients }>()
+);
+
+const addManyIngredientsFromRecipe = createAction(
+	'[Recipe page] Add ingredients from recipe',
+	props<{ ingredients: Ingredients[] }>()
+);
+
 export const shoppingListActions = {
 	addIngredient,
 	removeIngredient,
 	updateIngredient,
 	loadIngredients,
 	loadIngredientsSuccess,
+	addIngredientFromRecipe,
+	addManyIngredientsFromRecipe,
 };

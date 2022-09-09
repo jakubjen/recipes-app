@@ -28,6 +28,27 @@
     .row {
         color: $gray-600;
     }
+
+    .add-ingredients-to-shopping-list{
+        background: none;
+        border: none;
+        text-decoration: underline;
+    }
+
+
+
+    .add-to-shopping-list {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        opacity: 0;
+        background: $white;
+    }
+
+    .row:hover .add-to-shopping-list {
+        opacity: 1;
+    }
 }
 
 @include media-breakpoint-up(md) {

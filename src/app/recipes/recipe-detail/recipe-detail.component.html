@@ -14,17 +14,29 @@
 			</div>
 		</div>
 		<h3 class="fs-4 mt-5 mt-md-3">{{ 'Recipes.Ingredients' | translate }}</h3>
-		<div class="row">
-			<ng-template [ngIf]="recipe.ingredients" [ngIfElse]="empty">
-				<ng-container *ngFor="let ingredient of recipe.ingredients">
-					<div class="col-4">{{ ingredient.amount }} {{ ingredient.unit }}</div>
-					<div class="col-8">{{ ingredient.name }}</div>
-				</ng-container>
-			</ng-template>
-			<ng-template #empty>
-				<div class="col-12">{{ 'Recipes.NoIngredients' | translate }}</div>
-			</ng-template>
+		<ng-template [ngIf]="!!recipe.ingredients.length">
+			<div class="row mt-2" *ngFor="let ingredient of recipe.ingredients">
+				<div class="col-4">{{ ingredient.amount }} {{ ingredient.unit }}</div>
+				<div class="col-8 position-relative">
+					{{ ingredient.name }}
+					<button
+						class="add-to-shopping-list btn btn-outline-primary"
+						(click)="addIngredientToShippingList(ingredient)">
+						<i class="bi bi-basket-fill"></i> add
+					</button>
+				</div>
+			</div>
+		</ng-template>
+		<div class="row" *ngIf="!recipe.ingredients.length">
+			<div class="col-12">{{ 'Recipes.NoIngredients' | translate }}</div>
 		</div>
+		<ng-template role="button" [ngIf]="!!recipe.ingredients.length">
+			<button
+				class="text-primary mt-4 add-ingredients-to-shopping-list"
+				(click)="addAllIngredientsToShippingList(recipe.ingredients)">
+				{{ 'App.AddIngredientsToShoppingList' | translate }}
+			</button>
+		</ng-template>
 	</div>
 	<ng-container *ngIf="recipe.instructions.length > 0">
 		<div class="col-12 col-md-8 mt-5 mt-md-4 recipe pb-3">
