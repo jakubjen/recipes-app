@@ -9,6 +9,7 @@
 		"Description": "Description",
 		"ImageUrl": "Image Url",
 		"AddIngredient": "Add ingredient",
+		"EditIngredient": "Edit ingredient",
 		"AddInstruction": "Add instruction",
 		"Time": "Time to prepare dish"
 	},
@@ -17,10 +18,12 @@
 	},
 	"Navigation": {
 		"Home": "Home",
-		"AddRecipe": "Add Recipe"
+		"AddRecipe": "Add Recipe",
+		"ShoppingList": "Shopping List"
 	},
 	"App": {
 		"Loading": "Loading...",
+		"AddIngredientsToShoppingList":"Add ingredients to shopping list",
 		"Validation": {
 			"Required": "This filed is required.",
 			"MinLength": "Field required min length {{ length }}.",

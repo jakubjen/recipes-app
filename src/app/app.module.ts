@@ -24,13 +24,16 @@ import {
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ShoppingListComponent } from './shopping-list/shopping-list/shopping-list.component';
+import { ShoppingListReducer } from '@store/shopping-list/shopping-list.reducer';
+import { shoppingListEffects } from '@store/shopping-list/shopping-list.effects';
 
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http);
 }
 
 @NgModule({
-	declarations: [AppComponent],
+	declarations: [AppComponent, ShoppingListComponent],
 	imports: [
 		BrowserModule,
 		AppRoutingModule,
@@ -48,8 +51,8 @@ export function HttpLoaderFactory(http: HttpClient) {
 		BrowserAnimationsModule,
 		NgbModule,
 		StoreRouterConnectingModule.forRoot(),
-		StoreModule.forRoot({}),
-		EffectsModule.forRoot([]),
+		StoreModule.forRoot({ shoppingList: ShoppingListReducer }),
+		EffectsModule.forRoot([shoppingListEffects]),
 		StoreDevtoolsModule.instrument({
 			maxAge: 25,
 			logOnly: environment.production,

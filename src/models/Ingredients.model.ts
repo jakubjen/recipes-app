@@ -3,3 +3,7 @@ export default interface Ingredients {
 	unit: string;
 	amount: string;
 }
+
+export interface IngredientsInStore extends Ingredients {
+	id: string;
+}
