@@ -1,7 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import {
+	FormControl,
+	FormGroup,
+	FormGroupDirective,
+	Validators,
+} from '@angular/forms';
 import { IngredientsUnit } from '@models/ingredients-units.model';
 import Ingredients, { IngredientsInStore } from '@models/ingredients.model';
+import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { shoppingListActions } from '@store/shopping-list/shopping-list.actions';
 import ShoppingListSelectors from '@store/shopping-list/shopping-list.selectors';
@@ -18,6 +24,7 @@ export class ShoppingListComponent implements OnInit {
 	public ingredientList$?: Observable<IngredientsInStore[]>;
 	public mode: 'add' | 'edit' = 'add';
 	public editingIngredientId?: string;
+	public ingredientToDelete?: IngredientsInStore;
 
 	public ingredientForm = new FormGroup({
 		name: new FormControl<string>('', Validators.required),
@@ -41,14 +48,25 @@ export class ShoppingListComponent implements OnInit {
 		return this.ingredientForm.controls.amount;
 	}
 
-	constructor(private state: Store<AppState>) {}
+	constructor(private state: Store<AppState>, private modalService: NgbModal) {}
 
 	ngOnInit(): void {
 		this.ingredientList$ = this.state.select(ShoppingListSelectors.selectAll);
 	}
 
-	public removeIngredient(id: string): void {
-		this.state.dispatch(shoppingListActions.removeIngredient({ id }));
+	public removeIngredient(
+		ingredient: IngredientsInStore,
+		modal: TemplateRef<any>
+	): void {
+		this.ingredientToDelete = ingredient;
+		this.modalService
+			.open(modal, { ariaLabelledBy: 'modal-basic-title' })
+			.result.then(() => {
+				this.state.dispatch(
+					shoppingListActions.removeIngredient({ id: ingredient.id })
+				);
+			})
+			.catch(() => {});
 	}
 
 	public editIngredient(ingredient: IngredientsInStore): void {
@@ -57,8 +75,9 @@ export class ShoppingListComponent implements OnInit {
 		this.mode = 'edit';
 	}
 
-	public submit(): void {
-		if (!this.ingredientForm.value) return;
+	public submit(ngForm: FormGroupDirective): void {
+		if (!this.ingredientForm.valid) return;
+		ngForm.resetForm();
 		const { name, unit, amount } = this.ingredientForm.value;
 		const ingredient: Ingredients = {
 			name: name!,
