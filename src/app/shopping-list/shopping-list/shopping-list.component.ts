@@ -51,7 +51,13 @@ export class ShoppingListComponent implements OnInit {
 	constructor(private state: Store<AppState>, private modalService: NgbModal) {}
 
 	ngOnInit(): void {
-		this.ingredientList$ = this.state.select(ShoppingListSelectors.selectAll);
+		this.ingredientList$ = this.state.select(
+			ShoppingListSelectors.selectIngredients
+		);
+	}
+
+	public setQueryString(queryString: string): void {
+		this.state.dispatch(shoppingListActions.setQueryString({ queryString }));
 	}
 
 	public removeIngredient(

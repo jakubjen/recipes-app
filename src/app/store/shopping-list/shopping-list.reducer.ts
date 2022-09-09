@@ -7,11 +7,13 @@ import { v4 as uuidv4 } from 'uuid';
 
 export interface ShoppingListState extends EntityState<IngredientsInStore> {
 	dataState: DataState;
+	queryString: string;
 }
 const adapter: EntityAdapter<IngredientsInStore> =
 	createEntityAdapter<IngredientsInStore>();
 const initialState = adapter.getInitialState({
 	dataState: DataState.Loaded,
+	queryString: '',
 });
 export const ShoppingListReducer = createReducer(
 	{ ...initialState },
@@ -44,6 +46,13 @@ export const ShoppingListReducer = createReducer(
 		shoppingListActions.loadIngredientsSuccess,
 		(state: ShoppingListState, { ingredients }): ShoppingListState => {
 			return adapter.addMany(ingredients, state);
+		}
+	),
+
+	on(
+		shoppingListActions.setQueryString,
+		(state: ShoppingListState, { queryString }): ShoppingListState => {
+			return { ...state, queryString: queryString.toLowerCase() };
 		}
 	)
 );

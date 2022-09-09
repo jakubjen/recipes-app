@@ -22,3 +22,13 @@
     }
 }
 
+.searcher {
+	position: relative;
+
+	.icon {
+		position: absolute;
+		bottom: 9px;
+		right: 28px;
+		color: $gray-500;
+	}
+}

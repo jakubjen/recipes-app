@@ -33,6 +33,11 @@ const addManyIngredientsFromRecipe = createAction(
 	props<{ ingredients: Ingredients[] }>()
 );
 
+const setQueryString = createAction(
+	'[ShoppingList page] Add setQueryString',
+	props<{ queryString: string }>()
+);
+
 export const shoppingListActions = {
 	addIngredient,
 	removeIngredient,
@@ -41,4 +46,5 @@ export const shoppingListActions = {
 	loadIngredientsSuccess,
 	addIngredientFromRecipe,
 	addManyIngredientsFromRecipe,
+	setQueryString,
 };

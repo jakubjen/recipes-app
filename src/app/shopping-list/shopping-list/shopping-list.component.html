@@ -35,7 +35,6 @@
 				[input]="ingredientForm.controls.unit"
 				[form]="ngForm"></app-form-error>
 		</div>
-
 		<div class="col-12 col-lg-6 mt-3 mt-lg-0">
 			<div class="input-group">
 				<input
@@ -62,8 +61,23 @@
 	</button>
 </form>
 
+<div class="row mt-4">
+	<div class="col-12 col-md-5 searcher">
+		<label for="seachInput" class="form-label">Search</label>
+		<input
+			type="text"
+			class="form-control"
+			id="seachInput"
+			#queryString
+			(input)="setQueryString(queryString.value)" />
+		<div class="icon">
+			<i class="bi bi-search"></i>
+		</div>
+	</div>
+</div>
+
 <div class="col-12">
-	<table class="table mt-3">
+	<table class="table mt-5">
 		<thead>
 			<tr>
 				<th scope="col">#</th>
