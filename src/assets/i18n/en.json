@@ -31,5 +31,9 @@
 			"GoTo": "Go to",
 			"HomePage": "home page"
 		}
+	},
+	"Sorting": {
+		"Title": "Title",
+		"Time": "Time"
 	}
 }
