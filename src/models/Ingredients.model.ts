@@ -7,3 +7,8 @@ export default interface Ingredients {
 export interface IngredientsInStore extends Ingredients {
 	id: string;
 }
+
+export enum IngredientsSortBy {
+	Amount,
+	Name,
+}

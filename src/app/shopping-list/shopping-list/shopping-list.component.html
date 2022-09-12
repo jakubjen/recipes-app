@@ -75,14 +75,46 @@
 		</div>
 	</div>
 </div>
-
-<div class="col-12">
-	<table class="table mt-5">
+<div class="col-12 mt-4">
+	<table class="table">
 		<thead>
 			<tr>
 				<th scope="col">#</th>
-				<th scope="col">Amount</th>
-				<th scope="col">Name</th>
+				<th scope="col" (click)="changeSortKey(sortKeyEnum.Amount)">
+					<div
+						class="sortable"
+						[class.selected]="(sortKey | async) === sortKeyEnum.Amount">
+						Amount
+						<div
+							class="icons"
+							[class]="
+								(sortDirection | async) === sortDirectionEnum.ASC
+									? 'asc'
+									: 'desc'
+							">
+							<i class="bi bi-caret-up-fill top"></i>
+							<i class="bi bi-caret-down-fill bottom"></i>
+						</div>
+					</div>
+				</th>
+				<th scope="col" (click)="changeSortKey(sortKeyEnum.Name)">
+					<div
+						class="sortable"
+						[class.selected]="(sortKey | async) === sortKeyEnum.Name">
+						Name
+						<div
+							class="icons"
+							[class]="
+								(sortDirection | async) === sortDirectionEnum.ASC
+									? 'asc'
+									: 'desc'
+							">
+							>
+							<i class="bi bi-caret-up-fill top"></i>
+							<i class="bi bi-caret-down-fill bottom"></i>
+						</div>
+					</div>
+				</th>
 			</tr>
 		</thead>
 		<tbody>

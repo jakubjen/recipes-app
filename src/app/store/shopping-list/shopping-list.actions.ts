@@ -1,4 +1,8 @@
-import Ingredients, { IngredientsInStore } from '@models/ingredients.model';
+import Ingredients, {
+	IngredientsInStore,
+	IngredientsSortBy,
+} from '@models/ingredients.model';
+import SortDirection from '@models/sort-direction.ts';
 import { createAction, props } from '@ngrx/store';
 
 const addIngredient = createAction(
@@ -38,6 +42,18 @@ const setQueryString = createAction(
 	props<{ queryString: string }>()
 );
 
+const setSortDirection = createAction(
+	'[ShoppingList table] Set sort direction',
+	props<{ sortDirection: SortDirection }>()
+);
+
+const setSortKey = createAction(
+	'[ShoppingList table] Set sort key',
+	props<{ sortKey: IngredientsSortBy }>()
+);
+
+const toggleDirection = createAction('[ShoppingList table] Table direction');
+
 export const shoppingListActions = {
 	addIngredient,
 	removeIngredient,
@@ -47,4 +63,7 @@ export const shoppingListActions = {
 	addIngredientFromRecipe,
 	addManyIngredientsFromRecipe,
 	setQueryString,
+	setSortDirection,
+	toggleDirection,
+	setSortKey,
 };

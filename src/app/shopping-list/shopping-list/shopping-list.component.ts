@@ -6,13 +6,17 @@ import {
 	Validators,
 } from '@angular/forms';
 import { IngredientsUnit } from '@models/ingredients-units.model';
-import Ingredients, { IngredientsInStore } from '@models/ingredients.model';
+import Ingredients, {
+	IngredientsInStore,
+	IngredientsSortBy,
+} from '@models/ingredients.model';
+import SortDirection from '@models/sort-direction.ts';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { shoppingListActions } from '@store/shopping-list/shopping-list.actions';
 import ShoppingListSelectors from '@store/shopping-list/shopping-list.selectors';
 import { AppState } from '@store/store';
-import { Observable } from 'rxjs';
+import { first, tap, Observable, take } from 'rxjs';
 
 @Component({
 	selector: 'app-shopping-list',
@@ -25,6 +29,10 @@ export class ShoppingListComponent implements OnInit {
 	public mode: 'add' | 'edit' = 'add';
 	public editingIngredientId?: string;
 	public ingredientToDelete?: IngredientsInStore;
+	public sortKeyEnum = IngredientsSortBy;
+	public sortKey?: Observable<IngredientsSortBy>;
+	public sortDirection?: Observable<SortDirection>;
+	public sortDirectionEnum = SortDirection;
 
 	public ingredientForm = new FormGroup({
 		name: new FormControl<string>('', Validators.required),
@@ -48,16 +56,21 @@ export class ShoppingListComponent implements OnInit {
 		return this.ingredientForm.controls.amount;
 	}
 
-	constructor(private state: Store<AppState>, private modalService: NgbModal) {}
+	constructor(private store: Store, private modalService: NgbModal) {}
 
 	ngOnInit(): void {
-		this.ingredientList$ = this.state.select(
-			ShoppingListSelectors.selectIngredients
+		this.ingredientList$ = this.store.select(
+			ShoppingListSelectors.selectFilteredAndSortedIngredients
+		);
+
+		this.sortKey = this.store.select(ShoppingListSelectors.selectSortedKey);
+		this.sortDirection = this.store.select(
+			ShoppingListSelectors.selectSortDirection
 		);
 	}
 
 	public setQueryString(queryString: string): void {
-		this.state.dispatch(shoppingListActions.setQueryString({ queryString }));
+		this.store.dispatch(shoppingListActions.setQueryString({ queryString }));
 	}
 
 	public removeIngredient(
@@ -68,7 +81,7 @@ export class ShoppingListComponent implements OnInit {
 		this.modalService
 			.open(modal, { ariaLabelledBy: 'modal-basic-title' })
 			.result.then(() => {
-				this.state.dispatch(
+				this.store.dispatch(
 					shoppingListActions.removeIngredient({ id: ingredient.id })
 				);
 			})
@@ -83,8 +96,8 @@ export class ShoppingListComponent implements OnInit {
 
 	public submit(ngForm: FormGroupDirective): void {
 		if (!this.ingredientForm.valid) return;
-		ngForm.resetForm();
 		const { name, unit, amount } = this.ingredientForm.value;
+
 		const ingredient: Ingredients = {
 			name: name!,
 			unit: unit!,
@@ -92,19 +105,31 @@ export class ShoppingListComponent implements OnInit {
 		};
 
 		if (this.mode == 'add') {
-			this.state.dispatch(shoppingListActions.addIngredient({ ingredient }));
-			return;
+			this.store.dispatch(shoppingListActions.addIngredient({ ingredient }));
+			return ngForm.resetForm();
 		}
 		if (this.mode == 'edit') {
 			this.mode = 'add';
-			if (!this.editingIngredientId) return;
+			if (!this.editingIngredientId) return ngForm.resetForm();
 			const updatedIngredient: IngredientsInStore = {
 				id: this.editingIngredientId,
 				...ingredient,
 			};
-			this.state.dispatch(
+			this.store.dispatch(
 				shoppingListActions.updateIngredient({ ingredient: updatedIngredient })
 			);
+			return ngForm.resetForm();
 		}
+	}
+
+	public changeSortKey(sortKey: IngredientsSortBy): void {
+		this.store
+			.select(ShoppingListSelectors.selectSortedKey)
+			.pipe(first())
+			.subscribe(sortedBy => {
+				this.store.dispatch(shoppingListActions.setSortKey({ sortKey }));
+				if (sortedBy === sortKey)
+					this.store.dispatch(shoppingListActions.toggleDirection());
+			});
 	}
 }

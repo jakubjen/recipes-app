@@ -1,6 +1,45 @@
-@import '~bootstrap/scss/mixins';/* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/functions';/* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/variables';/* Importing Bootstrap SCSS file. */
+@use 'styles' as *;
+
+th {
+     user-select: none;
+
+    .sortable {
+        display: flex;
+        align-items: flex-end;
+        gap: 5px;
+        cursor: pointer;
+
+        .icons {
+            font-size: 13px;
+            width: 10px;
+            color: $gray-500;
+
+            .top { 
+                position: relative;
+                top: 14px;
+            }
+
+            .bottom { 
+                position: relative;
+                top: 4px
+            }
+        }
+
+        &.selected {
+            .icons.asc {
+                    .bottom {
+                        color: $primary;
+                    }
+            }
+
+            .icons.desc {
+                .top {
+                    color: $primary
+                }
+            }
+        }
+    }
+}
 
 .col-name {
     display: flex;

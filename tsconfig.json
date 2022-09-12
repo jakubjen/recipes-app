@@ -22,7 +22,8 @@
 		"paths": {
 			"@store/*": ["./src/app/store/*"],
 			"@models/*": ["./src/models/*"],
-			"@services/*": ["./src/app/services/*"]
+			"@services/*": ["./src/app/services/*"],
+			"@scss/*": ["./src/assets/scss/*"]
 		}
 	},
 	"angularCompilerOptions": {
