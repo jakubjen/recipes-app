@@ -5,6 +5,7 @@ import RecipesSelectors from 'src/app/store/recipes/recipes.selector';
 import { AppState } from 'src/app/store/store';
 import Recipe from '@models/recipe.model';
 import DataState from '@models/data-store.enum';
+import SortDirection from '@models/sort-direction';
 
 @Component({
 	selector: 'app-recipe-cards',
@@ -18,7 +19,8 @@ export class RecipesCardsComponent implements OnInit {
 	public searchText = '';
 	public sortCategory: keyof Recipe = 'title';
 	public sortingCategories: (keyof Recipe)[] = ['title', 'time'];
-	public sortDirection: 'asc' | 'desc' = 'asc';
+	public sortDirection: SortDirection = SortDirection.ASC;
+	public sortDirectionEnum = SortDirection;
 
 	constructor(private store: Store<AppState>) {}
 
@@ -38,10 +40,9 @@ export class RecipesCardsComponent implements OnInit {
 	}
 
 	public changeSortDirection(): void {
-		if (this.sortDirection === 'asc') {
-			this.sortDirection = 'desc';
-			return;
-		}
-		if (this.sortDirection === 'desc') this.sortDirection = 'asc';
+		this.sortDirection =
+			this.sortDirection === SortDirection.ASC
+				? SortDirection.DESC
+				: SortDirection.ASC;
 	}
 }

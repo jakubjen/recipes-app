@@ -27,8 +27,12 @@
 				</option>
 			</select>
 			<button class="icon input-group-text" (click)="changeSortDirection()">
-				<i class="bi bi-sort-down" *ngIf="sortDirection === 'asc'"></i>
-				<i class="bi bi-sort-up" *ngIf="sortDirection === 'desc'"></i>
+				<i
+					class="bi bi-sort-down"
+					*ngIf="sortDirection === sortDirectionEnum.ASC"></i>
+				<i
+					class="bi bi-sort-up"
+					*ngIf="sortDirection === sortDirectionEnum.DESC"></i>
 			</button>
 		</div>
 	</div>

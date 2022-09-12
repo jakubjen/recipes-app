@@ -1,5 +1,6 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import Recipe from '@models/recipe.model';
+import SortDirection from '@models/sort-direction';
 
 @Pipe({
 	name: 'sortRecipes',
@@ -8,7 +9,7 @@ export class SortRecipesPipe implements PipeTransform {
 	transform(
 		recipes: Recipe[],
 		field: keyof Recipe,
-		sortDirection: 'asc' | 'desc' = 'asc'
+		sortDirection: SortDirection
 	): Recipe[] {
 		recipes.sort((a, b) => {
 			if (a[field] > b[field]) {
@@ -19,6 +20,6 @@ export class SortRecipesPipe implements PipeTransform {
 			}
 			return 0;
 		});
-		return sortDirection === 'asc' ? recipes : recipes.reverse();
+		return sortDirection === SortDirection.ASC ? recipes : recipes.reverse();
 	}
 }
