@@ -7,8 +7,54 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 
 		<link rel="icon" type="image/x-icon" href="favicon.ico" />
+		<style>
+			.before-load .center {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				translate: -50% -50%;
+			}
+
+			.before-load .spinner {
+				height: 180px;
+				aspect-ratio: 1;
+				border-radius: 50%;
+				border: solid 8px transparent;
+				animation: spin-before-load 1s ease-in-out infinite;
+				border-left-color: rgb(246 189 65);
+				border-right-color: rgb(246 189 65);
+			}
+
+			.before-load .text {
+				animation: pulse-before-load 1s ease-in-out infinite alternate;
+				color: rgb(246 189 65);
+			}
+
+			@keyframes spin-before-load {
+				0% {
+					rotate: 0deg;
+				}
+				100% {
+					rotate: 360deg;
+				}
+			}
+
+			@keyframes pulse-before-load {
+				0% {
+					opacity: 1;
+				}
+				100% {
+					opacity: 0;
+				}
+			}
+		</style>
 	</head>
 	<body>
-		<app-root></app-root>
+		<app-root>
+			<div class="before-load">
+				<div class="spinner center"></div>
+				<div class="text center">Loading...</div>
+			</div>
+		</app-root>
 	</body>
 </html>
