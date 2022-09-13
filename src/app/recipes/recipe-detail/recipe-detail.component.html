@@ -1,4 +1,4 @@
-<div class="row" *ngIf="recipe$ | async as recipe">
+<div class="row" *ngIf="!!recipe">
 	<div class="col-12 col-md-8 card-wrapper">
 		<app-recipe-card [recipe]="recipe"></app-recipe-card>
 	</div>
@@ -8,12 +8,23 @@
 		</p>
 	</div>
 	<div class="col-12 col-md-4 ingredients">
-		<div class="row">
+		<div class="row mb-5 mb-md-3" *ngIf="user?.uid === recipe.ownerId">
 			<div class="col-6">
-				<a routerLink="#" class="btn btn-outline-primary w-100">Edit</a>
+				<a
+					[routerLink]="'/recipe/edit/' + recipe.id"
+					class="btn btn-outline-primary w-100"
+					>{{ 'App.Edit' | translate }}</a
+				>
+			</div>
+			<div class="col-6">
+				<button
+					class="btn btn-outline-danger w-100"
+					(click)="deleteRecipe(recipe.id)">
+					{{ 'App.Delete' | translate }}
+				</button>
 			</div>
 		</div>
-		<h3 class="fs-4 mt-5 mt-md-3">{{ 'Recipes.Ingredients' | translate }}</h3>
+		<h3 class="fs-4">{{ 'Recipes.Ingredients' | translate }}</h3>
 		<div class="row">
 			<ng-template [ngIf]="recipe.ingredients" [ngIfElse]="empty">
 				<ng-container *ngFor="let ingredient of recipe.ingredients">
@@ -37,7 +48,7 @@
 	</ng-container>
 </div>
 
-<div class="d-flex justify-content-center mt-3" *ngIf="recipe$ === undefined">
+<div class="d-flex justify-content-center mt-3" *ngIf="!recipe">
 	<div class="spinner-border text-primary" role="status">
 		<span class="visually-hidden">{{ 'App.Loading' | translate }} </span>
 	</div>

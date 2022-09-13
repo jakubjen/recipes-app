@@ -1,1 +1,6 @@
-<p>recipes-edit works!</p>
+<ng-container *ngIf="recipe">
+	<app-recipe-from
+		[recipe]="recipe"
+		action="Update"
+		(submitRecipe)="update($event)"></app-recipe-from>
+</ng-container>
