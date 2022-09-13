@@ -1,7 +1,11 @@
+import { transition } from '@angular/animations';
 import { Injectable } from '@angular/core';
 import { IngredientsInStore } from '@models/ingredients.model';
+import { SnackbarVariant } from '@models/snackbar.model';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { State, Store } from '@ngrx/store';
+import { TranslateService } from '@ngx-translate/core';
+import SnackbarActions from '@store/shared/snackbar.actions';
 import { AppState } from '@store/store';
 import { combineLatest, concatMap, map } from 'rxjs';
 import { shoppingListActions } from './shopping-list.actions';
@@ -43,5 +47,34 @@ export class shoppingListEffects {
 			})
 		);
 	});
-	constructor(private actions$: Actions, private store: Store<AppState>) {}
+
+	addIngredientsFromRecipe$ = createEffect(() => {
+		return this.actions$.pipe(
+			ofType(shoppingListActions.addManyIngredientsFromRecipe),
+			map(() =>
+				SnackbarActions.createSnackbar({
+					variant: SnackbarVariant.Success,
+					text: this.translate.instant('App.Snackbar.AllIngredientsAdded'),
+				})
+			)
+		);
+	});
+
+	addIngredientFromRecipe$ = createEffect(() => {
+		return this.actions$.pipe(
+			ofType(shoppingListActions.addIngredientFromRecipe),
+			map(() =>
+				SnackbarActions.createSnackbar({
+					variant: SnackbarVariant.Success,
+					text: this.translate.instant('App.Snackbar.IngredientAdded'),
+				})
+			)
+		);
+	});
+
+	constructor(
+		private actions$: Actions,
+		private store: Store<AppState>,
+		private translate: TranslateService
+	) {}
 }

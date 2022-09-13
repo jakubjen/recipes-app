@@ -58,8 +58,6 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
 				ingredients,
 			})
 		);
-		//TODO: Change to snackbar instead alert
-		alert('Ingredients are added to shopping list.');
 	}
 
 	public addIngredientToShippingList(ingredient: Ingredients): void {
@@ -68,8 +66,6 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
 				ingredient,
 			})
 		);
-		//TODO: Change to snackbar instead alert
-		alert('Ingredient is added to shopping list.');
 	}
 
 	public deleteRecipe(id: string): void {

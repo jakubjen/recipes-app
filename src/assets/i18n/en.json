@@ -38,7 +38,9 @@
 			"UserNotAuthorized": "User not authorized",
 			"RecipeAddedSuccessfully": "Recipe added successfully",
 			"RecipeUpdatedSuccessfully": "Recipe updated successfully",
-			"RecipeRemoveSuccessfully": "Recipe remove successfully"
+			"RecipeRemoveSuccessfully": "Recipe remove successfully",
+			"AllIngredientsAdded": "All ingredients added",
+			"IngredientAdded": "Ingredient added"
 		},
 		"Auth": {
 			"Register": "Register",
