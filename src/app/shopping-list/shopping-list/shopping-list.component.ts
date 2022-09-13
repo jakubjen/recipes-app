@@ -25,7 +25,7 @@ import { first, tap, Observable, take } from 'rxjs';
 })
 export class ShoppingListComponent implements OnInit {
 	public units = IngredientsUnit;
-	public ingredientList$?: Observable<IngredientsInStore[]>;
+	public ingredientList$?: Observable<IngredientsInStore[] | undefined>;
 	public mode: 'add' | 'edit' = 'add';
 	public editingIngredientId?: string;
 	public ingredientToDelete?: IngredientsInStore;
