@@ -3,6 +3,8 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import FirebaseActions from '@models/firebase-actions.enum';
 import Recipe from '@models/recipe.model';
 import { Store } from '@ngrx/store';
+import appActions from '@store/app.actions';
+import userActions from '@store/auth/user.actions';
 import RecipesActions from '@store/recipes/recipes.actions';
 import { AppState } from '@store/store';
 import { v4 as uuid } from 'uuid';
@@ -19,11 +21,11 @@ export class AppComponent implements OnInit {
 	) {}
 
 	ngOnInit(): void {
+		this.store.dispatch(appActions.appInit());
 		this.loadRecipes();
 	}
 
 	private loadRecipes(): void {
-		this.store.dispatch(RecipesActions.loadRecipesStart());
 		this.firestore
 			.collection<Recipe>('recipes')
 			.stateChanges()

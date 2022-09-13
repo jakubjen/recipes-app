@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import Recipe from '@models/recipe.model';
+import Recipe, { NewRecipe } from '@models/recipe.model';
 
 const loadRecipesStart = createAction('[App component] Start recipes');
 
@@ -7,6 +7,19 @@ const loadRecipesSuccess = createAction('[App component] Load recipes success');
 
 const loadRecipesFailed = createAction('[App component] Load recipes failed');
 
+const addRecipe = createAction(
+	'[Add recipe component] Add recipe',
+	props<{ recipe: NewRecipe }>()
+);
+
+const addRecipeSuccess = createAction(
+	'[Add recipe component] Add recipe success'
+);
+
+const addRecipeFailed = createAction(
+	'[Add recipe component] Add recipe failed',
+	props<{ text: string }>()
+);
 const firestoreAddRecipe = createAction(
 	'[firestore] Add recipe',
 	props<{ recipe: Recipe }>()
@@ -22,19 +35,49 @@ const firestoreRemoveRecipe = createAction(
 	props<{ id: string }>()
 );
 
-const addRecipe = createAction(
-	'[Add recipe] Add recipe',
+const removeRecipe = createAction(
+	'[Recipe effect] Recipe removed',
+	props<{ id: string }>()
+);
+const removeRecipeSuccess = createAction(
+	'[Recipe effect] Recipe removed success'
+);
+
+const removeRecipeFailed = createAction(
+	'[Recipe effect] Recipe removed failed',
+	props<{ text: string }>()
+);
+
+const updateRecipe = createAction(
+	'[Recipe effect] Recipe update',
 	props<{ recipe: Recipe }>()
+);
+
+const updateRecipeFailed = createAction(
+	'[Recipe effect] Recipe update',
+	props<{ text: string }>()
+);
+
+const updateRecipeSuccess = createAction(
+	'[Recipe effect] Recipe update success'
 );
 
 const RecipesActions = {
 	loadRecipesStart,
 	loadRecipesSuccess,
 	loadRecipesFailed,
+	addRecipe,
+	addRecipeSuccess,
+	addRecipeFailed,
 	firestoreAddRecipe,
 	firestoreRemoveRecipe,
 	firestoreModifyRecipe,
-	addRecipe,
+	removeRecipe,
+	removeRecipeSuccess,
+	removeRecipeFailed,
+	updateRecipe,
+	updateRecipeSuccess,
+	updateRecipeFailed,
 };
 
 export default RecipesActions;

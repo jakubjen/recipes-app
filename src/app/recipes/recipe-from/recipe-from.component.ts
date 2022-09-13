@@ -6,7 +6,7 @@ import {
 	Validators,
 	AbstractControl,
 } from '@angular/forms';
-import Recipe from '@models/recipe.model';
+import Recipe, { NewRecipe } from '@models/recipe.model';
 import { IngredientsUnit } from '@models/ingredients-units.model';
 
 @Component({
@@ -18,11 +18,16 @@ export class RecipeFromComponent {
 	@Input() action: string = '';
 	@Input() loading: boolean = false;
 	@Input() set recipe(recipe: Recipe) {
+		this.ingredients.clear();
+		this.instructions.clear();
 		recipe.ingredients.forEach(() => this.addIngredient());
 		recipe.instructions.forEach(() => this.addInstruction());
 		this.recipeForm.patchValue(recipe);
+		this.recipeId = recipe.id;
 	}
-	@Output() submitRecipe = new EventEmitter<Recipe>();
+	private recipeId?: string;
+
+	@Output() submitRecipe = new EventEmitter<NewRecipe>();
 
 	public units = IngredientsUnit;
 
@@ -39,17 +44,23 @@ export class RecipeFromComponent {
 		]),
 		description: new FormControl<string>('', [
 			Validators.required,
-			Validators.minLength(50),
+			Validators.minLength(20),
 			Validators.maxLength(2000),
 		]),
-		time: new FormControl<number | null>(null, [Validators.required]),
+		time: new FormControl<number | null>(null, [
+			Validators.required,
+			Validators.min(1),
+		]),
 		ingredients: new FormArray<FormGroup>([]),
 		instructions: new FormArray<FormControl<string>>([]),
 	});
 
 	public handleSubmit(): void {
 		if (this.recipeForm.valid) {
-			this.submitRecipe.emit(this.recipeForm.value as Recipe);
+			this.submitRecipe.emit({
+				...this.recipeForm.value,
+				id: this.recipeId,
+			} as NewRecipe);
 		}
 	}
 
@@ -92,7 +103,7 @@ export class RecipeFromComponent {
 		this.instructions.push(
 			new FormControl<string>('', [
 				Validators.required,
-				Validators.minLength(50),
+				Validators.minLength(20),
 				Validators.maxLength(2000),
 			])
 		);
