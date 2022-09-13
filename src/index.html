@@ -25,11 +25,6 @@
 				border-right-color: rgb(246 189 65);
 			}
 
-			.before-load .text {
-				animation: pulse-before-load 1s ease-in-out infinite alternate;
-				color: rgb(246 189 65);
-			}
-
 			@keyframes spin-before-load {
 				0% {
 					rotate: 0deg;
@@ -38,22 +33,12 @@
 					rotate: 360deg;
 				}
 			}
-
-			@keyframes pulse-before-load {
-				0% {
-					opacity: 1;
-				}
-				100% {
-					opacity: 0;
-				}
-			}
 		</style>
 	</head>
 	<body>
 		<app-root>
 			<div class="before-load">
 				<div class="spinner center"></div>
-				<div class="text center">Loading...</div>
 			</div>
 		</app-root>
 	</body>
