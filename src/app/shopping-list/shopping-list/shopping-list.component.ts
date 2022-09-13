@@ -130,6 +130,12 @@ export class ShoppingListComponent implements OnInit {
 				this.store.dispatch(shoppingListActions.setSortKey({ sortKey }));
 				if (sortedBy === sortKey)
 					this.store.dispatch(shoppingListActions.toggleDirection());
+				else
+					this.store.dispatch(
+						shoppingListActions.setSortDirection({
+							sortDirection: SortDirection.ASC,
+						})
+					);
 			});
 	}
 }
