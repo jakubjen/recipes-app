@@ -36,6 +36,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 	declarations: [AppComponent, ShoppingListComponent],
 	imports: [
 		BrowserModule,
+		BrowserAnimationsModule,
 		AppRoutingModule,
 		HttpClientModule,
 		DashboardModule,

@@ -1,3 +1,10 @@
+import {
+	animate,
+	state,
+	style,
+	transition,
+	trigger,
+} from '@angular/animations';
 import { Component, OnInit, TemplateRef } from '@angular/core';
 import {
 	FormControl,
@@ -22,6 +29,27 @@ import { first, tap, Observable, take } from 'rxjs';
 	selector: 'app-shopping-list',
 	templateUrl: './shopping-list.component.html',
 	styleUrls: ['./shopping-list.component.scss'],
+	animations: [
+		trigger('recipeSate', [
+			transition('void => *', [
+				style({
+					opacity: 0,
+				}),
+				animate('1s'),
+			]),
+			transition('* => void', [
+				style({
+					opacity: 1,
+				}),
+				animate(
+					'1s ease-out',
+					style({
+						opacity: 0,
+					})
+				),
+			]),
+		]),
+	],
 })
 export class ShoppingListComponent implements OnInit {
 	public units = IngredientsUnit;

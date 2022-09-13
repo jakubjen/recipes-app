@@ -118,7 +118,9 @@
 		</thead>
 		<tbody>
 			<ng-container *ngIf="ingredientList$ | async as ingredientList">
-				<tr *ngFor="let ingredient of ingredientList; let i = index">
+				<tr
+					*ngFor="let ingredient of ingredientList; let i = index"
+					[@recipeSate]="'normal'">
 					<th scope="row">{{ i + 1 }}</th>
 					<td>{{ ingredient.amount }} {{ ingredient.unit }}</td>
 					<td>
