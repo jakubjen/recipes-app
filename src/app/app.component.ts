@@ -6,14 +6,15 @@ import { Store } from '@ngrx/store';
 import appActions from '@store/app.actions';
 import userActions from '@store/auth/user.actions';
 import RecipesActions from '@store/recipes/recipes.actions';
+import { AppState } from '@store/store';
+import RecipesActions from '@store/recipes/recipes.actions';
 
 @Component({
 	selector: 'app-root',
 	templateUrl: './app.component.html',
 	styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements OnInit {
-	constructor(private firestore: AngularFirestore, private store: Store) {}
+		private firestore: AngularFirestore,
 
 	ngOnInit(): void {
 		this.store.dispatch(appActions.appInit());

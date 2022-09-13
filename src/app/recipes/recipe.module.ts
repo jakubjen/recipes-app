@@ -13,6 +13,8 @@ import { RecipeFromComponent } from './recipe-from/recipe-from.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RecipesAddComponent } from './recipes-add/recipes-add.component';
 import { SharedModule } from '../shared/shared.module';
+import { FilterRecipesPipe } from './filter-recipes.pipe';
+import { SortRecipesPipe } from './sort-recipes.pipe';
 import { RecipeEffects } from '@store/recipes/effect/recipes.effects';
 
 @NgModule({
@@ -23,6 +25,8 @@ import { RecipeEffects } from '@store/recipes/effect/recipes.effects';
 		RecipeDetailComponent,
 		RecipeCardComponent,
 		RecipeFromComponent,
+		FilterRecipesPipe,
+		SortRecipesPipe,
 	],
 	imports: [
 		CommonModule,
