@@ -2,6 +2,17 @@
 @import '~bootstrap/scss/functions'; /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/variables'; /* Importing Bootstrap SCSS file. */
 
+.image {
+	.image-preview {
+		img {
+			width: 100%;
+			height:220px; 
+			object-fit: cover;
+			border-radius: 8px;
+		};
+	}
+}
+
 .instruction {
 	position: relative;
 

@@ -1,3 +1,10 @@
+import {
+	animate,
+	state,
+	style,
+	transition,
+	trigger,
+} from '@angular/animations';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
 	AbstractControl,
@@ -14,6 +21,29 @@ import { Observable } from 'rxjs';
 	selector: 'app-recipe-from',
 	templateUrl: './recipe-from.component.html',
 	styleUrls: ['./recipe-from.component.scss'],
+	animations: [
+		trigger('fadeIn', [
+			transition('void => *', [
+				style({
+					height: 0,
+					scale: 0,
+				}),
+				animate('.3s ease-out'),
+			]),
+			transition('* => void', [
+				style({
+					scale: 1,
+				}),
+				animate(
+					'.3s ease-out',
+					style({
+						scale: 0,
+						height: 0,
+					})
+				),
+			]),
+		]),
+	],
 })
 export class RecipeFromComponent {
 	@Input() action: string = '';
@@ -27,6 +57,7 @@ export class RecipeFromComponent {
 		this.recipeForm.patchValue(recipe);
 		this.recipeId = recipe.id;
 		this.imageUrl = recipe.imageUrl;
+		this.previewImageUrl = recipe.imageUrl;
 		this.recipeForm.controls.image.removeValidators(Validators.required);
 	}
 
@@ -37,6 +68,7 @@ export class RecipeFromComponent {
 
 	private recipeId?: string;
 	private imageUrl = '';
+	public previewImageUrl: string | ArrayBuffer = '';
 	public units = IngredientsUnit;
 
 	public recipeForm = new FormGroup({
@@ -109,7 +141,17 @@ export class RecipeFromComponent {
 
 	public onFileChanged(event: Event): void {
 		const image = (event.target as HTMLInputElement).files?.[0];
-		if (!!image) this.recipeForm.patchValue({ image });
+		if (!image) {
+			this.previewImageUrl = '';
+			return;
+		}
+		const reader = new FileReader();
+
+		reader.readAsDataURL(image);
+		reader.onload = () => {
+			this.previewImageUrl = reader.result!;
+			this.recipeForm.patchValue({ image });
+		};
 	}
 
 	public handleSubmit(): void {

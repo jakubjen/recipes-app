@@ -26,16 +26,21 @@
 				<label for="image" class="form-label fs-5 fw-bold">{{
 					'Recipes.Image' | translate
 				}}</label>
-				<input
-					type="file"
-					accept=".jpg"
-					class="form-control"
-					(change)="onFileChanged($event)"
-					[class.is-invalid]="
-						(image?.touched || ngForm.submitted) && !!image?.errors
-					"
-					id="image" />
-				<app-form-error [input]="image" [form]="ngForm"></app-form-error>
+				<div class="col-12 col-md-10 col-lg-8">
+					<div class="image-preview mb-2" *ngIf="!!previewImageUrl">
+						<img [src]="previewImageUrl" alt="Image preview" />
+					</div>
+					<input
+						type="file"
+						accept=".jpg"
+						class="form-control"
+						(change)="onFileChanged($event)"
+						[class.is-invalid]="
+							(image?.touched || ngForm.submitted) && !!image?.errors
+						"
+						id="image" />
+					<app-form-error [input]="image" [form]="ngForm"></app-form-error>
+				</div>
 			</div>
 
 			<div class="time mt-4">
@@ -81,6 +86,7 @@
 					{{ 'Recipes.Ingredients' | translate }}
 				</h3>
 				<div
+					@fadeIn
 					class="row mt-3"
 					*ngFor="let ingredientsForm of ingredients.controls; let i = index">
 					<ng-container [formGroupName]="i">
@@ -153,6 +159,7 @@
 			<div class="instructions mt-4" formArrayName="instructions">
 				<h3 class="fs-4">instructions</h3>
 				<div
+					@fadeIn
 					*ngFor="let instructionForm of instructions.controls; let i = index"
 					class="instruction">
 					<textarea
