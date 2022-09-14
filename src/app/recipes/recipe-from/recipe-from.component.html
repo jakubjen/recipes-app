@@ -22,20 +22,20 @@
 				<app-form-error [input]="title" [form]="ngForm"></app-form-error>
 			</div>
 
-			<div class="mt-4 imageUrl">
-				<label for="imageUrl" class="form-label fs-5 fw-bold">{{
-					'Recipes.ImageUrl' | translate
+			<div class="mt-4 image">
+				<label for="image" class="form-label fs-5 fw-bold">{{
+					'Recipes.Image' | translate
 				}}</label>
 				<input
-					type="text"
-					formControlName="imageUrl"
-					[placeholder]="'Recipes.ImageUrl' | translate"
+					type="file"
+					accept=".jpg"
 					class="form-control"
+					(change)="onFileChanged($event)"
 					[class.is-invalid]="
-						(imageUrl?.touched || ngForm.submitted) && !!imageUrl?.errors
+						(image?.touched || ngForm.submitted) && !!image?.errors
 					"
-					id="imageUrl" />
-				<app-form-error [input]="imageUrl" [form]="ngForm"></app-form-error>
+					id="image" />
+				<app-form-error [input]="image" [form]="ngForm"></app-form-error>
 			</div>
 
 			<div class="time mt-4">
@@ -183,8 +183,16 @@
 					{{ 'Recipes.AddInstruction' | translate }}
 				</button>
 			</div>
-			<button type="submit" class="btn btn-primary mt-4">
+			<button
+				type="submit"
+				class="btn btn-primary mt-4"
+				[disabled]="processingData$ | async">
 				{{ action }}
+				<span
+					class="spinner-border spinner-border-sm"
+					role="status"
+					*ngIf="processingData$ | async"
+					aria-hidden="true"></span>
 			</button>
 		</div>
 	</div>
