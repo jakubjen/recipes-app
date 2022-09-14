@@ -9,10 +9,11 @@
 		position: absolute;
 		top: 8px;
 		right: 8px;
-		visibility: hidden;
+		transition: scale .3s ease-out;
+		scale: 0;
 	}
 
 	&:hover button {
-		visibility: visible;
+		scale: 1;
 	}
 }
