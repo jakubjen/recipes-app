@@ -7,7 +7,7 @@
 		"Recipe": "Recipe",
 		"Ingredients": "Ingredients",
 		"Description": "Description",
-		"ImageUrl": "Image Url",
+		"Image": "Image",
 		"AddIngredient": "Add ingredient",
 		"AddInstruction": "Add instruction",
 		"Time": "Time to prepare dish"
