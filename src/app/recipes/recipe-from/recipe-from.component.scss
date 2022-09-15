@@ -13,6 +13,15 @@
 	}
 }
 
+.description textarea{
+	transition: all .3s ease-out;
+	height: 120px;
+}
+
+.description textarea:focus {
+	height: 300px;
+}
+
 .instruction {
 	position: relative;
 
