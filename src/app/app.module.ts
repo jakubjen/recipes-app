@@ -57,9 +57,18 @@ export function HttpLoaderFactory(http: HttpClient) {
 		}),
 		BrowserAnimationsModule,
 		NgbModule,
-		StoreRouterConnectingModule.forRoot(),
-		StoreModule.forRoot({shoppingList: ShoppingListReducer, snackbar: snackbarReducer, user: userReducer }),
-		EffectsModule.forRoot([UserEffects, SnackbarEffects, AppEffects, shoppingListEffects]),
+		// StoreRouterConnectingModule.forRoot(),
+		StoreModule.forRoot({
+			shoppingList: ShoppingListReducer,
+			snackbar: snackbarReducer,
+			user: userReducer,
+		}),
+		EffectsModule.forRoot([
+			UserEffects,
+			SnackbarEffects,
+			AppEffects,
+			shoppingListEffects,
+		]),
 		StoreDevtoolsModule.instrument({
 			maxAge: 25,
 			logOnly: environment.production,

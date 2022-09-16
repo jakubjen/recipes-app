@@ -5,7 +5,7 @@ export const IngredientsUnit = {
 		grams: 1,
 	},
 	volume: {
-		mililitre: 1,
+		milliliter: 1,
 		cup: 250,
 		liter: 1000,
 	},

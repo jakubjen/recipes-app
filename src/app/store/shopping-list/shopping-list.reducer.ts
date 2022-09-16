@@ -27,16 +27,6 @@ const initialState = adapter.getInitialState({
 
 export const ShoppingListReducer = createReducer(
 	{ ...initialState },
-	on(
-		shoppingListActions.addIngredient,
-		(state: ShoppingListState, { ingredient }): ShoppingListState => {
-			const ingredientToStore: IngredientsInStore = {
-				id: uuidv4(),
-				...ingredient,
-			};
-			return adapter.addOne(ingredientToStore, state);
-		}
-	),
 
 	on(
 		shoppingListActions.updateIngredient,
@@ -49,6 +39,13 @@ export const ShoppingListReducer = createReducer(
 		shoppingListActions.removeIngredient,
 		(state: ShoppingListState, { id }): ShoppingListState => {
 			return adapter.removeOne(id, state);
+		}
+	),
+
+	on(
+		shoppingListActions.addIngredientAfterGrouping,
+		(state: ShoppingListState, { ingredients }): ShoppingListState => {
+			return adapter.setAll(ingredients, state);
 		}
 	),
 
@@ -67,24 +64,18 @@ export const ShoppingListReducer = createReducer(
 	),
 
 	on(
-		shoppingListActions.addIngredientFromRecipe,
-		(state: ShoppingListState, { ingredient }): ShoppingListState => {
-			const ingredientToStore: IngredientsInStore = {
-				id: uuidv4(),
-				...ingredient,
-			};
-			return adapter.addOne(ingredientToStore, state);
+		shoppingListActions.addIngredientFromRecipeAfterGrouping,
+		(state: ShoppingListState, { ingredients }): ShoppingListState => {
+			return adapter.setAll(ingredients, state);
 		}
 	),
 
 	on(
-		shoppingListActions.addManyIngredientsFromRecipe,
+		shoppingListActions.addManyIngredientsFromRecipeAfterGrouping,
 		(state: ShoppingListState, { ingredients }): ShoppingListState => {
-			const ingredientsToStore: IngredientsInStore[] = [];
-			ingredients.forEach(ingredient =>
-				ingredientsToStore.push({ ...ingredient, id: uuidv4() })
-			);
-			return adapter.addMany(ingredientsToStore, state);
+			console.table(ingredients);
+
+			return adapter.setAll(ingredients, state);
 		}
 	),
 

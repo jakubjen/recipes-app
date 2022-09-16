@@ -10,6 +10,11 @@ const addIngredient = createAction(
 	props<{ ingredient: Ingredients }>()
 );
 
+const addIngredientAfterGrouping = createAction(
+	'[ShoppingList page] add ingredient after grouping',
+	props<{ ingredients: IngredientsInStore[] }>()
+);
+
 const removeIngredient = createAction(
 	'[ShoppingList page] remove ingredient',
 	props<{ id: string }>()
@@ -30,6 +35,16 @@ const loadIngredientsSuccess = createAction(
 const addIngredientFromRecipe = createAction(
 	'[Recipe page] Add ingredient from recipe',
 	props<{ ingredient: Ingredients }>()
+);
+
+const addIngredientFromRecipeAfterGrouping = createAction(
+	'[Recipe page] Add ingredient from recipe after grouping',
+	props<{ ingredients: IngredientsInStore[] }>()
+);
+
+const addManyIngredientsFromRecipeAfterGrouping = createAction(
+	'[Recipe page] Add ingredients from recipe after grouping',
+	props<{ ingredients: IngredientsInStore[] }>()
 );
 
 const addManyIngredientsFromRecipe = createAction(
@@ -61,9 +76,12 @@ export const shoppingListActions = {
 	loadIngredients,
 	loadIngredientsSuccess,
 	addIngredientFromRecipe,
-	addManyIngredientsFromRecipe,
+	addManyIngredientsFromRecipeAfterGrouping,
+	addIngredientFromRecipeAfterGrouping,
 	setQueryString,
 	setSortDirection,
 	toggleDirection,
 	setSortKey,
+	addIngredientAfterGrouping,
+	addManyIngredientsFromRecipe,
 };

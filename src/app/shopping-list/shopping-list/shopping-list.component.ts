@@ -1,11 +1,13 @@
+import { animate, style, transition, trigger } from '@angular/animations';
 import {
-	animate,
-	state,
-	style,
-	transition,
-	trigger,
-} from '@angular/animations';
-import { Component, OnInit, TemplateRef } from '@angular/core';
+	AfterViewInit,
+	Component,
+	ElementRef,
+	OnDestroy,
+	OnInit,
+	TemplateRef,
+	ViewChild,
+} from '@angular/core';
 import {
 	FormControl,
 	FormGroup,
@@ -18,12 +20,11 @@ import Ingredients, {
 	IngredientsSortBy,
 } from '@models/ingredients.model';
 import SortDirection from '@models/sort-direction.ts';
-import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
 import { shoppingListActions } from '@store/shopping-list/shopping-list.actions';
 import ShoppingListSelectors from '@store/shopping-list/shopping-list.selectors';
-import { AppState } from '@store/store';
-import { first, tap, Observable, take } from 'rxjs';
+import { first, Observable } from 'rxjs';
 
 @Component({
 	selector: 'app-shopping-list',
@@ -51,7 +52,9 @@ import { first, tap, Observable, take } from 'rxjs';
 		]),
 	],
 })
-export class ShoppingListComponent implements OnInit {
+export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
+	@ViewChild('stickyFrom') stickyForm?: ElementRef;
+	public skyFromObserver?: IntersectionObserver;
 	public units = IngredientsUnit;
 	public ingredientList$?: Observable<IngredientsInStore[] | undefined>;
 	public mode: 'add' | 'edit' = 'add';
@@ -63,9 +66,9 @@ export class ShoppingListComponent implements OnInit {
 	public sortDirectionEnum = SortDirection;
 
 	public ingredientForm = new FormGroup({
-		name: new FormControl<string>('', Validators.required),
-		unit: new FormControl('grams', Validators.required),
-		amount: new FormControl<string | null>(null, [
+		name: new FormControl<string>('Ananas', Validators.required),
+		unit: new FormControl('kilogram', Validators.required),
+		amount: new FormControl<string | null>('1', [
 			Validators.required,
 			Validators.min(0),
 		]),
@@ -95,6 +98,20 @@ export class ShoppingListComponent implements OnInit {
 		this.sortDirection = this.store.select(
 			ShoppingListSelectors.selectSortDirection
 		);
+	}
+
+	ngAfterViewInit(): void {
+		this.skyFromObserver = new IntersectionObserver(
+			([e]) => {
+				e.target.classList.toggle('is-pinned', e.intersectionRatio < 1);
+			},
+			{ threshold: [1] }
+		);
+		this.skyFromObserver.observe(this.stickyForm?.nativeElement);
+	}
+
+	ngOnDestroy(): void {
+		this.skyFromObserver?.disconnect();
 	}
 
 	public setQueryString(queryString: string): void {
@@ -146,6 +163,7 @@ export class ShoppingListComponent implements OnInit {
 			this.store.dispatch(
 				shoppingListActions.updateIngredient({ ingredient: updatedIngredient })
 			);
+
 			return ngForm.resetForm();
 		}
 	}
