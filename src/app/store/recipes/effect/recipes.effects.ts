@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import Recipe from '@models/recipe.model';
@@ -21,7 +22,8 @@ export class RecipeEffects {
 		private router: Router,
 		private translate: TranslateService,
 		private firestore: AngularFirestore,
-		private store: Store<AppState>
+		private store: Store<AppState>,
+		private analytics: AngularFireAnalytics
 	) {}
 
 	addRecipes$ = createEffect(() => {
@@ -38,6 +40,10 @@ export class RecipeEffects {
 				newRecipe.ownerId = user.uid;
 				try {
 					this.firestore.collection('recipes').add(newRecipe);
+					this.analytics.logEvent('add_recipe', {
+						ingredientsNumber: newRecipe.ingredients.length,
+						stepsNumber: newRecipe.instructions.length,
+					});
 					this.router.navigate(['/']);
 					return RecipesActions.addRecipeSuccess();
 				} catch (err: any) {
