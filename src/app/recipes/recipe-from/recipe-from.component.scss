@@ -1,6 +1,4 @@
-@import '~bootstrap/scss/mixins'; /* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/functions'; /* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/variables'; /* Importing Bootstrap SCSS file. */
+@use 'variables';
 
 .image {
 	.image-preview {

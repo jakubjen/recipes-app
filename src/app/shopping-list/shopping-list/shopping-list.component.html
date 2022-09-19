@@ -1,0 +1,196 @@
+<h3 class="fs-5 fw-bold">
+	{{ 'Recipes.Ingredients' | translate }}
+</h3>
+
+<div class="form-container" #stickyFrom>
+	<form
+		[formGroup]="ingredientForm"
+		#ngForm="ngForm"
+		(ngSubmit)="submit(ngForm)">
+		<div class="row mt-3">
+			<div class="col-6 col-lg-3 amount">
+				<input
+					type="number"
+					class="form-control"
+					formControlName="amount"
+					[class.is-invalid]="
+						(amount.touched || ngForm.submitted) && !!amount.errors
+					"
+					placeholder="Amount" />
+				<app-form-error [input]="amount" [form]="ngForm"></app-form-error>
+			</div>
+
+			<div class="col-6 col-lg-3">
+				<select
+					class="form-select"
+					aria-label="select unit"
+					formControlName="unit"
+					formControlName="unit">
+					<option
+						*ngFor="let unit of units.weight | keyvalue"
+						[value]="unit.key">
+						{{ unit.key }}
+					</option>
+					<option
+						*ngFor="let unit of units.volume | keyvalue"
+						[value]="unit.key">
+						{{ unit.key }}
+					</option>
+					<option *ngFor="let unit of units.other" [value]="unit">
+						{{ unit }}
+					</option>
+				</select>
+				<app-form-error
+					[input]="ingredientForm.controls.unit"
+					[form]="ngForm"></app-form-error>
+			</div>
+			<div class="col-12 col-lg-6 mt-3 mt-lg-0">
+				<div class="input-group">
+					<input
+						type="text"
+						class="form-control"
+						placeholder="Name"
+						[class.is-invalid]="
+							(name.touched || ngForm.submitted) && !!name.errors
+						"
+						formControlName="name" />
+					<button
+						type="button"
+						class="btn btn-danger"
+						aria-label="Reset"
+						(click)="ngForm.reset(); mode = 'add'">
+						<i class="bi bi-x-lg"></i>
+					</button>
+				</div>
+				<app-form-error [input]="name" [form]="ngForm"></app-form-error>
+			</div>
+		</div>
+		<button type="submit" class="btn btn-outline-primary mt-3">
+			{{ submitButtonText | translate }}
+		</button>
+	</form>
+</div>
+
+<div class="row mt-4">
+	<div class="col-12 col-md-5 searcher">
+		<label for="seachInput" class="form-label">Search</label>
+		<input
+			type="text"
+			class="form-control"
+			id="seachInput"
+			#queryString
+			(input)="setQueryString(queryString.value)" />
+		<div class="icon">
+			<i class="bi bi-search"></i>
+		</div>
+	</div>
+</div>
+<div class="col-12 mt-4">
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">#</th>
+				<th scope="col" (click)="changeSortKey(sortKeyEnum.Amount)">
+					<div
+						class="sortable"
+						[class.selected]="(sortKey | async) === sortKeyEnum.Amount">
+						Amount
+						<div
+							class="icons"
+							[class]="
+								(sortDirection | async) === sortDirectionEnum.ASC
+									? 'asc'
+									: 'desc'
+							">
+							<i class="bi bi-caret-up-fill top"></i>
+							<i class="bi bi-caret-down-fill bottom"></i>
+						</div>
+					</div>
+				</th>
+				<th scope="col" (click)="changeSortKey(sortKeyEnum.Name)">
+					<div
+						class="sortable"
+						[class.selected]="(sortKey | async) === sortKeyEnum.Name">
+						Name
+						<div
+							class="icons"
+							[class]="
+								(sortDirection | async) === sortDirectionEnum.ASC
+									? 'asc'
+									: 'desc'
+							">
+							<i class="bi bi-caret-up-fill top"></i>
+							<i class="bi bi-caret-down-fill bottom"></i>
+						</div>
+					</div>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			<ng-container *ngIf="ingredientList$ | async as ingredientList">
+				<tr
+					*ngFor="let ingredient of ingredientList; let i = index"
+					[@recipeSate]="'normal'">
+					<th scope="row">{{ i + 1 }}</th>
+					<td>{{ ingredient.amount }} {{ ingredient.unit }}</td>
+					<td>
+						<div class="col-name">
+							<div class="text">
+								{{ ingredient.name }}
+							</div>
+
+							<div class="buttons">
+								<span
+									type="button"
+									class="text-primary"
+									(click)="editIngredient(ingredient)">
+									<i class="bi bi-pencil"></i>
+								</span>
+								<span
+									type="button"
+									class="text-danger"
+									(click)="removeIngredient(ingredient, modal)">
+									<i class="bi bi-x-circle"></i>
+								</span>
+							</div>
+						</div>
+					</td>
+				</tr>
+			</ng-container>
+		</tbody>
+	</table>
+	<ng-template #modal let-modal>
+		<div class="modal-header">
+			<h4 class="modal-title" id="modal-title">Confirm: remove ingredient</h4>
+			<button
+				type="button"
+				class="btn-close"
+				aria-describedby="modal-title"
+				(click)="modal.dismiss('Cross click')"></button>
+		</div>
+		<div class="modal-body">
+			<p>
+				<strong
+					>Are you sure you want to delete:
+					<span class="text-primary">{{ ingredientToDelete?.name }}</span
+					>?</strong
+				>
+			</p>
+			<span class="text-danger">This operation can not be undone.</span>
+		</div>
+		<div class="modal-footer">
+			<button
+				type="button"
+				class="btn btn-outline-secondary"
+				(click)="modal.dismiss('cancel click')">
+				Cancel
+			</button>
+			<button
+				type="button"
+				class="btn btn-danger"
+				(click)="modal.close('Ok click')">
+				Ok
+			</button>
+		</div>
+	</ng-template>
+</div>

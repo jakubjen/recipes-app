@@ -6,6 +6,8 @@ import { Store } from '@ngrx/store';
 import { AppState } from '@store/store';
 import RecipesSelectors from '@store/recipes/recipes.selector';
 import DataState from '@models/data-store.enum';
+import { shoppingListActions } from '@store/shopping-list/shopping-list.actions';
+import Ingredients from '@models/ingredients.model';
 import RecipesActions from '@store/recipes/recipes.actions';
 import { userSelectors } from '@store/auth/selectors';
 import { User } from '@models/user.model';
@@ -48,6 +50,22 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
 				this.recipe = recipe;
 				this.user = user;
 			});
+	}
+
+	public addAllIngredientsToShippingList(ingredients: Ingredients[]): void {
+		this.store.dispatch(
+			shoppingListActions.addManyIngredientsFromRecipe({
+				ingredients,
+			})
+		);
+	}
+
+	public addIngredientToShippingList(ingredient: Ingredients): void {
+		this.store.dispatch(
+			shoppingListActions.addIngredientFromRecipe({
+				ingredient,
+			})
+		);
 	}
 
 	public deleteRecipe(id: string): void {

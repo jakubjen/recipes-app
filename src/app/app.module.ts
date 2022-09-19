@@ -19,6 +19,11 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { ShoppingListComponent } from './shopping-list/shopping-list/shopping-list.component';
+import { ShoppingListReducer } from '@store/shopping-list/shopping-list.reducer';
+import { shoppingListEffects } from '@store/shopping-list/shopping-list.effects';
+import { snackbarReducer } from '@store/shared/snackbar.reducer';
+import { userReducer } from '@store/auth/auth.reducer';
 import { AuthService } from '@services/auth/auth.service';
 import { RecipesService } from '@services/recipes/recipes.service';
 import { AppEffects } from '@store/app.effect';
@@ -37,9 +42,10 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-	declarations: [AppComponent],
+	declarations: [AppComponent, ShoppingListComponent],
 	imports: [
 		BrowserModule,
+		BrowserAnimationsModule,
 		AppRoutingModule,
 		HttpClientModule,
 		DashboardModule,
@@ -54,9 +60,18 @@ export function HttpLoaderFactory(http: HttpClient) {
 		}),
 		BrowserAnimationsModule,
 		NgbModule,
-		StoreRouterConnectingModule.forRoot(),
-		StoreModule.forRoot({ snackbar: snackbarReducer, user: userReducer }),
-		EffectsModule.forRoot([UserEffects, SnackbarEffects, AppEffects]),
+		// StoreRouterConnectingModule.forRoot(),
+		StoreModule.forRoot({
+			shoppingList: ShoppingListReducer,
+			snackbar: snackbarReducer,
+			user: userReducer,
+		}),
+		EffectsModule.forRoot([
+			UserEffects,
+			SnackbarEffects,
+			AppEffects,
+			shoppingListEffects,
+		]),
 		StoreDevtoolsModule.instrument({
 			maxAge: 25,
 			logOnly: environment.production,

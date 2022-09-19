@@ -7,6 +7,7 @@ import appActions from '@store/app.actions';
 import userActions from '@store/auth/user.actions';
 import RecipesActions from '@store/recipes/recipes.actions';
 import { AppState } from '@store/store';
+import { v4 as uuid } from 'uuid';
 
 @Component({
 	selector: 'app-root',
