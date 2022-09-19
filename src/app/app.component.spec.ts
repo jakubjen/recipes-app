@@ -83,8 +83,6 @@ describe('AppComponent', () => {
 	beforeEach(() => {
 		fixture = TestBed.createComponent(AppComponent);
 		component = fixture.componentInstance;
-		console.log('New Test');
-
 		fixture.detectChanges();
 	});
 
