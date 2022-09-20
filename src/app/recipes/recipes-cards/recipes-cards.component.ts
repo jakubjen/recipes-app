@@ -5,6 +5,7 @@ import RecipesSelectors from 'src/app/store/recipes/recipes.selector';
 import { AppState } from 'src/app/store/store';
 import Recipe from '@models/recipe.model';
 import DataState from '@models/data-store.enum';
+import SortDirection from '@models/sort-direction';
 
 @Component({
 	selector: 'app-recipe-cards',
@@ -15,6 +16,12 @@ export class RecipesCardsComponent implements OnInit {
 	public recipes$: Observable<Recipe[]> | undefined;
 	public recipesAreLoaded$: Observable<DataState> | undefined;
 	public dataState: typeof DataState = DataState;
+	public searchText = '';
+	public sortCategory: keyof Recipe = 'title';
+	public sortingCategories: (keyof Recipe)[] = ['title', 'time'];
+	public sortDirection: SortDirection = SortDirection.ASC;
+	public sortDirectionEnum = SortDirection;
+
 	constructor(private store: Store<AppState>) {}
 
 	ngOnInit(): void {
@@ -22,5 +29,20 @@ export class RecipesCardsComponent implements OnInit {
 		this.recipesAreLoaded$ = this.store.select(
 			RecipesSelectors.selectDataState
 		);
+	}
+
+	public handleTextSearchInput(value: Event): void {
+		this.searchText = (<HTMLInputElement>value.target).value;
+	}
+
+	public selectFileToSort(event: Event): void {
+		this.sortCategory = (<HTMLInputElement>event.target).value as keyof Recipe;
+	}
+
+	public changeSortDirection(): void {
+		this.sortDirection =
+			this.sortDirection === SortDirection.ASC
+				? SortDirection.DESC
+				: SortDirection.ASC;
 	}
 }

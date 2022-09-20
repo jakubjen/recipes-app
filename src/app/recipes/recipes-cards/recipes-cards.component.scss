@@ -1,6 +1,7 @@
-@use 'variables';
 
-@import '~bootstrap/scss/bootstrap';
+@import '~bootstrap/scss/mixins'; /* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/functions'; /* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/variables'; /* Importing Bootstrap SCSS file. */
 
 .recipes-cards {
 	display: grid;
@@ -17,4 +18,16 @@
 
 	grid-auto-rows: 380px;
 	justify-content: space-between;
+}
+
+
+.input-wrapper {
+	position: relative;
+
+	.icon {
+		position: absolute;
+		bottom: 7px;
+		right: 18px;
+		color: $gray-500;
+	}
 }

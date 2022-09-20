@@ -1,0 +1,34 @@
+<div class="col-12 col-md-7">
+	<form [formGroup]="registerForm" #ngForm="ngForm" (ngSubmit)="register()">
+		<h3 class="mb-3">Register</h3>
+		<div class="mb-3">
+			<label for="emailInput" class="form-label">Email address</label>
+			<input
+				type="email"
+				class="form-control"
+				id="emailInput"
+				formControlName="email"
+				placeholder="name@example.com"
+				[class.is-invalid]="
+					(email?.touched || ngForm.submitted) && !!email?.errors
+				" />
+			<app-form-error [input]="email" [form]="ngForm"></app-form-error>
+		</div>
+
+		<div class="mb-3">
+			<label for="passwordInput" class="form-label">Password</label>
+			<input
+				type="password"
+				class="form-control"
+				id="passwordInput"
+				formControlName="password"
+				[class.is-invalid]="
+					(password?.touched || ngForm.submitted) && !!password?.errors
+				"
+				placeholder="Password" />
+			<app-form-error [form]="ngForm" [input]="password"></app-form-error>
+		</div>
+
+		<button type="submit" class="btn btn-outline-primary">Register</button>
+	</form>
+</div>
