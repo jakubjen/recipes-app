@@ -41,7 +41,13 @@
 			"RecipeUpdatedSuccessfully": "Recipe updated successfully",
 			"RecipeRemoveSuccessfully": "Recipe remove successfully",
 			"AllIngredientsAdded": "All ingredients added",
-			"IngredientAdded": "Ingredient added"
+			"IngredientAdded": "Ingredient added",
+			"Error": {
+				"EmailAreUsed": "This email already in used",
+				"InvalidEmailOrPassword": "Invalid email or password",
+				"UserClosePopUpBeforeLoginFinish": "User close popup",
+				"PopupBlock": "Popup blocked"
+			}
 		},
 		"Auth": {
 			"Register": "Register",
