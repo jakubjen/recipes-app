@@ -59,7 +59,7 @@ export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
 	public units = IngredientsUnit;
 	public ingredientList$?: Observable<IngredientsInStore[] | undefined>;
 	public mode: 'add' | 'edit' = 'add';
-	public editingIngredient?: IngredientsInStore;
+	public editedIngredient?: IngredientsInStore;
 	public ingredientToDelete?: IngredientsInStore;
 	public sortKeyEnum = IngredientsSortBy;
 	public sortKey?: Observable<IngredientsSortBy>;
@@ -135,7 +135,7 @@ export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
 	}
 
 	public editIngredient(ingredient: IngredientsInStore): void {
-		this.editingIngredient = ingredient;
+		this.editedIngredient = ingredient;
 		const { amount, unit } = ingredient;
 		const convertedUnits = convertUnit({ amount, unit });
 		this.ingredientForm.patchValue({
@@ -163,15 +163,15 @@ export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
 		}
 		if (this.mode == 'edit') {
 			this.mode = 'add';
-			if (!this.editingIngredient?.id) return ngForm.resetForm();
+			if (!this.editedIngredient?.id) return ngForm.resetForm();
 			const updatedIngredient: IngredientsInStore = {
-				id: this.editingIngredient?.id,
+				id: this.editedIngredient?.id,
 				...ingredient,
 			};
 			this.store.dispatch(
 				shoppingListActions.updateIngredient({
 					ingredient: updatedIngredient,
-					previewIngredient: this.editingIngredient,
+					previewIngredient: this.editedIngredient,
 				})
 			);
 
