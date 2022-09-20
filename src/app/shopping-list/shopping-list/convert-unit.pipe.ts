@@ -17,6 +17,12 @@ export class ConvertUnitPipe implements PipeTransform {
 				unit = 'kilograms';
 			}
 		}
+		if (unit === 'milliliters') {
+			if (amount > 1000) {
+				amount = amount / 1000;
+				unit = 'liters';
+			}
+		}
 		return `${amount} ${unit}`;
 	}
 }
