@@ -25,6 +25,7 @@ import { Store } from '@ngrx/store';
 import { shoppingListActions } from '@store/shopping-list/shopping-list.actions';
 import ShoppingListSelectors from '@store/shopping-list/shopping-list.selectors';
 import { first, Observable } from 'rxjs';
+import { convertUnit } from 'src/helpers/convertUnits';
 
 @Component({
 	selector: 'app-shopping-list',
@@ -135,7 +136,14 @@ export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
 
 	public editIngredient(ingredient: IngredientsInStore): void {
 		this.editingIngredientId = ingredient.id;
-		this.ingredientForm.patchValue(ingredient);
+		const { amount, unit } = ingredient;
+		const convertedUnits = convertUnit({ amount, unit });
+		this.ingredientForm.patchValue({
+			...ingredient,
+			amount: convertedUnits.amount,
+			unit: convertedUnits.unit,
+		});
+
 		this.mode = 'edit';
 	}
 
