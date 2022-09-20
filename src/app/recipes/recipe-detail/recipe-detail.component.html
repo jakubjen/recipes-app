@@ -19,7 +19,7 @@
 			<div class="col-6">
 				<button
 					class="btn btn-outline-danger w-100"
-					(click)="deleteRecipe(recipe.id)">
+					(click)="removeRecipe(modal)">
 					{{ 'App.Delete' | translate }}
 				</button>
 			</div>
@@ -65,3 +65,45 @@
 		<span class="visually-hidden">{{ 'App.Loading' | translate }} </span>
 	</div>
 </div>
+
+<ng-template #modal let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-title">
+			{{
+				'Modals.ConfirmRemove'
+					| translate: { what: 'Modals.Recipe' | translate }
+			}}
+		</h4>
+		<button
+			type="button"
+			class="btn-close"
+			aria-describedby="modal-title"
+			(click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<p>
+			<strong
+				>{{ 'Modals.AreYouSureYouWantToDelete' | translate }}
+				<span class="text-primary">{{ recipe?.title }}</span
+				>?</strong
+			>
+		</p>
+		<span class="text-danger">{{
+			'Modals.ThisOperationCanNotBeUndone' | translate
+		}}</span>
+	</div>
+	<div class="modal-footer">
+		<button
+			type="button"
+			class="btn btn-outline-secondary"
+			(click)="modal.dismiss('cancel click')">
+			{{ 'Modals.Cancel' | translate }}
+		</button>
+		<button
+			type="button"
+			class="btn btn-danger"
+			(click)="modal.close('Ok click')">
+			Ok
+		</button>
+	</div>
+</ng-template>
