@@ -2,13 +2,15 @@
 <div class="row">
 	<div class="col-12 col-md-5 searcher">
 		<label for="seachInput" class="form-label">Search</label>
-		<input
-			type="text"
-			class="form-control"
-			id="seachInput"
-			(input)="handleTextSearchInput($event)" />
-		<div class="icon">
-			<i class="bi bi-search"></i>
+		<div class="input-wrapper">
+			<input
+				type="text"
+				class="form-control"
+				id="seachInput"
+				(input)="handleTextSearchInput($event)" />
+			<div class="icon">
+				<i class="bi bi-search"></i>
+			</div>
 		</div>
 	</div>
 	<div class="col-12 col-md-3">
