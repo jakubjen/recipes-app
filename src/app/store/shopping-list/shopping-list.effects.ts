@@ -22,7 +22,7 @@ export class shoppingListEffects {
 					shoppingListActions.addManyIngredientsFromRecipeAfterGrouping,
 					shoppingListActions.addIngredientAfterGrouping,
 					shoppingListActions.removeIngredient,
-					shoppingListActions.updateIngredient
+					shoppingListActions.updateIngredientSuccess
 				),
 				concatLatestFrom(() =>
 					this.store.select(ShoppingListSelectors.selectAll)
@@ -146,6 +146,32 @@ export class shoppingListEffects {
 					text: this.translate.instant('App.Snackbar.IngredientAdded'),
 				})
 			)
+		);
+	});
+
+	updateIngredientsFromRecipe = createEffect(() => {
+		return this.actions$.pipe(
+			ofType(shoppingListActions.updateIngredient),
+			concatLatestFrom(() =>
+				this.store.select(ShoppingListSelectors.selectAll)
+			),
+			map(([action, ingredientInShoppingList]: [any, IngredientsInStore[]]) => {
+				let ingredientsToStore = ingredientInShoppingList;
+				const { ingredient, previewIngredient } = action;
+
+				ingredientsToStore = ingredientsToStore.filter(
+					ingredient => ingredient !== previewIngredient
+				);
+
+				ingredientsToStore = this.ingredientService.addIngredientAndGroupe(
+					ingredient,
+					ingredientsToStore
+				);
+
+				return shoppingListActions.updateIngredientSuccess({
+					ingredients: ingredientsToStore,
+				});
+			})
 		);
 	});
 

@@ -22,7 +22,15 @@ const removeIngredient = createAction(
 
 const updateIngredient = createAction(
 	'[ShoppingList page] update ingredient',
-	props<{ ingredient: IngredientsInStore }>()
+	props<{
+		ingredient: IngredientsInStore;
+		previewIngredient: IngredientsInStore;
+	}>()
+);
+
+const updateIngredientSuccess = createAction(
+	'[ShoppingList page] update ingredient success',
+	props<{ ingredients: IngredientsInStore[] }>()
 );
 
 const loadIngredients = createAction('[App component] load ingredients');
@@ -73,6 +81,7 @@ export const shoppingListActions = {
 	addIngredient,
 	removeIngredient,
 	updateIngredient,
+	updateIngredientSuccess,
 	loadIngredients,
 	loadIngredientsSuccess,
 	addIngredientFromRecipe,

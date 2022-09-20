@@ -47,18 +47,20 @@ export class IngredientsService {
 			this.createInStoreIngredientFromIngredient(ingredient)
 		);
 
-		const ingredientWithSameName = ingredientsInStore.filter(
-			ingredient => newIngredient.name === ingredient!.name
+		const ingredientWithSameNameAndUnit = ingredientsInStore.filter(
+			ingredient =>
+				newIngredient.name === ingredient!.name &&
+				newIngredient.unit === ingredient!.unit
 		)[0];
 
-		if (!!ingredientWithSameName) {
+		if (!!ingredientWithSameNameAndUnit) {
 			newIngredient.amount = (
-				+ingredientWithSameName.amount + +newIngredient.amount
+				+ingredientWithSameNameAndUnit.amount + +newIngredient.amount
 			).toString();
 		}
 
 		let ingredientsToStore = ingredientsInStore.filter(
-			ingredient => ingredient != ingredientWithSameName
+			ingredient => ingredient != ingredientWithSameNameAndUnit
 		);
 
 		ingredientsToStore.push(newIngredient);
