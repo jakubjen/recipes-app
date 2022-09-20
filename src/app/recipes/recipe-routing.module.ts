@@ -32,7 +32,10 @@ const routes: Routes = [
 	{
 		path: 'recipe/:id',
 		component: RecipeDetailComponent,
-		resolve: [LoadShoppingListResolver],
+},
+{
+path: 'recipe/add',
+		component: RecipesAddComponent,
 	},
 ];
 
