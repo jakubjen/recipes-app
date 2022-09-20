@@ -30,7 +30,7 @@
 						"style": "kebab-case"
 					}
 				],
-				"no-console": "off"
+				"no-console": "warn"
 			}
 		},
 		{

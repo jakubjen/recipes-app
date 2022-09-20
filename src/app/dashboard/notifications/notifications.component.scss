@@ -1,0 +1,35 @@
+@import '~bootstrap/scss/mixins'; /* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/functions'; /* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/variables'; /* Importing Bootstrap SCSS file. */
+.notifications {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    .notification {
+        color: $white;
+        background: $dark;
+        padding: 10px 32px;
+        border-radius: 8px;
+        margin-top: 12px;
+        position: relative;
+
+        &.error {
+            background: $danger;
+        }
+
+        &.success {
+            background: $success;
+        }
+
+        .close {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            padding: 2px 5px;
+            right: 5px;
+            cursor: pointer;
+        }
+    }
+}
