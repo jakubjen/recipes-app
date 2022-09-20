@@ -63,5 +63,12 @@
 	"Sorting": {
 		"Title": "Title",
 		"Time": "Time"
+	},
+	"Modals": {
+		"Recipe": "Recipe",
+		"ConfirmRemove": "Confirm remove: {{ what }}",
+		"AreYouSureYouWantToDelete": "Are you sure you want to delete: ",
+		"ThisOperationCanNotBeUndone": "This operation can not be undone.",
+		"Cancel": "Cancel"
 	}
 }
