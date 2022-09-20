@@ -27,6 +27,7 @@
 	"App": {
 		"Loading": "Loading...",
 		"AddIngredientsToShoppingList":"Add ingredients to shopping list",
+		"NoIngredientsInShoppingList":"Shopping list ist empty.",
 		"Delete":"Delete",
 		"Edit":"Edit",
 		"'Loading": "Loading...",
