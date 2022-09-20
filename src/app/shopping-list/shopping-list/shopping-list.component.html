@@ -6,7 +6,7 @@
 	<form
 		[formGroup]="ingredientForm"
 		#ngForm="ngForm"
-		(ngSubmit)="submit(ngForm)">
+		(ngSubmit)="ingredientFromSubmitButton.focus(); submit(ngForm)">
 		<div class="row mt-3">
 			<div class="col-6 col-lg-3 amount">
 				<input
@@ -65,7 +65,10 @@
 				<app-form-error [input]="name" [form]="ngForm"></app-form-error>
 			</div>
 		</div>
-		<button type="submit" class="btn btn-outline-primary mt-3">
+		<button
+			type="submit"
+			#ingredientFromSubmitButton
+			class="btn btn-outline-primary mt-3">
 			{{ submitButtonText | translate }}
 		</button>
 	</form>
