@@ -9,6 +9,7 @@
 		"Description": "Description",
 		"ImageUrl": "Image Url",
 		"AddIngredient": "Add ingredient",
+		"EditIngredient": "Edit ingredient",
 		"AddInstruction": "Add instruction",
 		"Time": "Time to prepare dish"
 	},
@@ -18,12 +19,15 @@
 	"Navigation": {
 		"Home": "Home",
 		"AddRecipe": "Add Recipe",
-		"Register": "Register",
+        "Register": "Register",
+		"ShoppingList": "Shopping List",
 		"Login": "Login",
 		"LogOut": "Log Out"
 	},
 	"App": {
 		"Loading": "Loading...",
+		"AddIngredientsToShoppingList":"Add ingredients to shopping list",
+		"NoIngredientsInShoppingList":"Shopping list ist empty.",
 		"Delete":"Delete",
 		"Edit":"Edit",
 		"'Loading": "Loading...",
@@ -35,7 +39,9 @@
 			"UserNotAuthorized": "User not authorized",
 			"RecipeAddedSuccessfully": "Recipe added successfully",
 			"RecipeUpdatedSuccessfully": "Recipe updated successfully",
-			"RecipeRemoveSuccessfully": "Recipe remove successfully"
+			"RecipeRemoveSuccessfully": "Recipe remove successfully",
+			"AllIngredientsAdded": "All ingredients added",
+			"IngredientAdded": "Ingredient added"
 		},
 		"Auth": {
 			"Register": "Register",
@@ -58,5 +64,13 @@
 	"Sorting": {
 		"Title": "Title",
 		"Time": "Time"
+	},
+	"Modals": {
+		"Ingredient": "Ingredient",
+		"Recipe": "Recipe",
+		"ConfirmRemove": "Confirm remove: {{ what }}",
+		"AreYouSureYouWantToDelete": "Are you sure you want to delete: ",
+		"ThisOperationCanNotBeUndone": "This operation can not be undone.",
+		"Cancel": "Cancel"
 	}
 }

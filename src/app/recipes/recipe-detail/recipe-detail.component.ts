@@ -1,17 +1,17 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { filter, Subject, takeUntil, tap, withLatestFrom } from 'rxjs';
-import Recipe from '@models/recipe.model';
-import { Store } from '@ngrx/store';
-import { AppState } from '@store/store';
-import RecipesSelectors from '@store/recipes/recipes.selector';
 import DataState from '@models/data-store.enum';
-import RecipesActions from '@store/recipes/recipes.actions';
-import { userSelectors } from '@store/auth/selectors';
+import Ingredients from '@models/ingredients.model';
+import Recipe from '@models/recipe.model';
 import { User } from '@models/user.model';
-import SnackbarActions from '@store/shared/snackbar.actions';
-import { SnackbarVariant } from '@models/snackbar.model';
-import { TranslateService } from '@ngx-translate/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { Store } from '@ngrx/store';
+import { userSelectors } from '@store/auth/selectors';
+import RecipesActions from '@store/recipes/recipes.actions';
+import RecipesSelectors from '@store/recipes/recipes.selector';
+import { shoppingListActions } from '@store/shopping-list/shopping-list.actions';
+import { AppState } from '@store/store';
+import { filter, Subject, takeUntil, tap, withLatestFrom } from 'rxjs';
 
 @Component({
 	selector: 'app-recipe-detail',
@@ -26,7 +26,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
 		private route: ActivatedRoute,
 		private store: Store<AppState>,
 		private router: Router,
-		private translate: TranslateService
+		private modalService: NgbModal
 	) {}
 
 	ngOnInit(): void {
@@ -50,8 +50,31 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
 			});
 	}
 
-	public deleteRecipe(id: string): void {
-		this.store.dispatch(RecipesActions.removeRecipe({ id }));
+	public addAllIngredientsToShippingList(ingredients: Ingredients[]): void {
+		this.store.dispatch(
+			shoppingListActions.addManyIngredientsFromRecipe({
+				ingredients,
+			})
+		);
+	}
+
+	public addIngredientToShippingList(ingredient: Ingredients): void {
+		this.store.dispatch(
+			shoppingListActions.addIngredientFromRecipe({
+				ingredient,
+			})
+		);
+	}
+
+	public removeRecipe(modal: TemplateRef<any>): void {
+		this.modalService
+			.open(modal, { ariaLabelledBy: 'modal-remove-recipe' })
+			.result.then(() => {
+				this.store.dispatch(
+					RecipesActions.removeRecipe({ id: this.recipe!.id })
+				);
+			})
+			.catch(() => {});
 	}
 
 	public ngOnDestroy(): void {

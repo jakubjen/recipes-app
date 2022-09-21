@@ -24,21 +24,26 @@ import {
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ShoppingListComponent } from './shopping-list/shopping-list/shopping-list.component';
+import { ShoppingListReducer } from '@store/shopping-list/shopping-list.reducer';
+import { shoppingListEffects } from '@store/shopping-list/shopping-list.effects';
 import { snackbarReducer } from '@store/shared/snackbar.reducer';
 import { userReducer } from '@store/auth/auth.reducer';
 import { AuthService } from '@services/auth/auth.service';
 import { UserEffects } from '@store/auth/user.effects';
 import { SnackbarEffects } from '@store/shared/snackbar.effects';
 import { AppEffects } from '@store/app.effect';
+import { ConvertUnitPipe } from './shopping-list/shopping-list/convert-unit.pipe';
 
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http);
 }
 
 @NgModule({
-	declarations: [AppComponent],
+	declarations: [AppComponent, ShoppingListComponent, ConvertUnitPipe],
 	imports: [
 		BrowserModule,
+		BrowserAnimationsModule,
 		AppRoutingModule,
 		HttpClientModule,
 		DashboardModule,
@@ -53,9 +58,18 @@ export function HttpLoaderFactory(http: HttpClient) {
 		}),
 		BrowserAnimationsModule,
 		NgbModule,
-		StoreRouterConnectingModule.forRoot(),
-		StoreModule.forRoot({ snackbar: snackbarReducer, user: userReducer }),
-		EffectsModule.forRoot([UserEffects, SnackbarEffects, AppEffects]),
+		// StoreRouterConnectingModule.forRoot(),
+		StoreModule.forRoot({
+			shoppingList: ShoppingListReducer,
+			snackbar: snackbarReducer,
+			user: userReducer,
+		}),
+		EffectsModule.forRoot([
+			UserEffects,
+			SnackbarEffects,
+			AppEffects,
+			shoppingListEffects,
+		]),
 		StoreDevtoolsModule.instrument({
 			maxAge: 25,
 			logOnly: environment.production,
