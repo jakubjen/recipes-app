@@ -1,0 +1,80 @@
+{
+	"Recipes": {
+		"LatestRecipes": "Przepisy",
+		"NoIngredients": "Składniki nie są potrzebne",
+		"Preparing": "Przygotowanie",
+		"Title": "Tytuł",
+		"Recipe": "Przepis",
+		"Ingredients": "Składniki",
+		"Description": "Opis",
+		"ImageUrl": "Adres url zdjęcia",
+		"AddIngredient": "Dodaj składnik",
+		"EditIngredient": "Edytuj składniki",
+		"AddInstruction": "Dodaj instrukcje",
+		"Time": "Czas potrzebny do przygotowanie przepisu"
+	},
+	"Time": {
+		"minutesShort": "min"
+	},
+	"Navigation": {
+		"Home": "Strona główna",
+		"AddRecipe": "Dodaj przepis",
+        "Register": "Rejestracja",
+		"ShoppingList": "Lista zakupów",
+		"Login": "Zaloguj",
+		"LogOut": "Wyloguj"
+	},
+	"App": {
+		"Loading": "Ładuje...",
+		"AddIngredientsToShoppingList":"Dodaj składniki do listy zakupów",
+		"NoIngredientsInShoppingList":"List zakupów jest pusta",
+		"Delete":"Usuń",
+		"Search": "Szukaj",
+		"SortBy": "Sortuj",
+		"Edit":"Edytuj",
+		"Snackbar":{
+			"EditNotAllowed": "Nie masz uprawnień do edycji tego przepisu",
+			"UserCreatedSuccess": "Pomyślnie utworzono użytkownika",
+			"LoginSuccessfully": "Zalogowano pomyślnie",
+			"LogoutSuccessfully": "Wylogowano pomyślnie",
+			"UserNotAuthorized": "Użytkownik nieautoryzowany",
+			"RecipeAddedSuccessfully": "Pomyślnie dodano przepis",
+			"RecipeUpdatedSuccessfully": "Pomyślni zaktualizowano przepis",
+			"RecipeRemoveSuccessfully": "Pomyślnie usunięto przepis",
+			"AllIngredientsAdded": "Wszystkie składniki dodano",
+			"IngredientAdded": "Dodano składnik"
+		},
+		"Auth": {
+			"Register": "Rejestracja",
+			"Login": "Zaloguj",
+			"LoginWithGoogle": "Zaloguj przez Google"
+		},
+		"Validation": {
+			"Required": "To pole jest wymagane.",
+			"MinLength": "Minimalna długość pola to {{ length }}.",
+			"MaxLength": "Maksymalna długość pola to {{ length }}.",
+			"MinValue": "Minimalna wartość pola to  {{ min }}.",
+			"Email": "Podaj adres email"
+   },
+		"PageNotFound": {
+			"Heading": "Strona nieznaleziona",
+			"GoTo": "Przejdź do",
+			"HomePage": "strony głównej"
+		}
+	},
+	"Sorting": {
+		"Title": "Tytuł",
+		"Time": "Czas"
+	},
+	"Modals": {
+		"Recipe": "Przepis",
+		"ConfirmRemove": "Potwierdź usunięcie: {{ what }}",
+		"AreYouSureYouWantToDelete": "Jesteś pewien że chcesz usunąć: ",
+		"ThisOperationCanNotBeUndone": "Ta operacja jest nieodwracalna.",
+		"Cancel": "Anuluj"
+	},
+	"ShoppingList": {
+		"Amount": "Ilość",
+		"Name": "Nazwa"
+	}
+}

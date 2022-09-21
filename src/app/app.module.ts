@@ -32,8 +32,9 @@ import { userReducer } from '@store/auth/auth.reducer';
 import { AuthService } from '@services/auth/auth.service';
 import { UserEffects } from '@store/auth/user.effects';
 import { SnackbarEffects } from '@store/shared/snackbar.effects';
-import { AppEffects } from '@store/app.effect';
+import { AppEffects } from '@store/app/app.effect';
 import { ConvertUnitPipe } from './shopping-list/shopping-list/convert-unit.pipe';
+import { mainReducer } from '@store/app/app.reducer';
 
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http);
@@ -58,11 +59,12 @@ export function HttpLoaderFactory(http: HttpClient) {
 		}),
 		BrowserAnimationsModule,
 		NgbModule,
-		// StoreRouterConnectingModule.forRoot(),
+		StoreRouterConnectingModule.forRoot(),
 		StoreModule.forRoot({
 			shoppingList: ShoppingListReducer,
 			snackbar: snackbarReducer,
 			user: userReducer,
+			main: mainReducer,
 		}),
 		EffectsModule.forRoot([
 			UserEffects,

@@ -30,7 +30,8 @@
 		"NoIngredientsInShoppingList":"Shopping list ist empty.",
 		"Delete":"Delete",
 		"Edit":"Edit",
-		"'Loading": "Loading...",
+		"Search": "Search",
+		"SortBy": "Sort by",
 		"Snackbar":{
 			"EditNotAllowed": "You are not allowed to edit this recipe",
 			"UserCreatedSuccess": "User created successfully",
@@ -72,5 +73,9 @@
 		"AreYouSureYouWantToDelete": "Are you sure you want to delete: ",
 		"ThisOperationCanNotBeUndone": "This operation can not be undone.",
 		"Cancel": "Cancel"
+	},
+	"ShoppingList": {
+		"Amount": "Amount",
+		"Name": "Name"
 	}
 }
