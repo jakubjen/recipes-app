@@ -17,5 +17,6 @@ export const convertUnit = ({ amount: amountArg, unit }: Value): Value => {
 			unit = 'liters';
 		}
 	}
+	amount = Math.round(amount * 100) / 100;
 	return { amount: amount.toString(), unit };
 };
