@@ -155,10 +155,10 @@ export class shoppingListEffects {
 			),
 			map(([action, ingredientInShoppingList]) => {
 				let ingredientsToStore = ingredientInShoppingList;
-				const { ingredient, previewIngredient } = action;
+				const { ingredient, previousIngredient } = action;
 
 				ingredientsToStore = ingredientsToStore.filter(
-					ingredient => ingredient !== previewIngredient
+					ingredient => ingredient !== previousIngredient
 				);
 
 				ingredientsToStore = this.ingredientService.addIngredientAndGroupe(

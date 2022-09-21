@@ -171,7 +171,7 @@ export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
 			this.store.dispatch(
 				shoppingListActions.updateIngredient({
 					ingredient: updatedIngredient,
-					previewIngredient: this.editedIngredient,
+					previousIngredient: this.editedIngredient,
 				})
 			);
 

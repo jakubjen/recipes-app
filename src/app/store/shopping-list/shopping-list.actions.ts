@@ -24,7 +24,7 @@ const updateIngredient = createAction(
 	'[ShoppingList page] update ingredient',
 	props<{
 		ingredient: IngredientsInStore;
-		previewIngredient: IngredientsInStore;
+		previousIngredient: IngredientsInStore;
 	}>()
 );
 
