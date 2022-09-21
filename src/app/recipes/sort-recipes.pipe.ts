@@ -12,14 +12,20 @@ export class SortRecipesPipe implements PipeTransform {
 		sortDirection: SortDirection
 	): Recipe[] {
 		recipes.sort((a, b) => {
-			if (a[field] > b[field]) {
-				return 1;
+			let aNormalized: string | number;
+			let bNormalized: string | number;
+			if (field === 'time') {
+				aNormalized = a[field];
+				bNormalized = b[field];
+			} else {
+				aNormalized = a[field].toString().toLocaleLowerCase();
+				bNormalized = b[field].toString().toLocaleLowerCase();
 			}
-			if (a[field] < b[field]) {
-				return -1;
-			}
+			if (aNormalized > bNormalized) return 1 * sortDirection;
+			if (aNormalized < bNormalized) return -1 * sortDirection;
+
 			return 0;
 		});
-		return sortDirection === SortDirection.ASC ? recipes : recipes.reverse();
+		return recipes;
 	}
 }
