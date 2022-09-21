@@ -177,7 +177,12 @@
 
 <ng-template #modal let-modal>
 	<div class="modal-header">
-		<h4 class="modal-title" id="modal-title">Confirm: remove ingredient</h4>
+		<h4 class="modal-title" id="modal-title">
+			{{
+				'Modals.ConfirmRemove'
+					| translate: { what: 'Modals.Ingredient' | translate }
+			}}
+		</h4>
 		<button
 			type="button"
 			class="btn-close"
@@ -187,19 +192,21 @@
 	<div class="modal-body">
 		<p>
 			<strong
-				>Are you sure you want to delete:
+				>{{ 'Modals.AreYouSureYouWantToDelete' | translate }}
 				<span class="text-primary">{{ ingredientToDelete?.name }}</span
 				>?</strong
 			>
 		</p>
-		<span class="text-danger">This operation can not be undone.</span>
+		<span class="text-danger">{{
+			'Modals.ThisOperationCanNotBeUndone' | translate
+		}}</span>
 	</div>
 	<div class="modal-footer">
 		<button
 			type="button"
 			class="btn btn-outline-secondary"
 			(click)="modal.dismiss('cancel click')">
-			Cancel
+			{{ 'Modals.Cancel' | translate }}
 		</button>
 		<button
 			type="button"
