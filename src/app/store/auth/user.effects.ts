@@ -152,10 +152,8 @@ export class UserEffects {
 	logOutEffect$ = createEffect(() => {
 		return this.actions$.pipe(
 			ofType(userActions.logOut),
-			switchMap(async action => {
+			switchMap(async () => {
 				try {
-					console.log(await this.analytics.logEvent('logout'));
-
 					await this.authService.logOut();
 					return userActions.logOutSuccess();
 				} catch (err) {
