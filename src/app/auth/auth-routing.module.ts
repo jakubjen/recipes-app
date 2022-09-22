@@ -7,10 +7,12 @@ const routes: Routes = [
 	{
 		path: 'login',
 		component: LoginComponent,
+		data: { title: 'Login' },
 	},
 	{
 		path: 'register',
 		component: RegisterComponent,
+		data: { title: 'Register' },
 	},
 ];
 

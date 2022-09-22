@@ -21,21 +21,23 @@ const routes: Routes = [
 		path: 'recipe/add',
 		component: RecipesAddComponent,
 		canActivate: [AngularFireAuthGuard],
-		data: { authGuardPipe: redirectUnauthorizedToLogin },
+		data: { authGuardPipe: redirectUnauthorizedToLogin, title: 'Add recipe' },
 	},
 	{
 		path: 'recipe/edit/:id',
 		component: RecipesEditComponent,
 		canActivate: [AngularFireAuthGuard],
-		data: { authGuardPipe: redirectUnauthorizedToLogin },
+		data: { authGuardPipe: redirectUnauthorizedToLogin, title: 'Edit' },
 	},
 	{
 		path: 'recipe/:id',
 		component: RecipeDetailComponent,
-},
-{
-path: 'recipe/add',
+		data: { title: 'Recipe' },
+	},
+	{
+		path: 'recipe/add',
 		component: RecipesAddComponent,
+		data: { title: 'Add' },
 	},
 ];
 
