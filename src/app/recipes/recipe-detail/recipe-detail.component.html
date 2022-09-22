@@ -25,20 +25,24 @@
 			</div>
 		</div>
 		<h3 class="fs-4 mt-5 mt-md-3">{{ 'Recipes.Ingredients' | translate }}</h3>
-		<div
-			class="ingredient mt-4 mt-sm-2"
-			*ngFor="let ingredient of recipe.ingredients">
-			<div class="row mt-2">
-				<div class="col-4">{{ ingredient.amount }} {{ ingredient.unit }}</div>
-				<div class="col-8 position-relative">
-					{{ ingredient.name }}
+		<div class="ingredients-list">
+			<div
+				class="ingredient mt-3 mt-sm-2"
+				*ngFor="let ingredient of recipe.ingredients">
+				<div class="row">
+					<div class="col-4">{{ ingredient.amount }} {{ ingredient.unit }}</div>
+					<div class="col-8 position-relative">
+						{{ ingredient.name }}
+					</div>
+				</div>
+				<div class="add-to-shopping-list">
+					<button
+						class="btn btn-primary mt-3 mt-sm-0"
+						(click)="addIngredientToShippingList(ingredient)">
+						add <i class="bi bi-basket-fill"></i>
+					</button>
 				</div>
 			</div>
-			<button
-				class="add-to-shopping-list btn btn-primary mt-2 mt-sm-0"
-				(click)="addIngredientToShippingList(ingredient)">
-				<small>add <i class="bi bi-basket-fill"></i> </small>
-			</button>
 		</div>
 		<div class="row" *ngIf="!recipe.ingredients.length">
 			<div class="col-12">{{ 'Recipes.NoIngredients' | translate }}</div>

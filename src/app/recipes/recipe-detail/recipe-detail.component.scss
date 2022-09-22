@@ -18,40 +18,42 @@
     }
 }
 
-.ingredients {
-    .cal {
-        overflow-wrap: break-word;
-    }
-
-    .row {
-        color: $gray-600;
-    }
-
-    .add-ingredients-to-shopping-list{
-        background: none;
-        border: none;
-        text-decoration: underline;
-    }
-
+.ingredients-list {
     .ingredient {
         position: relative;
+        color: $gray-600;
+        margin-top: 200px;
+
+        @include media-breakpoint-down(sm) {
+            box-shadow: 4px 4px 12px 2px rgb(66 68 90 / 25%);
+            padding: 15px;
+            color: $gray-700;
+            margin-top: 20px;
+            border-radius: 8px;
+        }
+
+        .add-to-shopping-list {
+            display: flex;
+            justify-content: flex-end;
+        }
 
         button {
-            width: 100%;
+            width: 40%;
     
             @include media-breakpoint-up(sm) {
                 width: fit-content;
                 position: absolute;
                 right: 0;
                 top: 50%;
+                color: $primary;
+                background: transparent;
                 transform: translateY(-50%);
-                background: $white;
                 opacity: 0;
-                transition: opacity .3s ease-out;
-    
+                transition: all .3s ease-out;
+
                 &:hover {
-                    opacity: 1;
-                }
+                    background: $primary;
+                    color: #fff;                }
             }
         }
 
@@ -59,6 +61,12 @@
             opacity: 1;
         }
     }
+}
+
+.add-ingredients-to-shopping-list {
+    background-color: transparent;
+    border: none;
+    text-decoration: underline
 }
 
 @include media-breakpoint-up(md) {
