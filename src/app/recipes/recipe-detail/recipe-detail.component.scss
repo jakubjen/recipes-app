@@ -1,6 +1,4 @@
-@import '~bootstrap/scss/mixins';/* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/functions';/* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/variables';/* Importing Bootstrap SCSS file. */
+@use 'variables' as *;
 
 .card-wrapper {
     height: 400px;
@@ -35,17 +33,31 @@
         text-decoration: underline;
     }
 
-    .add-to-shopping-list {
-        position: absolute;
-        right: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        opacity: 0;
-        background: $white;
-    }
+    .ingredient {
+        position: relative;
 
-    .row:hover .add-to-shopping-list {
-        opacity: 1;
+        button {
+            width: 100%;
+    
+            @include media-breakpoint-up(sm) {
+                width: fit-content;
+                position: absolute;
+                right: 0;
+                top: 50%;
+                transform: translateY(-50%);
+                background: $white;
+                opacity: 0;
+                transition: opacity .3s ease-out;
+    
+                &:hover {
+                    opacity: 1;
+                }
+            }
+        }
+
+        &:hover button {
+            opacity: 1;
+        }
     }
 }
 

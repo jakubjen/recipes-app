@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 import { Router } from '@angular/router';
 import { SnackbarVariant } from '@models/snackbar.model';
 import { User } from '@models/user.model';
@@ -15,7 +16,8 @@ export class UserEffects {
 		private actions$: Actions,
 		private authService: AuthService,
 		private router: Router,
-		private translate: TranslateService
+		private translate: TranslateService,
+		private analytics: AngularFireAnalytics
 	) {}
 
 	loginWithPassword$ = createEffect(() => {
@@ -87,7 +89,7 @@ export class UserEffects {
 	loginSuccess$ = createEffect(() => {
 		return this.actions$.pipe(
 			ofType(userActions.loginSuccess),
-			concatMap(async () => {
+			concatMap(async action => {
 				this.router.navigate(['/']);
 				return SnackbarActions.createSnackbar({
 					variant: SnackbarVariant.Success,
@@ -150,9 +152,9 @@ export class UserEffects {
 	logOutEffect$ = createEffect(() => {
 		return this.actions$.pipe(
 			ofType(userActions.logOut),
-			switchMap(async action => {
+			switchMap(async () => {
 				try {
-					this.authService.logOut();
+					await this.authService.logOut();
 					return userActions.logOutSuccess();
 				} catch (err) {
 					return userActions.logOutFailed();

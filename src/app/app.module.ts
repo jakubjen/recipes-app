@@ -35,6 +35,7 @@ import { SharedModule } from './shared/shared.module';
 import { ConvertUnitPipe } from './shopping-list/shopping-list/convert-unit.pipe';
 import { ShoppingListComponent } from './shopping-list/shopping-list/shopping-list.component';
 import { PendingChangesGuard } from 'src/helpers/pending-changes.guard';
+import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http);
@@ -59,7 +60,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 		}),
 		BrowserAnimationsModule,
 		NgbModule,
-		// StoreRouterConnectingModule.forRoot(),
+		StoreRouterConnectingModule.forRoot(),
 		StoreModule.forRoot({
 			shoppingList: ShoppingListReducer,
 			snackbar: snackbarReducer,
