@@ -9,5 +9,5 @@ export const IngredientsUnit = {
 		cup: 250,
 		liter: 1000,
 	},
-	other: ['piece'],
+	other: ['piece', 'spun'],
 };
