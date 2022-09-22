@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostListener, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import DataState from '@models/data-store.enum';
 import Recipe, { NewRecipe } from '@models/recipe.model';
@@ -28,7 +28,11 @@ export class RecipesEditComponent implements OnInit, OnDestroy {
 	public recipe?: Recipe;
 	public processingData$?: Observable<boolean | undefined>;
 	private ngDestroyed$ = new Subject();
-
+	public recipeStatues: 'unedited' | 'edited' = 'unedited';
+	@HostListener('window:beforeunload')
+	canDeactivate(): Observable<boolean> | boolean {
+		return this.recipeStatues === 'unedited';
+	}
 	constructor(
 		private route: ActivatedRoute,
 		private store: Store<AppState>,

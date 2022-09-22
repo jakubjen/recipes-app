@@ -34,6 +34,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { SharedModule } from './shared/shared.module';
 import { ConvertUnitPipe } from './shopping-list/shopping-list/convert-unit.pipe';
 import { ShoppingListComponent } from './shopping-list/shopping-list/shopping-list.component';
+import { PendingChangesGuard } from 'src/helpers/pending-changes.guard';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -88,6 +89,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 		UserTrackingService,
 		AuthService,
 		RecipesService,
+		PendingChangesGuard,
 	],
 	exports: [TranslateModule],
 	bootstrap: [AppComponent],
