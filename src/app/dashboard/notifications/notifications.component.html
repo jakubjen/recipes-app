@@ -1,5 +1,6 @@
 <div class="notifications" *ngIf="snackbars$ | async as snackbars">
 	<div
+		@fadeIn
 		[class]="'notification ' + snackbar.variant"
 		*ngFor="let snackbar of snackbars">
 		<small

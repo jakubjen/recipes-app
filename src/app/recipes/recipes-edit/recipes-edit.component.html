@@ -1,6 +1,7 @@
 <ng-container *ngIf="recipe">
 	<app-recipe-from
 		[recipe]="recipe"
+		[processingData$]="processingData$"
 		action="Update"
 		(submitRecipe)="update($event)"></app-recipe-from>
 </ng-container>

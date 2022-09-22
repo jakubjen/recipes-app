@@ -7,7 +7,7 @@
 		"Recipe": "Recipe",
 		"Ingredients": "Ingredients",
 		"Description": "Description",
-		"ImageUrl": "Image Url",
+		"Image": "Image",
 		"AddIngredient": "Add ingredient",
 		"EditIngredient": "Edit ingredient",
 		"AddInstruction": "Add instruction",
@@ -42,7 +42,14 @@
 			"RecipeUpdatedSuccessfully": "Recipe updated successfully",
 			"RecipeRemoveSuccessfully": "Recipe remove successfully",
 			"AllIngredientsAdded": "All ingredients added",
-			"IngredientAdded": "Ingredient added"
+			"IngredientAdded": "Ingredient added",
+			"Error": {
+				"EmailAreUsed": "This email already in used",
+				"InvalidEmailOrPassword": "Invalid email or password",
+				"UserClosePopUpBeforeLoginFinish": "User close popup",
+				"PopupBlock": "Popup blocked",
+				"InvalidEmail": "Invalid email"
+			}
 		},
 		"Auth": {
 			"Register": "Register",
