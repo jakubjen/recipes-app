@@ -1,17 +1,23 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import DataState from '@models/data-store.enum';
 import Recipe, { NewRecipe } from '@models/recipe.model';
-import { Store } from '@ngrx/store';
-import RecipesSelectors from '@store/recipes/recipes.selector';
-import { AppState } from '@store/store';
-import { tap, takeUntil, filter, withLatestFrom, Subject } from 'rxjs';
-import { AuthService } from '@services/auth/auth.service';
 import { SnackbarVariant } from '@models/snackbar.model';
+import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import SnackbarActions from '@store/shared/snackbar.actions';
-import RecipesActions from '@store/recipes/recipes.actions';
 import { userSelectors } from '@store/auth/selectors';
+import RecipesActions from '@store/recipes/recipes.actions';
+import RecipesSelectors from '@store/recipes/recipes.selector';
+import SnackbarActions from '@store/shared/snackbar.actions';
+import { AppState } from '@store/store';
+import {
+	filter,
+	Observable,
+	Subject,
+	takeUntil,
+	tap,
+	withLatestFrom,
+} from 'rxjs';
 
 @Component({
 	selector: 'app-recipes-edit',
@@ -20,18 +26,21 @@ import { userSelectors } from '@store/auth/selectors';
 })
 export class RecipesEditComponent implements OnInit, OnDestroy {
 	public recipe?: Recipe;
+	public processingData$?: Observable<boolean | undefined>;
 	private ngDestroyed$ = new Subject();
 
 	constructor(
 		private route: ActivatedRoute,
 		private store: Store<AppState>,
 		private router: Router,
-		private authService: AuthService,
 		private translate: TranslateService
 	) {}
 
 	ngOnInit(): void {
 		const id = this.route.snapshot.paramMap.get('id')!;
+		this.processingData$ = this.store.select(
+			RecipesSelectors.selectProcessingData
+		);
 		this.store
 			.select(RecipesSelectors.selectDataState)
 			.pipe(
@@ -65,10 +74,15 @@ export class RecipesEditComponent implements OnInit, OnDestroy {
 		this.ngDestroyed$.complete();
 	}
 
-	public update(recipe: NewRecipe): void {
-		if (!recipe.id) return;
+	public async update({
+		recipe,
+		image,
+	}: {
+		recipe: NewRecipe;
+		image?: File | null;
+	}): Promise<void> {
 		this.store.dispatch(
-			RecipesActions.updateRecipe({ recipe: recipe as Recipe })
+			RecipesActions.updateRecipe({ recipe: recipe as Recipe, image })
 		);
 	}
 }

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
 import { Router } from '@angular/router';
 import { SnackbarVariant } from '@models/snackbar.model';
 import { User } from '@models/user.model';
@@ -6,7 +7,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '@services/auth/auth.service';
 import SnackbarActions from '@store/shared/snackbar.actions';
-import { concatMap, firstValueFrom, switchMap } from 'rxjs';
+import { concatMap, firstValueFrom, map, switchMap } from 'rxjs';
 import userActions from './user.actions';
 
 @Injectable()
@@ -15,7 +16,8 @@ export class UserEffects {
 		private actions$: Actions,
 		private authService: AuthService,
 		private router: Router,
-		private translate: TranslateService
+		private translate: TranslateService,
+		private analytics: AngularFireAnalytics
 	) {}
 
 	loginWithPassword$ = createEffect(() => {
@@ -32,6 +34,19 @@ export class UserEffects {
 					const userToStore: User = { uid: user.uid, email: user.email! };
 					return userActions.loginSuccess({ user: userToStore });
 				} catch (err: any) {
+					const errorCode = err.code;
+					if (errorCode === 'auth/user-not-found')
+						return userActions.loginFailed({
+							error: this.translate.instant(
+								'App.Snackbar.Error.InvalidEmailOrPassword'
+							),
+						});
+					if (errorCode === 'auth/wrong-password')
+						return userActions.loginFailed({
+							error: this.translate.instant(
+								'App.Snackbar.Error.InvalidEmailOrPassword'
+							),
+						});
 					return userActions.loginFailed({ error: err.message });
 				}
 			})
@@ -48,7 +63,24 @@ export class UserEffects {
 					const userToStore: User = { uid: user.uid, email: user.email! };
 					return userActions.loginSuccess({ user: userToStore });
 				} catch (err: any) {
-					return userActions.loginFailed({ error: err.message });
+					const errorCode = err.code;
+					let errorMessage = '';
+					switch (errorCode) {
+						case 'auth/popup-closed-by-user':
+							errorMessage = 'UserClosePopUpBeforeLoginFinish';
+							break;
+						case 'auth/popup-blocked':
+							errorMessage = 'PopupBlock';
+							break;
+						default:
+							return userActions.loginFailed({
+								error: errorCode,
+							});
+					}
+
+					return userActions.loginFailed({
+						error: this.translate.instant(`App.Snackbar.Error.${errorMessage}`),
+					});
 				}
 			})
 		);
@@ -57,7 +89,7 @@ export class UserEffects {
 	loginSuccess$ = createEffect(() => {
 		return this.actions$.pipe(
 			ofType(userActions.loginSuccess),
-			concatMap(async () => {
+			concatMap(async action => {
 				this.router.navigate(['/']);
 				return SnackbarActions.createSnackbar({
 					variant: SnackbarVariant.Success,
@@ -90,6 +122,15 @@ export class UserEffects {
 					const userToStore: User = { uid: user.uid, email: user.email! };
 					return userActions.loginSuccess({ user: userToStore });
 				} catch (err: any) {
+					const errorCode = err.code;
+					if (errorCode === 'auth/email-already-in-use')
+						return userActions.registerFailed({
+							error: this.translate.instant('App.Snackbar.Error.EmailAreUsed'),
+						});
+					if (errorCode === 'auth/invalid-email')
+						return userActions.registerFailed({
+							error: this.translate.instant('App.Snackbar.Error.InvalidEmail'),
+						});
 					return userActions.registerFailed({ error: err.message });
 				}
 			})
@@ -111,13 +152,25 @@ export class UserEffects {
 	logOutEffect$ = createEffect(() => {
 		return this.actions$.pipe(
 			ofType(userActions.logOut),
-			switchMap(async action => {
+			switchMap(async () => {
 				try {
-					this.authService.logOut();
+					await this.authService.logOut();
 					return userActions.logOutSuccess();
 				} catch (err) {
 					return userActions.logOutFailed();
 				}
+			})
+		);
+	});
+
+	logoutSuccess$ = createEffect(() => {
+		return this.actions$.pipe(
+			ofType(userActions.logOutSuccess),
+			concatMap(async action => {
+				return SnackbarActions.createSnackbar({
+					variant: SnackbarVariant.Success,
+					text: this.translate.instant('App.LogoutSuccessfully'),
+				});
 			})
 		);
 	});
