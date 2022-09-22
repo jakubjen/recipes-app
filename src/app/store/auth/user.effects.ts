@@ -32,6 +32,19 @@ export class UserEffects {
 					const userToStore: User = { uid: user.uid, email: user.email! };
 					return userActions.loginSuccess({ user: userToStore });
 				} catch (err: any) {
+					const errorCode = err.code;
+					if (errorCode === 'auth/user-not-found')
+						return userActions.loginFailed({
+							error: this.translate.instant(
+								'App.Snackbar.Error.InvalidEmailOrPassword'
+							),
+						});
+					if (errorCode === 'auth/wrong-password')
+						return userActions.loginFailed({
+							error: this.translate.instant(
+								'App.Snackbar.Error.InvalidEmailOrPassword'
+							),
+						});
 					return userActions.loginFailed({ error: err.message });
 				}
 			})
@@ -48,7 +61,24 @@ export class UserEffects {
 					const userToStore: User = { uid: user.uid, email: user.email! };
 					return userActions.loginSuccess({ user: userToStore });
 				} catch (err: any) {
-					return userActions.loginFailed({ error: err.message });
+					const errorCode = err.code;
+					let errorMessage = '';
+					switch (errorCode) {
+						case 'auth/popup-closed-by-user':
+							errorMessage = 'UserClosePopUpBeforeLoginFinish';
+							break;
+						case 'auth/popup-blocked':
+							errorMessage = 'PopupBlock';
+							break;
+						default:
+							return userActions.loginFailed({
+								error: errorCode,
+							});
+					}
+
+					return userActions.loginFailed({
+						error: this.translate.instant(`App.Snackbar.Error.${errorMessage}`),
+					});
 				}
 			})
 		);
@@ -90,6 +120,15 @@ export class UserEffects {
 					const userToStore: User = { uid: user.uid, email: user.email! };
 					return userActions.loginSuccess({ user: userToStore });
 				} catch (err: any) {
+					const errorCode = err.code;
+					if (errorCode === 'auth/email-already-in-use')
+						return userActions.registerFailed({
+							error: this.translate.instant('App.Snackbar.Error.EmailAreUsed'),
+						});
+					if (errorCode === 'auth/invalid-email')
+						return userActions.registerFailed({
+							error: this.translate.instant('App.Snackbar.Error.InvalidEmail'),
+						});
 					return userActions.registerFailed({ error: err.message });
 				}
 			})
