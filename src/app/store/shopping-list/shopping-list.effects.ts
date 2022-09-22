@@ -22,7 +22,7 @@ export class shoppingListEffects {
 					shoppingListActions.addManyIngredientsFromRecipeAfterGrouping,
 					shoppingListActions.addIngredientAfterGrouping,
 					shoppingListActions.removeIngredient,
-					shoppingListActions.updateIngredient
+					shoppingListActions.updateIngredientSuccess
 				),
 				concatLatestFrom(() =>
 					this.store.select(ShoppingListSelectors.selectAll)
@@ -55,7 +55,7 @@ export class shoppingListEffects {
 			concatLatestFrom(() =>
 				this.store.select(ShoppingListSelectors.selectAll)
 			),
-			map(([action, ingredientInShoppingList]: [any, IngredientsInStore[]]) => {
+			map(([action, ingredientInShoppingList]) => {
 				let ingredientsToStore: IngredientsInStore[] = ingredientInShoppingList;
 				action.ingredients.forEach((ingredient: Ingredients) => {
 					ingredientsToStore = this.ingredientService.addIngredientAndGroupe(
@@ -63,8 +63,6 @@ export class shoppingListEffects {
 						ingredientsToStore
 					);
 				});
-
-				console.log(ingredientsToStore, ingredientsToStore.length);
 
 				return shoppingListActions.addManyIngredientsFromRecipeAfterGrouping({
 					ingredients: ingredientsToStore,
@@ -91,7 +89,7 @@ export class shoppingListEffects {
 			concatLatestFrom(() =>
 				this.store.select(ShoppingListSelectors.selectAll)
 			),
-			map(([action, ingredientInShoppingList]: [any, IngredientsInStore[]]) => {
+			map(([action, ingredientInShoppingList]) => {
 				const ingredientsToStore: IngredientsInStore[] =
 					this.ingredientService.addIngredientAndGroupe(
 						action.ingredient,
@@ -123,7 +121,7 @@ export class shoppingListEffects {
 			concatLatestFrom(() =>
 				this.store.select(ShoppingListSelectors.selectAll)
 			),
-			map(([action, ingredientInShoppingList]: [any, IngredientsInStore[]]) => {
+			map(([action, ingredientInShoppingList]) => {
 				const ingredientsToStore: IngredientsInStore[] =
 					this.ingredientService.addIngredientAndGroupe(
 						action.ingredient,
@@ -146,6 +144,32 @@ export class shoppingListEffects {
 					text: this.translate.instant('App.Snackbar.IngredientAdded'),
 				})
 			)
+		);
+	});
+
+	updateIngredientsFromRecipe = createEffect(() => {
+		return this.actions$.pipe(
+			ofType(shoppingListActions.updateIngredient),
+			concatLatestFrom(() =>
+				this.store.select(ShoppingListSelectors.selectAll)
+			),
+			map(([action, ingredientInShoppingList]) => {
+				let ingredientsToStore = ingredientInShoppingList;
+				const { ingredient, previousIngredient } = action;
+
+				ingredientsToStore = ingredientsToStore.filter(
+					ingredient => ingredient !== previousIngredient
+				);
+
+				ingredientsToStore = this.ingredientService.addIngredientAndGroupe(
+					ingredient,
+					ingredientsToStore
+				);
+
+				return shoppingListActions.updateIngredientSuccess({
+					ingredients: ingredientsToStore,
+				});
+			})
 		);
 	});
 

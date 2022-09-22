@@ -29,9 +29,9 @@ export const ShoppingListReducer = createReducer(
 	{ ...initialState },
 
 	on(
-		shoppingListActions.updateIngredient,
-		(state: ShoppingListState, { ingredient }): ShoppingListState => {
-			return adapter.setOne(ingredient, state);
+		shoppingListActions.updateIngredientSuccess,
+		(state: ShoppingListState, { ingredients }): ShoppingListState => {
+			return adapter.setAll(ingredients, state);
 		}
 	),
 

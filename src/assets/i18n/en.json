@@ -27,6 +27,7 @@
 	"App": {
 		"Loading": "Loading...",
 		"AddIngredientsToShoppingList":"Add ingredients to shopping list",
+		"NoIngredientsInShoppingList":"Shopping list ist empty.",
 		"Delete":"Delete",
 		"Edit":"Edit",
 		"'Loading": "Loading...",
@@ -63,5 +64,13 @@
 	"Sorting": {
 		"Title": "Title",
 		"Time": "Time"
+	},
+	"Modals": {
+		"Ingredient": "Ingredient",
+		"Recipe": "Recipe",
+		"ConfirmRemove": "Confirm remove: {{ what }}",
+		"AreYouSureYouWantToDelete": "Are you sure you want to delete: ",
+		"ThisOperationCanNotBeUndone": "This operation can not be undone.",
+		"Cancel": "Cancel"
 	}
 }

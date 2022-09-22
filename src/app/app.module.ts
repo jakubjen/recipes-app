@@ -33,13 +33,14 @@ import { AuthService } from '@services/auth/auth.service';
 import { UserEffects } from '@store/auth/user.effects';
 import { SnackbarEffects } from '@store/shared/snackbar.effects';
 import { AppEffects } from '@store/app.effect';
+import { ConvertUnitPipe } from './shopping-list/shopping-list/convert-unit.pipe';
 
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http);
 }
 
 @NgModule({
-	declarations: [AppComponent, ShoppingListComponent],
+	declarations: [AppComponent, ShoppingListComponent, ConvertUnitPipe],
 	imports: [
 		BrowserModule,
 		BrowserAnimationsModule,

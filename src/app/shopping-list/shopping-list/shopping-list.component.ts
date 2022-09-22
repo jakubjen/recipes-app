@@ -25,6 +25,7 @@ import { Store } from '@ngrx/store';
 import { shoppingListActions } from '@store/shopping-list/shopping-list.actions';
 import ShoppingListSelectors from '@store/shopping-list/shopping-list.selectors';
 import { first, Observable } from 'rxjs';
+import { convertUnit } from 'src/helpers/convertUnits';
 
 @Component({
 	selector: 'app-shopping-list',
@@ -58,7 +59,7 @@ export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
 	public units = IngredientsUnit;
 	public ingredientList$?: Observable<IngredientsInStore[] | undefined>;
 	public mode: 'add' | 'edit' = 'add';
-	public editingIngredientId?: string;
+	public editedIngredient?: IngredientsInStore;
 	public ingredientToDelete?: IngredientsInStore;
 	public sortKeyEnum = IngredientsSortBy;
 	public sortKey?: Observable<IngredientsSortBy>;
@@ -66,9 +67,9 @@ export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
 	public sortDirectionEnum = SortDirection;
 
 	public ingredientForm = new FormGroup({
-		name: new FormControl<string>('Ananas', Validators.required),
-		unit: new FormControl('kilogram', Validators.required),
-		amount: new FormControl<string | null>('1', [
+		name: new FormControl<string>('', Validators.required),
+		unit: new FormControl('', Validators.required),
+		amount: new FormControl<string | null>('', [
 			Validators.required,
 			Validators.min(0),
 		]),
@@ -134,8 +135,15 @@ export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
 	}
 
 	public editIngredient(ingredient: IngredientsInStore): void {
-		this.editingIngredientId = ingredient.id;
-		this.ingredientForm.patchValue(ingredient);
+		this.editedIngredient = ingredient;
+		const { amount, unit } = ingredient;
+		const convertedUnits = convertUnit({ amount, unit });
+		this.ingredientForm.patchValue({
+			...ingredient,
+			amount: convertedUnits.amount,
+			unit: convertedUnits.unit,
+		});
+
 		this.mode = 'edit';
 	}
 
@@ -155,13 +163,16 @@ export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
 		}
 		if (this.mode == 'edit') {
 			this.mode = 'add';
-			if (!this.editingIngredientId) return ngForm.resetForm();
+			if (!this.editedIngredient?.id) return ngForm.resetForm();
 			const updatedIngredient: IngredientsInStore = {
-				id: this.editingIngredientId,
+				id: this.editedIngredient?.id,
 				...ingredient,
 			};
 			this.store.dispatch(
-				shoppingListActions.updateIngredient({ ingredient: updatedIngredient })
+				shoppingListActions.updateIngredient({
+					ingredient: updatedIngredient,
+					previousIngredient: this.editedIngredient,
+				})
 			);
 
 			return ngForm.resetForm();
