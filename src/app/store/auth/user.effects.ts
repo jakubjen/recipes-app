@@ -125,6 +125,10 @@ export class UserEffects {
 						return userActions.registerFailed({
 							error: this.translate.instant('App.Snackbar.Error.EmailAreUsed'),
 						});
+					if (errorCode === 'auth/invalid-email')
+						return userActions.registerFailed({
+							error: this.translate.instant('App.Snackbar.Error.InvalidEmail'),
+						});
 					return userActions.registerFailed({ error: err.message });
 				}
 			})
