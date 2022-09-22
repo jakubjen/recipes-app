@@ -23,7 +23,7 @@ export class RecipeEffects {
 		private translate: TranslateService,
 		private firestore: AngularFirestore,
 		private store: Store<AppState>,
-		private analytics: AngularFireAnalytics
+		private analytics: AngularFireAnalytics,
 		private recipesService: RecipesService
 	) {}
 
