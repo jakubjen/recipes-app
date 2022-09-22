@@ -6,7 +6,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from '@services/auth/auth.service';
 import SnackbarActions from '@store/shared/snackbar.actions';
-import { concatMap, firstValueFrom, switchMap } from 'rxjs';
+import { concatMap, firstValueFrom, map, switchMap } from 'rxjs';
 import userActions from './user.actions';
 
 @Injectable()
@@ -118,6 +118,18 @@ export class UserEffects {
 				} catch (err) {
 					return userActions.logOutFailed();
 				}
+			})
+		);
+	});
+
+	logoutSuccess$ = createEffect(() => {
+		return this.actions$.pipe(
+			ofType(userActions.logOutSuccess),
+			concatMap(async action => {
+				return SnackbarActions.createSnackbar({
+					variant: SnackbarVariant.Success,
+					text: this.translate.instant('App.LogoutSuccessfully'),
+				});
 			})
 		);
 	});
