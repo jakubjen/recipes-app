@@ -73,7 +73,7 @@ export class RecipeFromComponent implements OnInit, OnDestroy {
 		recipe: NewRecipe;
 		image: File | null | undefined;
 	}>();
-	@Output() edited = new EventEmitter<'edited'>();
+	@Output() edited = new EventEmitter<'edited' | 'unedited'>();
 
 	private recipeId?: string;
 	private imageUrl = '';
@@ -179,6 +179,7 @@ export class RecipeFromComponent implements OnInit, OnDestroy {
 
 	public handleSubmit(): void {
 		if (this.recipeForm.valid) {
+			this.edited.next('unedited');
 			const { image, ...valuesFromFrom } = this.recipeForm.value;
 			const recipe = {
 				...valuesFromFrom,
