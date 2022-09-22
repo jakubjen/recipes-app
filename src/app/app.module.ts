@@ -30,6 +30,8 @@ import { AppEffects } from '@store/app.effect';
 import { userReducer } from '@store/auth/auth.reducer';
 import { UserEffects } from '@store/auth/user.effects';
 import { SnackbarEffects } from '@store/shared/snackbar.effects';
+import { AppEffects } from '@store/app.effect';
+import { ConvertUnitPipe } from './shopping-list/shopping-list/convert-unit.pipe';
 import { snackbarReducer } from '@store/shared/snackbar.reducer';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
@@ -42,7 +44,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 }
 
 @NgModule({
-	declarations: [AppComponent, ShoppingListComponent],
+	declarations: [AppComponent, ShoppingListComponent, ConvertUnitPipe],
 	imports: [
 		BrowserModule,
 		BrowserAnimationsModule,
