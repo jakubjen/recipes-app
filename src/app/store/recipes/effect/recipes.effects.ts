@@ -3,25 +3,26 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
 import Recipe from '@models/recipe.model';
 import { SnackbarVariant } from '@models/snackbar.model';
-import { Actions, createEffect, ofType, concatLatestFrom } from '@ngrx/effects';
+import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
 import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
-import { AuthService } from '@services/auth/auth.service';
 import { userSelectors } from '@store/auth/selectors';
 import SnackbarActions from '@store/shared/snackbar.actions';
 import { AppState } from '@store/store';
-import { map, mergeMap, withLatestFrom } from 'rxjs';
+
+import { RecipesService } from '@services/recipes/recipes.service';
+import { firstValueFrom, map, mergeMap } from 'rxjs';
 import RecipesActions from '../recipes.actions';
 
 @Injectable()
 export class RecipeEffects {
 	constructor(
 		private actions$: Actions,
-		private authService: AuthService,
 		private router: Router,
 		private translate: TranslateService,
 		private firestore: AngularFirestore,
-		private store: Store<AppState>
+		private store: Store<AppState>,
+		private recipesService: RecipesService
 	) {}
 
 	addRecipes$ = createEffect(() => {
@@ -37,7 +38,14 @@ export class RecipeEffects {
 				}
 				newRecipe.ownerId = user.uid;
 				try {
-					this.firestore.collection('recipes').add(newRecipe);
+					const document = await this.firestore
+						.collection('recipes')
+						.add(newRecipe);
+					const recipeId = await document.id;
+					newRecipe.imageUrl = await firstValueFrom(
+						await this.recipesService.uploadImage(action.image, recipeId, user)
+					);
+					document.update(newRecipe);
 					this.router.navigate(['/']);
 					return RecipesActions.addRecipeSuccess();
 				} catch (err: any) {
@@ -71,24 +79,23 @@ export class RecipeEffects {
 		);
 	});
 
-	removeRecipe$ = createEffect(
-		() => {
-			return this.actions$.pipe(
-				ofType(RecipesActions.removeRecipe),
-				mergeMap(async action => {
-					try {
-						await this.firestore.doc<Recipe>(`recipes/${action.id}`).delete();
-						this.router.navigate(['/']);
-						return RecipesActions.removeRecipeSuccess();
-					} catch (err: any) {
-						console.log(err);
-						return RecipesActions.removeRecipeFailed({ text: err.message });
-					}
-				})
-			);
-		},
-		{ dispatch: false }
-	);
+	removeRecipe$ = createEffect(() => {
+		return this.actions$.pipe(
+			ofType(RecipesActions.removeRecipe),
+			concatLatestFrom(() => this.store.select(userSelectors.selectUser)),
+			mergeMap(async ([action, user]) => {
+				try {
+					await this.firestore.doc<Recipe>(`recipes/${action.id}`).delete();
+					const imagePath = `${user!.uid}/${action.id}.jpg`;
+					this.recipesService.deleteImage(imagePath);
+					this.router.navigate(['/']);
+					return RecipesActions.removeRecipeSuccess();
+				} catch (err: any) {
+					return RecipesActions.removeRecipeFailed({ text: err.message });
+				}
+			})
+		);
+	});
 
 	removeRecipeSuccess$ = createEffect(() => {
 		return this.actions$.pipe(
@@ -117,28 +124,53 @@ export class RecipeEffects {
 	updateRecipe$ = createEffect(() => {
 		return this.actions$.pipe(
 			ofType(RecipesActions.updateRecipe),
-			mergeMap(async action => {
-				const { recipe } = action;
+			concatLatestFrom(() => this.store.select(userSelectors.selectUser)),
+			mergeMap(async ([action, user]) => {
+				const { image } = action;
+				const { ...recipe } = action.recipe;
 				try {
+					if (!!image) {
+						recipe.imageUrl = await firstValueFrom(
+							await this.recipesService.uploadImage(image, recipe.id, user!)
+						);
+					}
 					await this.firestore
 						.doc<Recipe>(`recipes/${recipe.id}`)
 						.update(recipe);
 
 					this.router.navigate([`/recipe/${recipe.id}`]);
 
-					return SnackbarActions.createSnackbar({
-						variant: SnackbarVariant.Success,
-						text: this.translate.instant(
-							'App.Snackbar.RecipeUpdatedSuccessfully'
-						),
-					});
+					return RecipesActions.updateRecipeSuccess();
 				} catch (err: any) {
-					return SnackbarActions.createSnackbar({
-						variant: SnackbarVariant.Error,
-						text: err.message,
-					});
+					return RecipesActions.updateRecipeFailed({ text: err.message });
 				}
 			})
+		);
+	});
+
+	updateRecipeSuccess$ = createEffect(() => {
+		return this.actions$.pipe(
+			ofType(RecipesActions.updateRecipeSuccess),
+			map(action =>
+				SnackbarActions.createSnackbar({
+					variant: SnackbarVariant.Success,
+					text: this.translate.instant(
+						'App.Snackbar.RecipeUpdatedSuccessfully'
+					),
+				})
+			)
+		);
+	});
+
+	updateRecipeFailed$ = createEffect(() => {
+		return this.actions$.pipe(
+			ofType(RecipesActions.updateRecipeFailed),
+			map(action =>
+				SnackbarActions.createSnackbar({
+					variant: SnackbarVariant.Error,
+					text: action.text,
+				})
+			)
 		);
 	});
 }

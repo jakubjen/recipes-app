@@ -5,7 +5,7 @@
 	(ngSubmit)="handleSubmit()"
 	*ngIf="!loading">
 	<div class="row">
-		<div class="col-12 col-md-9 col-xl-8">
+		<div class="col-12 col-md-9 col-xl-7">
 			<div class="title">
 				<label for="title" class="form-label fs-5 fw-bold">{{
 					'Recipes.Title' | translate
@@ -22,20 +22,25 @@
 				<app-form-error [input]="title" [form]="ngForm"></app-form-error>
 			</div>
 
-			<div class="mt-4 imageUrl">
-				<label for="imageUrl" class="form-label fs-5 fw-bold">{{
-					'Recipes.ImageUrl' | translate
+			<div class="mt-4 image">
+				<label for="image" class="form-label fs-5 fw-bold">{{
+					'Recipes.Image' | translate
 				}}</label>
-				<input
-					type="text"
-					formControlName="imageUrl"
-					[placeholder]="'Recipes.ImageUrl' | translate"
-					class="form-control"
-					[class.is-invalid]="
-						(imageUrl?.touched || ngForm.submitted) && !!imageUrl?.errors
-					"
-					id="imageUrl" />
-				<app-form-error [input]="imageUrl" [form]="ngForm"></app-form-error>
+				<div class="col-10 col-sm-8 col-md-6">
+					<div class="image-preview mb-2" *ngIf="!!previewImageUrl">
+						<img [src]="previewImageUrl" alt="Image preview" />
+					</div>
+					<input
+						type="file"
+						accept=".jpg"
+						class="form-control"
+						(change)="onFileChanged($event)"
+						[class.is-invalid]="
+							(image?.touched || ngForm.submitted) && !!image?.errors
+						"
+						id="image" />
+					<app-form-error [input]="image" [form]="ngForm"></app-form-error>
+				</div>
 			</div>
 
 			<div class="time mt-4">
@@ -81,6 +86,7 @@
 					{{ 'Recipes.Ingredients' | translate }}
 				</h3>
 				<div
+					@fadeIn
 					class="row mt-3"
 					*ngFor="let ingredientsForm of ingredients.controls; let i = index">
 					<ng-container [formGroupName]="i">
@@ -153,6 +159,7 @@
 			<div class="instructions mt-4" formArrayName="instructions">
 				<h3 class="fs-4">instructions</h3>
 				<div
+					@fadeIn
 					*ngFor="let instructionForm of instructions.controls; let i = index"
 					class="instruction">
 					<textarea
@@ -178,13 +185,21 @@
 				</div>
 				<button
 					type="button"
-					class="btn btn-outline-primary mt-2"
+					class="btn btn-outline-primary mt-3"
 					(click)="addInstruction()">
 					{{ 'Recipes.AddInstruction' | translate }}
 				</button>
 			</div>
-			<button type="submit" class="btn btn-primary mt-4">
+			<button
+				type="submit"
+				class="btn btn-primary mt-4"
+				[disabled]="processingData$ | async">
 				{{ action }}
+				<span
+					class="spinner-border spinner-border-sm"
+					role="status"
+					*ngIf="processingData$ | async"
+					aria-hidden="true"></span>
 			</button>
 		</div>
 	</div>

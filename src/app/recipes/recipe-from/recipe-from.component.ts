@@ -1,22 +1,54 @@
+import {
+	animate,
+	state,
+	style,
+	transition,
+	trigger,
+} from '@angular/animations';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import {
+	AbstractControl,
+	FormArray,
 	FormControl,
 	FormGroup,
-	FormArray,
 	Validators,
-	AbstractControl,
 } from '@angular/forms';
-import Recipe, { NewRecipe } from '@models/recipe.model';
 import { IngredientsUnit } from '@models/ingredients-units.model';
+import Recipe, { NewRecipe } from '@models/recipe.model';
+import { Observable } from 'rxjs';
 
 @Component({
 	selector: 'app-recipe-from',
 	templateUrl: './recipe-from.component.html',
 	styleUrls: ['./recipe-from.component.scss'],
+	animations: [
+		trigger('fadeIn', [
+			transition('void => *', [
+				style({
+					height: 0,
+					scale: 0,
+				}),
+				animate('.3s ease-out'),
+			]),
+			transition('* => void', [
+				style({
+					scale: 1,
+				}),
+				animate(
+					'.3s ease-out',
+					style({
+						scale: 0,
+						height: 0,
+					})
+				),
+			]),
+		]),
+	],
 })
 export class RecipeFromComponent {
 	@Input() action: string = '';
 	@Input() loading: boolean = false;
+	@Input() processingData$?: Observable<boolean | undefined>;
 	@Input() set recipe(recipe: Recipe) {
 		this.ingredients.clear();
 		this.instructions.clear();
@@ -24,11 +56,19 @@ export class RecipeFromComponent {
 		recipe.instructions.forEach(() => this.addInstruction());
 		this.recipeForm.patchValue(recipe);
 		this.recipeId = recipe.id;
+		this.imageUrl = recipe.imageUrl;
+		this.previewImageUrl = recipe.imageUrl;
+		this.recipeForm.controls.image.removeValidators(Validators.required);
 	}
+
+	@Output() submitRecipe = new EventEmitter<{
+		recipe: NewRecipe;
+		image: File | null | undefined;
+	}>();
+
 	private recipeId?: string;
-
-	@Output() submitRecipe = new EventEmitter<NewRecipe>();
-
+	private imageUrl = '';
+	public previewImageUrl: string | ArrayBuffer = '';
 	public units = IngredientsUnit;
 
 	public recipeForm = new FormGroup({
@@ -37,11 +77,7 @@ export class RecipeFromComponent {
 			Validators.minLength(10),
 			Validators.maxLength(200),
 		]),
-		imageUrl: new FormControl<string>('', [
-			Validators.required,
-			Validators.minLength(10),
-			Validators.maxLength(200),
-		]),
+		image: new FormControl<File | null>(null, Validators.required),
 		description: new FormControl<string>('', [
 			Validators.required,
 			Validators.minLength(20),
@@ -55,17 +91,25 @@ export class RecipeFromComponent {
 		instructions: new FormArray<FormControl<string>>([]),
 	});
 
-	public handleSubmit(): void {
-		if (this.recipeForm.valid) {
-			this.submitRecipe.emit({
-				...this.recipeForm.value,
-				id: this.recipeId,
-			} as NewRecipe);
-		}
-	}
-
 	get ingredients(): FormArray {
 		return this.recipeForm.get('ingredients') as FormArray;
+	}
+	get title(): AbstractControl<string | null, string | null> | null {
+		return this.recipeForm.get('title');
+	}
+	get image(): AbstractControl | null {
+		return this.recipeForm.get('image');
+	}
+
+	get description(): AbstractControl<string | null, string | null> | null {
+		return this.recipeForm.get('description');
+	}
+
+	get time(): AbstractControl<number | null, number | null> | null {
+		return this.recipeForm.get('time');
+	}
+	get instructions(): FormArray {
+		return this.recipeForm.get('instructions') as FormArray;
 	}
 
 	public addIngredient(): void {
@@ -81,24 +125,6 @@ export class RecipeFromComponent {
 		this.ingredients.removeAt(index);
 	}
 
-	get title(): AbstractControl<string | null, string | null> | null {
-		return this.recipeForm.get('title');
-	}
-
-	get imageUrl(): AbstractControl<string | null, string | null> | null {
-		return this.recipeForm.get('imageUrl');
-	}
-
-	get description(): AbstractControl<string | null, string | null> | null {
-		return this.recipeForm.get('description');
-	}
-
-	get time(): AbstractControl<number | null, number | null> | null {
-		return this.recipeForm.get('time');
-	}
-	get instructions(): FormArray {
-		return this.recipeForm.get('instructions') as FormArray;
-	}
 	public addInstruction(): void {
 		this.instructions.push(
 			new FormControl<string>('', [
@@ -111,5 +137,33 @@ export class RecipeFromComponent {
 
 	public removeInstruction(index: number): void {
 		this.instructions.removeAt(index);
+	}
+
+	public onFileChanged(event: Event): void {
+		const image = (event.target as HTMLInputElement).files?.[0];
+		if (!image) {
+			this.previewImageUrl = '';
+			return;
+		}
+		const reader = new FileReader();
+
+		reader.readAsDataURL(image);
+		reader.onload = () => {
+			this.previewImageUrl = reader.result!;
+			this.recipeForm.patchValue({ image });
+		};
+	}
+
+	public handleSubmit(): void {
+		if (this.recipeForm.valid) {
+			const { image, ...valuesFromFrom } = this.recipeForm.value;
+			const recipe = {
+				...valuesFromFrom,
+				imageUrl: this.imageUrl,
+				id: this.recipeId,
+			} as NewRecipe;
+
+			this.submitRecipe.emit({ recipe, image });
+		}
 	}
 }

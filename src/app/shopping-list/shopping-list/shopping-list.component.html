@@ -6,7 +6,7 @@
 	<form
 		[formGroup]="ingredientForm"
 		#ngForm="ngForm"
-		(ngSubmit)="submit(ngForm)">
+		(ngSubmit)="ingredientFromSubmitButton.focus(); submit(ngForm)">
 		<div class="row mt-3">
 			<div class="col-6 col-lg-3 amount">
 				<input
@@ -65,7 +65,10 @@
 				<app-form-error [input]="name" [form]="ngForm"></app-form-error>
 			</div>
 		</div>
-		<button type="submit" class="btn btn-outline-primary mt-3">
+		<button
+			type="submit"
+			#ingredientFromSubmitButton
+			class="btn btn-outline-primary mt-3">
 			{{ submitButtonText | translate }}
 		</button>
 	</form>
@@ -86,7 +89,9 @@
 	</div>
 </div>
 <div class="col-12 mt-4">
-	<table class="table">
+	<table
+		class="table"
+		*ngIf="(ingredientList$ | async)?.length; else tableEmpty">
 		<thead>
 			<tr>
 				<th scope="col">#</th>
@@ -132,7 +137,11 @@
 					*ngFor="let ingredient of ingredientList; let i = index"
 					[@recipeSate]="'normal'">
 					<th scope="row">{{ i + 1 }}</th>
-					<td>{{ ingredient.amount }} {{ ingredient.unit }}</td>
+					<td>
+						{{
+							{ amount: ingredient.amount, unit: ingredient.unit } | convertUnit
+						}}
+					</td>
 					<td>
 						<div class="col-name">
 							<div class="text">
@@ -159,38 +168,51 @@
 			</ng-container>
 		</tbody>
 	</table>
-	<ng-template #modal let-modal>
-		<div class="modal-header">
-			<h4 class="modal-title" id="modal-title">Confirm: remove ingredient</h4>
-			<button
-				type="button"
-				class="btn-close"
-				aria-describedby="modal-title"
-				(click)="modal.dismiss('Cross click')"></button>
-		</div>
-		<div class="modal-body">
-			<p>
-				<strong
-					>Are you sure you want to delete:
-					<span class="text-primary">{{ ingredientToDelete?.name }}</span
-					>?</strong
-				>
-			</p>
-			<span class="text-danger">This operation can not be undone.</span>
-		</div>
-		<div class="modal-footer">
-			<button
-				type="button"
-				class="btn btn-outline-secondary"
-				(click)="modal.dismiss('cancel click')">
-				Cancel
-			</button>
-			<button
-				type="button"
-				class="btn btn-danger"
-				(click)="modal.close('Ok click')">
-				Ok
-			</button>
+	<ng-template #tableEmpty>
+		<div class="text-primary text-center">
+			{{ 'App.NoIngredientsInShoppingList' | translate }}
 		</div>
 	</ng-template>
 </div>
+
+<ng-template #modal let-modal>
+	<div class="modal-header">
+		<h4 class="modal-title" id="modal-title">
+			{{
+				'Modals.ConfirmRemove'
+					| translate: { what: 'Modals.Ingredient' | translate }
+			}}
+		</h4>
+		<button
+			type="button"
+			class="btn-close"
+			aria-describedby="modal-title"
+			(click)="modal.dismiss('Cross click')"></button>
+	</div>
+	<div class="modal-body">
+		<p>
+			<strong
+				>{{ 'Modals.AreYouSureYouWantToDelete' | translate }}
+				<span class="text-primary">{{ ingredientToDelete?.name }}</span
+				>?</strong
+			>
+		</p>
+		<span class="text-danger">{{
+			'Modals.ThisOperationCanNotBeUndone' | translate
+		}}</span>
+	</div>
+	<div class="modal-footer">
+		<button
+			type="button"
+			class="btn btn-outline-secondary"
+			(click)="modal.dismiss('cancel click')">
+			{{ 'Modals.Cancel' | translate }}
+		</button>
+		<button
+			type="button"
+			class="btn btn-danger"
+			(click)="modal.close('Ok click')">
+			Ok
+		</button>
+	</div>
+</ng-template>

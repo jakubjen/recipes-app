@@ -7,7 +7,7 @@
 		"Recipe": "Recipe",
 		"Ingredients": "Ingredients",
 		"Description": "Description",
-		"ImageUrl": "Image Url",
+		"Image": "Image",
 		"AddIngredient": "Add ingredient",
 		"EditIngredient": "Edit ingredient",
 		"AddInstruction": "Add instruction",
@@ -27,6 +27,7 @@
 	"App": {
 		"Loading": "Loading...",
 		"AddIngredientsToShoppingList":"Add ingredients to shopping list",
+		"NoIngredientsInShoppingList":"Shopping list ist empty.",
 		"Delete":"Delete",
 		"Edit":"Edit",
 		"'Loading": "Loading...",
@@ -40,7 +41,14 @@
 			"RecipeUpdatedSuccessfully": "Recipe updated successfully",
 			"RecipeRemoveSuccessfully": "Recipe remove successfully",
 			"AllIngredientsAdded": "All ingredients added",
-			"IngredientAdded": "Ingredient added"
+			"IngredientAdded": "Ingredient added",
+			"Error": {
+				"EmailAreUsed": "This email already in used",
+				"InvalidEmailOrPassword": "Invalid email or password",
+				"UserClosePopUpBeforeLoginFinish": "User close popup",
+				"PopupBlock": "Popup blocked",
+				"InvalidEmail": "Invalid email"
+			}
 		},
 		"Auth": {
 			"Register": "Register",
@@ -65,6 +73,7 @@
 		"Time": "Time"
 	},
 	"Modals": {
+		"Ingredient": "Ingredient",
 		"Recipe": "Recipe",
 		"ConfirmRemove": "Confirm remove: {{ what }}",
 		"AreYouSureYouWantToDelete": "Are you sure you want to delete: ",
