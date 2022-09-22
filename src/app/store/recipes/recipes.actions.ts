@@ -9,7 +9,7 @@ const loadRecipesFailed = createAction('[App component] Load recipes failed');
 
 const addRecipe = createAction(
 	'[Add recipe component] Add recipe',
-	props<{ recipe: NewRecipe }>()
+	props<{ recipe: NewRecipe; image: File }>()
 );
 
 const addRecipeSuccess = createAction(
@@ -50,16 +50,16 @@ const removeRecipeFailed = createAction(
 
 const updateRecipe = createAction(
 	'[Recipe effect] Recipe update',
-	props<{ recipe: Recipe }>()
+	props<{ recipe: Recipe; image?: File | null }>()
 );
 
 const updateRecipeFailed = createAction(
-	'[Recipe effect] Recipe update',
+	'[Recipe effect] Recipe update failed',
 	props<{ text: string }>()
 );
 
 const updateRecipeSuccess = createAction(
-	'[Recipe effect] Recipe update success'
+	'[Recipe effect] Recipe update successfully'
 );
 
 const RecipesActions = {

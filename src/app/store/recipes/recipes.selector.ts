@@ -1,10 +1,6 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { AppState } from '../store';
-import {
-	RecipesState,
-	selectAllRecipes,
-	selectRecipeEntities,
-} from './recipes.reducer';
+import { RecipesState, selectAllRecipes } from './recipes.reducer';
 
 const selectRecipesState = createFeatureSelector<AppState, RecipesState>(
 	'recipes'
@@ -17,6 +13,11 @@ const selectDataState = createSelector(
 	state => state.dataState
 );
 
+const selectProcessingData = createSelector(
+	selectRecipesState,
+	state => state.processingData
+);
+
 const selectById = (recipeId: string) =>
 	createSelector(selectAll, recipes =>
 		recipes.find(recipe => recipe.id === recipeId)
@@ -26,6 +27,7 @@ const RecipesSelectors = {
 	selectRecipesState,
 	selectAll,
 	selectDataState,
+	selectProcessingData,
 	selectById,
 };
 export default RecipesSelectors;
