@@ -5,7 +5,6 @@ export const passwordConfirmValidator: ValidatorFn = (
 ): ValidationErrors | null => {
 	const password = controls.get('password')?.value;
 	const passwordConfirm = controls.get('passwordConfirm')?.value;
-	console.log(password, '===', passwordConfirm);
 
 	return password === passwordConfirm
 		? null

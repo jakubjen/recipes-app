@@ -1,1 +1,5 @@
-/* stylelint-disable no-empty-source */
+@use 'variables' as *;
+
+.password-strength {
+    color: $gray-600;
+}

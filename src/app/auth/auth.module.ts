@@ -7,6 +7,7 @@ import { RegisterComponent } from './register/register.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '@services/auth/auth.service';
 import { SharedModule } from '../shared/shared.module';
+import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
 	declarations: [LoginComponent, RegisterComponent],
@@ -16,6 +17,7 @@ import { SharedModule } from '../shared/shared.module';
 		TranslateModule,
 		FormsModule,
 		ReactiveFormsModule,
+		NgbProgressbarModule,
 		SharedModule,
 	],
 	providers: [AuthService],
