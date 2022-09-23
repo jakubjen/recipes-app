@@ -8,6 +8,8 @@ import {
 import { Store } from '@ngrx/store';
 import { AuthService } from '@services/auth/auth.service';
 import userActions from '@store/auth/user.actions';
+import { customEmailValidator } from 'src/helpers/email.validator';
+import { passwordConfirmValidator } from 'src/helpers/password-confirm.validator';
 
 @Component({
 	selector: 'app-register',
@@ -15,14 +17,21 @@ import userActions from '@store/auth/user.actions';
 	styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
-	registerForm = new FormGroup({
-		email: new FormControl<string>('', [Validators.required, Validators.email]),
-		password: new FormControl<string>('', [
-			Validators.required,
-			Validators.minLength(8),
-			Validators.maxLength(200),
-		]),
-	});
+	public registerForm = new FormGroup(
+		{
+			email: new FormControl<string>('', [
+				Validators.required,
+				customEmailValidator(),
+			]),
+			password: new FormControl<string>('', [
+				Validators.required,
+				Validators.minLength(8),
+				Validators.maxLength(200),
+			]),
+			passwordConfirm: new FormControl<string>(''),
+		},
+		{ validators: passwordConfirmValidator }
+	);
 
 	constructor(private authService: AuthService, private store: Store) {}
 
@@ -39,5 +48,9 @@ export class RegisterComponent {
 	}
 	get password(): AbstractControl<string | null, string | null> | null {
 		return this.registerForm.get('password');
+	}
+
+	get passwordConfirm(): AbstractControl<string | null, string | null> | null {
+		return this.registerForm.get('passwordConfirm');
 	}
 }
