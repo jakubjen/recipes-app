@@ -7,6 +7,7 @@
 	padding: 0;
 	margin: 0;
 	box-sizing: border-box;
+	overflow-wrap: break-word;
 }
 
 html,
@@ -20,7 +21,20 @@ body {
 }
 
 $navbar-dark-color: rgb(255 255 255 / 70%);
+$btn-link-hover-color: red;
 $primary: rgb(246 189 65);
 
 /* stylelint-disable-next-line no-invalid-position-at-import-rule */
 @import '~bootstrap/scss/bootstrap';/* Importing Bootstrap SCSS file. */
+
+.btn-primary {
+	color: #fff;
+}
+
+.btn-primary:hover {
+	color: rgba(255 255 255 / 70%);
+}
+
+.btn-outline-primary:hover {
+	color: #fff;
+}

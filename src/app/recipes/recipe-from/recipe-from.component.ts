@@ -5,7 +5,15 @@ import {
 	transition,
 	trigger,
 } from '@angular/animations';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import {
+	Component,
+	EventEmitter,
+	HostListener,
+	Input,
+	OnDestroy,
+	OnInit,
+	Output,
+} from '@angular/core';
 import {
 	AbstractControl,
 	FormArray,
@@ -15,7 +23,7 @@ import {
 } from '@angular/forms';
 import { IngredientsUnit } from '@models/ingredients-units.model';
 import Recipe, { NewRecipe } from '@models/recipe.model';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 
 @Component({
 	selector: 'app-recipe-from',
@@ -45,7 +53,7 @@ import { Observable } from 'rxjs';
 		]),
 	],
 })
-export class RecipeFromComponent {
+export class RecipeFromComponent implements OnInit, OnDestroy {
 	@Input() action: string = '';
 	@Input() loading: boolean = false;
 	@Input() processingData$?: Observable<boolean | undefined>;
@@ -65,11 +73,13 @@ export class RecipeFromComponent {
 		recipe: NewRecipe;
 		image: File | null | undefined;
 	}>();
+	@Output() edited = new EventEmitter<'edited' | 'unedited'>();
 
 	private recipeId?: string;
 	private imageUrl = '';
 	public previewImageUrl: string | ArrayBuffer = '';
 	public units = IngredientsUnit;
+	private destroyed = new Subject<void>();
 
 	public recipeForm = new FormGroup({
 		title: new FormControl<string>('', [
@@ -110,6 +120,19 @@ export class RecipeFromComponent {
 	}
 	get instructions(): FormArray {
 		return this.recipeForm.get('instructions') as FormArray;
+	}
+
+	ngOnInit(): void {
+		this.recipeForm.valueChanges
+			.pipe(takeUntil(this.destroyed))
+			.subscribe(() => {
+				this.edited.next('edited');
+			});
+	}
+
+	ngOnDestroy(): void {
+		this.destroyed.next();
+		this.destroyed.complete();
 	}
 
 	public addIngredient(): void {
@@ -156,6 +179,7 @@ export class RecipeFromComponent {
 
 	public handleSubmit(): void {
 		if (this.recipeForm.valid) {
+			this.edited.next('unedited');
 			const { image, ...valuesFromFrom } = this.recipeForm.value;
 			const recipe = {
 				...valuesFromFrom,
