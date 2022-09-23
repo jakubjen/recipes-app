@@ -53,14 +53,17 @@
 		"Auth": {
 			"Register": "Register",
 			"Login": "Login",
-			"LoginWithGoogle": "Login with Google"
+			"LoginWithGoogle": "Login with Google",
+			"PasswordStrength" : "Password strength",
+			"ConfirmPassword": "Confirm password"
 		},
 		"Validation": {
 			"Required": "This filed is required.",
 			"MinLength": "Field required min length {{ length }}.",
 			"MaxLength": "Field required max length {{ length }}.",
 			"MinValue": "Field must be greater than or equal to {{ min }}.",
-			"Email": "Provide current email address."
+			"Email": "Provide current email address.",
+			"ConfirmPassword": "Passwords have to be equal."
    },
 		"PageNotFound": {
 			"Heading": "Page Not Found",
