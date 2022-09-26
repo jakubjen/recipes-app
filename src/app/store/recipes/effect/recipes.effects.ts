@@ -40,7 +40,6 @@ export class RecipeEffects {
 				}
 				newRecipe.ownerId = user.uid;
 				try {
-					this.firestore.collection('recipes').add(newRecipe);
 					this.analytics.logEvent('add_recipe', {
 						ingredientsNumber: newRecipe.ingredients.length,
 						stepsNumber: newRecipe.instructions.length,

@@ -84,13 +84,13 @@ export class RecipeFromComponent implements OnInit, OnDestroy {
 	public recipeForm = new FormGroup({
 		title: new FormControl<string>('', [
 			Validators.required,
-			Validators.minLength(10),
+			Validators.minLength(5),
 			Validators.maxLength(200),
 		]),
 		image: new FormControl<File | null>(null, Validators.required),
 		description: new FormControl<string>('', [
 			Validators.required,
-			Validators.minLength(20),
+			Validators.minLength(10),
 			Validators.maxLength(2000),
 		]),
 		time: new FormControl<number | null>(null, [

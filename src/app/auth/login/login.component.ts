@@ -8,6 +8,7 @@ import {
 import { Store } from '@ngrx/store';
 import { AuthService } from '@services/auth/auth.service';
 import userActions from '@store/auth/user.actions';
+import { customEmailValidator } from 'src/helpers/email.validator';
 
 @Component({
 	selector: 'app-login',
@@ -16,7 +17,10 @@ import userActions from '@store/auth/user.actions';
 })
 export class LoginComponent {
 	loginForm = new FormGroup({
-		email: new FormControl<string>('', [Validators.required, Validators.email]),
+		email: new FormControl<string>('', [
+			Validators.required,
+			customEmailValidator(),
+		]),
 		password: new FormControl<string>('', [
 			Validators.required,
 			Validators.minLength(8),
