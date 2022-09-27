@@ -202,7 +202,7 @@
 				type="submit"
 				class="btn btn-primary mt-4"
 				[disabled]="processingData$ | async">
-				{{ action }}
+				{{ 'Recipes.' + action | translate }}
 				<span
 					class="spinner-border spinner-border-sm"
 					role="status"

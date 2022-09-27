@@ -11,7 +11,9 @@
 		"AddIngredient": "Add ingredient",
 		"EditIngredient": "Edit ingredient",
 		"AddInstruction": "Add instruction",
-		"Time": "Time to prepare dish"
+		"Time": "Time to prepare dish",
+		"AddRecipe": "Add recipe",
+		"UpdateRecipe": "Update recipe"
 	},
 	"Ingredients": {
 		"Amount": "Amount",
