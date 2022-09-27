@@ -14,6 +14,7 @@ const routes: Routes = [
 		path: 'shopping-list',
 		component: ShoppingListComponent,
 		resolve: [LoadShoppingListResolver],
+		data: { title: 'Shopping List' },
 	},
 	{
 		path: 'auth',
