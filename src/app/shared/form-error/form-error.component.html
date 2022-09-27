@@ -29,10 +29,16 @@
 				}}
 			</small>
 		</div>
-    
+
 		<div class="text-danger" *ngIf="!!input?.errors?.['email']">
 			<small>
 				{{ 'App.Validation.Email' | translate }}
+			</small>
+		</div>
+
+		<div class="text-danger" *ngIf="!!input?.errors?.['confirmPassword']">
+			<small>
+				{{ 'App.ZupaZupa' | translate }}
 			</small>
 		</div>
 	</div>

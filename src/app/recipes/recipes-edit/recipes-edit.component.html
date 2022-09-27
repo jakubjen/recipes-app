@@ -3,5 +3,6 @@
 		[recipe]="recipe"
 		[processingData$]="processingData$"
 		action="Update"
+		(edited)="recipeStatues = $event"
 		(submitRecipe)="update($event)"></app-recipe-from>
 </ng-container>

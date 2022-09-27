@@ -7,7 +7,8 @@
 		"build": "ng build",
 		"watch": "ng build --watch --configuration development",
 		"test": "ng test",
-		"lint": "ng lint"
+		"lint": "ng lint",
+		"deploy": "ng build && firebase deploy"
 	},
 	"private": true,
 	"dependencies": {
@@ -33,6 +34,7 @@
 		"@types/uuid": "^8.3.4",
 		"bootstrap": "^5.2.0",
 		"bootstrap-icons": "^1.9.1",
+		"check-password-strength": "^2.0.7",
 		"rxjs": "~7.5.0",
 		"stylelint-config-standard-scss": "^5.0.0",
 		"tslib": "^2.3.0",

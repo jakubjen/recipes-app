@@ -22,11 +22,44 @@
 				class="form-control"
 				id="passwordInput"
 				formControlName="password"
+				#passwordInput
+				(input)="testPasswordStrength(passwordInput.value)"
 				[class.is-invalid]="
 					(password?.touched || ngForm.submitted) && !!password?.errors
 				"
 				placeholder="Password" />
 			<app-form-error [form]="ngForm" [input]="password"></app-form-error>
+
+			<div class="password-strength mt-2">
+				<small>{{ 'App.Auth.PasswordStrength' | translate }}</small>
+				<ngb-progressbar
+					[type]="progresBarColor"
+					height="5px"
+					[value]="passwordStrength"></ngb-progressbar>
+			</div>
+		</div>
+
+		<div class="mb-3">
+			<label for="passwordConfirmInput" class="form-label">{{
+				'Confirm password' | translate
+			}}</label>
+			<input
+				type="password"
+				class="form-control"
+				id="passwordConfirmInput"
+				formControlName="passwordConfirm"
+				[class.is-invalid]="
+					(passwordConfirm?.touched || ngForm.submitted) &&
+					!!passwordConfirm?.errors
+				"
+				placeholder="Password Confirm" />
+			<div
+				class="text-danger"
+				*ngIf="password?.touched &&  passwordConfirm?.touched && !!registerForm?.errors?.['passwordConfirm']">
+				<small>
+					{{ 'App.Validation.ConfirmPassword' | translate }}
+				</small>
+			</div>
 		</div>
 
 		<button type="submit" class="btn btn-outline-primary">Register</button>

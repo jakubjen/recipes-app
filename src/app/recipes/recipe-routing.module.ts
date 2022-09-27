@@ -9,6 +9,7 @@ import {
 	AngularFireAuthGuard,
 	redirectUnauthorizedTo,
 } from '@angular/fire/compat/auth-guard';
+import { PendingChangesGuard } from 'src/helpers/pending-changes.guard';
 const redirectUnauthorizedToLogin = () =>
 	redirectUnauthorizedTo(['/auth/login']);
 
@@ -21,21 +22,25 @@ const routes: Routes = [
 		path: 'recipe/add',
 		component: RecipesAddComponent,
 		canActivate: [AngularFireAuthGuard],
-		data: { authGuardPipe: redirectUnauthorizedToLogin },
+		canDeactivate: [PendingChangesGuard],
+		data: { authGuardPipe: redirectUnauthorizedToLogin, title: 'Add recipe' },
 	},
 	{
 		path: 'recipe/edit/:id',
 		component: RecipesEditComponent,
 		canActivate: [AngularFireAuthGuard],
-		data: { authGuardPipe: redirectUnauthorizedToLogin },
+		canDeactivate: [PendingChangesGuard],
+		data: { authGuardPipe: redirectUnauthorizedToLogin, title: 'Edit' },
 	},
 	{
 		path: 'recipe/:id',
 		component: RecipeDetailComponent,
-},
-{
-path: 'recipe/add',
+		data: { title: 'Recipe' },
+	},
+	{
+		path: 'recipe/add',
 		component: RecipesAddComponent,
+		data: { title: 'Add' },
 	},
 ];
 

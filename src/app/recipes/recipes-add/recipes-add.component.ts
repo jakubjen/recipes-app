@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import Recipe, { NewRecipe } from '@models/recipe.model';
 import { Store } from '@ngrx/store';
 import RecipesActions from '@store/recipes/recipes.actions';
@@ -13,6 +13,7 @@ import { Observable } from 'rxjs';
 })
 export class RecipesAddComponent implements OnInit {
 	public processingData$?: Observable<boolean>;
+	public recipeStatues: 'unedited' | 'edited' = 'unedited';
 
 	constructor(private store: Store<AppState>) {}
 
@@ -20,6 +21,11 @@ export class RecipesAddComponent implements OnInit {
 		this.processingData$ = this.store.select(
 			RecipesSelectors.selectProcessingData
 		);
+	}
+
+	@HostListener('window:beforeunload')
+	canDeactivate(): Observable<boolean> | boolean {
+		return this.recipeStatues === 'unedited';
 	}
 
 	addRecipe({ recipe, image }: { recipe: NewRecipe; image?: File | null }) {
