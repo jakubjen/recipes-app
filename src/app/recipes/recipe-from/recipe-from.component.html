@@ -107,6 +107,9 @@
 							<select
 								class="form-select"
 								aria-label="select unit"
+								[class.is-invalid]="
+									(ngForm.submitted || ingredients.controls[i].get('unit')?.touched) &&
+									!!ingredients.controls[i].get('unit')?.errors?.['required']"
 								formControlName="unit">
 								<option
 									*ngFor="let unit of units.weight | keyvalue"
@@ -122,6 +125,9 @@
 									{{ unit }}
 								</option>
 							</select>
+							<app-form-error
+								[input]="ingredients.controls[i].get('unit')"
+								[form]="ngForm"></app-form-error>
 						</div>
 						<div class="col-12 col-lg-6 mt-3 mt-lg-0">
 							<div class="input-group">
