@@ -20,7 +20,6 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AuthService } from '@services/auth/auth.service';
 import { RecipesService } from '@services/recipes/recipes.service';
-import { AppEffects } from '@store/app.effect';
 import { userReducer } from '@store/auth/auth.reducer';
 import { UserEffects } from '@store/auth/user.effects';
 import { SnackbarEffects } from '@store/shared/snackbar.effects';
@@ -34,10 +33,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { SharedModule } from './shared/shared.module';
-import { ConvertUnitPipe } from './shopping-list/shopping-list/convert-unit.pipe';
 import { ShoppingListComponent } from './shopping-list/shopping-list/shopping-list.component';
 import { PendingChangesGuard } from 'src/helpers/pending-changes.guard';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { AppEffects } from '@store/app/app.effect';
 
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http);
