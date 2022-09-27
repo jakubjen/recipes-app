@@ -6,7 +6,6 @@ import {
 	Validators,
 } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { AuthService } from '@services/auth/auth.service';
 import userActions from '@store/auth/user.actions';
 import { customEmailValidator } from 'src/helpers/email.validator';
 
@@ -28,10 +27,11 @@ export class LoginComponent {
 		]),
 	});
 
-	constructor(private authService: AuthService, private store: Store) {}
+	constructor(private store: Store) {}
 
 	public loginWithPassword(): void {
 		if (!this.loginForm.valid) return;
+
 		const { email, password } = this.loginForm.value;
 		this.store.dispatch(
 			userActions.loginWithPassword({ email: email!, password: password! })
