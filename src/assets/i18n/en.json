@@ -13,6 +13,10 @@
 		"AddInstruction": "Add instruction",
 		"Time": "Time to prepare dish"
 	},
+	"Ingredients": {
+		"Amount": "Amount",
+		"Name": "Name"
+	},
 	"Time": {
 		"minutesShort": "min"
 	},
