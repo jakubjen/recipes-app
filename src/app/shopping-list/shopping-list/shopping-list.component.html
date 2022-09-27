@@ -101,7 +101,7 @@
 			class="amount header-amount"
 			[class.selected]="(sortKey | async) === sortKeyEnum.Amount"
 			(click)="changeSortKey(sortKeyEnum.Amount)">
-			Amount
+			{{ 'Ingredients.Amount' | translate }}
 			<div
 				class="icons"
 				[class]="
@@ -115,7 +115,7 @@
 			class="name header-name"
 			[class.selected]="(sortKey | async) === sortKeyEnum.Name"
 			(click)="changeSortKey(sortKeyEnum.Name)">
-			Name
+			{{ 'Ingredients.Name' | translate }}
 			<div
 				class="icons"
 				[class]="
@@ -133,12 +133,16 @@
 			*ngFor="let ingredient of ingredientList$ | async; let i = index">
 			<div class="lp">{{ i + 1 }}</div>
 			<div class="amount">
-				<span class="mobile-label text-primary">Amount:</span>
+				<span class="mobile-label text-primary"
+					>{{ 'Ingredients.Amount' | translate }}:</span
+				>
 				{{ { amount: ingredient.amount, unit: ingredient.unit } | convertUnit }}
 			</div>
 			<div class="name">
 				<div class="text">
-					<span class="mobile-label text-primary">Name:</span>
+					<span class="mobile-label text-primary">
+						{{ 'Ingredients.Name' | translate }} :</span
+					>
 					{{ ingredient.name }}
 				</div>
 			</div>
