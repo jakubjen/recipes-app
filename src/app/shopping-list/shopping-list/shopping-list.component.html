@@ -16,7 +16,7 @@
 					[class.is-invalid]="
 						(amount.touched || ngForm.submitted) && !!amount.errors
 					"
-					placeholder="Amount" />
+					placeholder="{{ 'Ingredients.Amount' | translate }}" />
 				<app-form-error [input]="amount" [form]="ngForm"></app-form-error>
 			</div>
 
@@ -52,7 +52,7 @@
 					<input
 						type="text"
 						class="form-control"
-						placeholder="Name"
+						placeholder="{{ 'Ingredients.Name' | translate }}"
 						[class.is-invalid]="
 							(name.touched || ngForm.submitted) && !!name.errors
 						"
@@ -138,7 +138,11 @@
 				<span class="mobile-label text-primary"
 					>{{ 'Ingredients.Amount' | translate }}:</span
 				>
-				{{ { amount: ingredient.amount, unit: ingredient.unit } | convertUnit }}
+				{{
+					{ amount: ingredient.amount, unit: ingredient.unit }
+						| convertUnit
+						| async
+				}}
 			</div>
 			<div class="name">
 				<div class="text">
