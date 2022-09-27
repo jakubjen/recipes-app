@@ -32,15 +32,15 @@
 					<option
 						*ngFor="let unit of units.weight | keyvalue"
 						[value]="unit.key">
-						{{ unit.key }}
+						{{ 'Units.' + unit.key | translate }}
 					</option>
 					<option
 						*ngFor="let unit of units.volume | keyvalue"
 						[value]="unit.key">
-						{{ unit.key }}
+						{{ 'Units.' + unit.key | translate }}
 					</option>
 					<option *ngFor="let unit of units.other" [value]="unit">
-						{{ unit }}
+						{{ 'Units.' + unit | translate }}
 					</option>
 				</select>
 				<app-form-error
