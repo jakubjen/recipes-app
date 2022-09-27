@@ -32,21 +32,23 @@ import { convertUnit } from 'src/helpers/convertUnits';
 	templateUrl: './shopping-list.component.html',
 	styleUrls: ['./shopping-list.component.scss'],
 	animations: [
-		trigger('recipeSate', [
+		trigger('fadeIn', [
 			transition('void => *', [
 				style({
-					opacity: 0,
+					height: 0,
+					scale: 0,
 				}),
-				animate('1s'),
+				animate('.3s ease-out'),
 			]),
 			transition('* => void', [
 				style({
-					opacity: 1,
+					scale: 1,
 				}),
 				animate(
-					'1s ease-out',
+					'.3s ease-out',
 					style({
-						opacity: 0,
+						scale: 0,
+						height: 0,
 					})
 				),
 			]),
