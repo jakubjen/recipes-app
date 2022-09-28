@@ -1,8 +1,12 @@
-@use 'variables';
+@use 'variables' as *;
+
+nav {
+	// margin-bottom: 50px;
+}
 
 .logo {
 	position: relative;
-	background: variables.$logo-background;
+	background: $logo-background;
 	width: 38px;
 	height: 38px;
 	border-radius: 6px;
@@ -15,7 +19,45 @@
 		top: 50%;
 		left: 50%;
 		transform: translateX(-50%) translateY(-50%);
-		background: variables.$logo-circle;
+		background: $logo-circle;
 		border-radius: 50%;
+	}
+}
+
+.language-wrapper {
+	display: flex;
+	justify-content: flex-end;
+
+	.language-selector {
+		margin-top: 20px;
+		position: relative;
+
+		button {
+			background: none;
+			border: none;
+			color: $gray-600;
+
+			&:hover {
+				color: $gray-700;
+			}
+		}
+
+
+		.language-list {
+			box-sizing: content-box;
+			position: absolute;
+			background: $gray-100;
+			padding: 8px 18px 12px;
+			border-radius: 8px;
+			right: 0;
+			top: 28px;
+			z-index: 110;
+			box-shadow: 4px 4px 12px 0 rgb(66 68 90 / 54%);
+			overflow: hidden;
+			
+			button {
+				font-weight: 300;
+			}
+		}
 	}
 }

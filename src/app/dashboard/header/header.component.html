@@ -70,3 +70,29 @@
 		</div>
 	</div>
 </nav>
+
+<div class="language-wrapper container">
+	<div
+		class="language-selector"
+		*ngIf="currentLanguages$ | async as currentLanguages"
+		appClickOutSideDirective
+		(clickOutSide)="languageDropDownIsOpen = false">
+		<ng-container *ngIf="availedLanguages$ | async as availedLanguages">
+			<div class="current-language">
+				<button (click)="toggleOpen()">
+					{{ currentLanguages.nativeName }}
+					<i class="bi bi-chevron-down"></i>
+				</button>
+			</div>
+			<div
+				class="language-list"
+				[@openClose]="languageDropDownIsOpen ? 'open' : 'closed'">
+				<button
+					(click)="changeLanguage(language)"
+					*ngFor="let language of availedLanguages">
+					{{ language.name }}
+				</button>
+			</div>
+		</ng-container>
+	</div>
+</div>

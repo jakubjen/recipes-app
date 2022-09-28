@@ -14,6 +14,7 @@ const routes: Routes = [
 		path: 'shopping-list',
 		component: ShoppingListComponent,
 		resolve: [LoadShoppingListResolver],
+		data: { title: 'Shopping List' },
 	},
 	{
 		path: 'auth',
@@ -23,7 +24,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-	imports: [RouterModule.forRoot(routes)],
+	imports: [
+		RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' }),
+	],
 	exports: [RouterModule],
 })
 export class AppRoutingModule {}

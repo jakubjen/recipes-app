@@ -24,7 +24,10 @@
 				<select
 					class="form-select"
 					aria-label="select unit"
-					formControlName="unit"
+					[class.is-invalid]="
+						(ingredientForm.controls.unit.touched || ngForm.submitted) &&
+						!!ingredientForm.controls.unit.errors
+					"
 					formControlName="unit">
 					<option
 						*ngFor="let unit of units.weight | keyvalue"
@@ -76,7 +79,9 @@
 
 <div class="row mt-4">
 	<div class="col-12 col-md-5 searcher">
-		<label for="seachInput" class="form-label">Search</label>
+		<label for="seachInput" class="form-label">{{
+			'App.Search' | translate
+		}}</label>
 		<input
 			type="text"
 			class="form-control"
@@ -88,92 +93,84 @@
 		</div>
 	</div>
 </div>
-<div class="col-12 mt-4">
-	<table
-		class="table"
-		*ngIf="(ingredientList$ | async)?.length; else tableEmpty">
-		<thead>
-			<tr>
-				<th scope="col">#</th>
-				<th scope="col" (click)="changeSortKey(sortKeyEnum.Amount)">
-					<div
-						class="sortable"
-						[class.selected]="(sortKey | async) === sortKeyEnum.Amount">
-						Amount
-						<div
-							class="icons"
-							[class]="
-								(sortDirection | async) === sortDirectionEnum.ASC
-									? 'asc'
-									: 'desc'
-							">
-							<i class="bi bi-caret-up-fill top"></i>
-							<i class="bi bi-caret-down-fill bottom"></i>
-						</div>
-					</div>
-				</th>
-				<th scope="col" (click)="changeSortKey(sortKeyEnum.Name)">
-					<div
-						class="sortable"
-						[class.selected]="(sortKey | async) === sortKeyEnum.Name">
-						Name
-						<div
-							class="icons"
-							[class]="
-								(sortDirection | async) === sortDirectionEnum.ASC
-									? 'asc'
-									: 'desc'
-							">
-							<i class="bi bi-caret-up-fill top"></i>
-							<i class="bi bi-caret-down-fill bottom"></i>
-						</div>
-					</div>
-				</th>
-			</tr>
-		</thead>
-		<tbody>
-			<ng-container *ngIf="ingredientList$ | async as ingredientList">
-				<tr
-					*ngFor="let ingredient of ingredientList; let i = index"
-					[@recipeSate]="'normal'">
-					<th scope="row">{{ i + 1 }}</th>
-					<td>
-						{{
-							{ amount: ingredient.amount, unit: ingredient.unit } | convertUnit
-						}}
-					</td>
-					<td>
-						<div class="col-name">
-							<div class="text">
-								{{ ingredient.name }}
-							</div>
 
-							<div class="buttons">
-								<span
-									type="button"
-									class="text-primary"
-									(click)="editIngredient(ingredient)">
-									<i class="bi bi-pencil"></i>
-								</span>
-								<span
-									type="button"
-									class="text-danger"
-									(click)="removeIngredient(ingredient, modal)">
-									<i class="bi bi-x-circle"></i>
-								</span>
-							</div>
-						</div>
-					</td>
-				</tr>
-			</ng-container>
-		</tbody>
-	</table>
-	<ng-template #tableEmpty>
-		<div class="text-primary text-center">
-			{{ 'App.NoIngredientsInShoppingList' | translate }}
+<div
+	class="ingredients-list mt-5"
+	*ngIf="(ingredientList$ | async)?.length; else tableEmpty">
+	<div class="list-header">
+		<div class="lp">#</div>
+		<div
+			class="amount header-amount"
+			[class.selected]="(sortKey | async) === sortKeyEnum.Amount"
+			(click)="changeSortKey(sortKeyEnum.Amount)">
+			{{ 'Ingredients.Amount' | translate }}
+			<div
+				class="icons"
+				[class]="
+					(sortDirection | async) === sortDirectionEnum.ASC ? 'asc' : 'desc'
+				">
+				<i class="bi bi-caret-up-fill top"></i>
+				<i class="bi bi-caret-down-fill bottom"></i>
+			</div>
 		</div>
-	</ng-template>
+		<div
+			class="name header-name"
+			[class.selected]="(sortKey | async) === sortKeyEnum.Name"
+			(click)="changeSortKey(sortKeyEnum.Name)">
+			{{ 'Ingredients.Name' | translate }}
+			<div
+				class="icons"
+				[class]="
+					(sortDirection | async) === sortDirectionEnum.ASC ? 'asc' : 'desc'
+				">
+				<i class="bi bi-caret-up-fill top"></i>
+				<i class="bi bi-caret-down-fill bottom"></i>
+			</div>
+		</div>
+	</div>
+	<div class="list-elements">
+		<div
+			class="list-element"
+			@fadeIn
+			*ngFor="let ingredient of ingredientList$ | async; let i = index">
+			<div class="lp">{{ i + 1 }}</div>
+			<div class="amount">
+				<span class="mobile-label text-primary"
+					>{{ 'Ingredients.Amount' | translate }}:</span
+				>
+				{{ { amount: ingredient.amount, unit: ingredient.unit } | convertUnit }}
+			</div>
+			<div class="name">
+				<div class="text">
+					<span class="mobile-label text-primary">
+						{{ 'Ingredients.Name' | translate }} :</span
+					>
+					{{ ingredient.name }}
+				</div>
+			</div>
+
+			<div class="buttons">
+				<button
+					type="button"
+					class="btn btn-primary"
+					(click)="editIngredient(ingredient)">
+					<i class="bi bi-pencil"></i>
+				</button>
+				<button
+					type="button"
+					class="btn btn-danger"
+					(click)="removeIngredient(ingredient, modal)">
+					<i class="bi bi-x-circle"></i>
+				</button>
+			</div>
+		</div>
+	</div>
 </div>
+<ng-template #tableEmpty>
+	<div class="text-primary text-center">
+		{{ 'App.NoIngredientsInShoppingList' | translate }}
+	</div>
+</ng-template>
 
 <ng-template #modal let-modal>
 	<div class="modal-header">

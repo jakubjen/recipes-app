@@ -20,10 +20,11 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AuthService } from '@services/auth/auth.service';
 import { RecipesService } from '@services/recipes/recipes.service';
-import { AppEffects } from '@store/app.effect';
 import { userReducer } from '@store/auth/auth.reducer';
 import { UserEffects } from '@store/auth/user.effects';
 import { SnackbarEffects } from '@store/shared/snackbar.effects';
+import { ConvertUnitPipe } from './shopping-list/shopping-list/convert-unit.pipe';
+import { mainReducer } from '@store/app/app.reducer';
 import { snackbarReducer } from '@store/shared/snackbar.reducer';
 import { shoppingListEffects } from '@store/shopping-list/shopping-list.effects';
 import { ShoppingListReducer } from '@store/shopping-list/shopping-list.reducer';
@@ -32,10 +33,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { DashboardModule } from './dashboard/dashboard.module';
 import { SharedModule } from './shared/shared.module';
-import { ConvertUnitPipe } from './shopping-list/shopping-list/convert-unit.pipe';
 import { ShoppingListComponent } from './shopping-list/shopping-list/shopping-list.component';
 import { PendingChangesGuard } from 'src/helpers/pending-changes.guard';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
+import { AppEffects } from '@store/app/app.effect';
 
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http);
@@ -65,6 +66,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 			shoppingList: ShoppingListReducer,
 			snackbar: snackbarReducer,
 			user: userReducer,
+			main: mainReducer,
 		}),
 		EffectsModule.forRoot([
 			UserEffects,
