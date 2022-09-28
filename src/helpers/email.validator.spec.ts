@@ -10,7 +10,7 @@ const validData = [
 	'edu.edu.@edu.edu',
 ];
 
-const incorrect = ['kuba@kuba', 'fbuefid.pl', 'fbuef@id.eu&^'];
+const incorrect = ['kuba@kuba', 'kuba@cos.', 'albert.pl', 'fbuef@id.eu&^'];
 
 describe('customEmailValidator', () => {
 	it('should return null when adres is correct', () => {
