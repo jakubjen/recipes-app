@@ -17,7 +17,6 @@ describe('AuthReducer', () => {
 		};
 
 		const result = userReducer(initialState, action);
-		console.log(result);
 		expect(result).not.toBe(initialState);
 		expect(result).toEqual(expectedState);
 	});
