@@ -61,19 +61,29 @@
 			"RecipeUpdatedSuccessfully": "Pomyślni zaktualizowano przepis",
 			"RecipeRemoveSuccessfully": "Pomyślnie usunięto przepis",
 			"AllIngredientsAdded": "Wszystkie składniki dodano",
-			"IngredientAdded": "Dodano składnik"
+			"IngredientAdded": "Dodano składnik",
+			"Error": {
+				"EmailAreUsed": "Email jest juź używany przez aplikacje",
+				"InvalidEmailOrPassword": "Nieprawidłowy adres email lub hasło",
+				"UserClosePopUpBeforeLoginFinish": "Użytkownik zamknął popup przez zakończeniem logowania",
+				"PopupBlock": "Popup został zablokowany",
+				"InvalidEmail": "Nieprawidłowy adres email"
+			}
 		},
 		"Auth": {
 			"Register": "Rejestracja",
 			"Login": "Zaloguj",
-			"LoginWithGoogle": "Zaloguj przez Google"
+			"LoginWithGoogle": "Zaloguj przez Google",
+			"PasswordStrength" : "Siła hasła",
+			"ConfirmPassword": "Powtórz hasło"
 		},
 		"Validation": {
 			"Required": "To pole jest wymagane.",
 			"MinLength": "Minimalna długość pola to {{ length }}.",
 			"MaxLength": "Maksymalna długość pola to {{ length }}.",
 			"MinValue": "Minimalna wartość pola to  {{ min }}.",
-			"Email": "Podaj adres email"
+			"Email": "Podaj adres email",
+			"ConfirmPassword": "Hasła muszą być takie same."
    },
 		"PageNotFound": {
 			"Heading": "Strona nieznaleziona",
@@ -86,6 +96,7 @@
 		"Time": "Czas"
 	},
 	"Modals": {
+		"Ingredient": "Składnik",
 		"Recipe": "Przepis",
 		"ConfirmRemove": "Potwierdź usunięcie: {{ what }}",
 		"AreYouSureYouWantToDelete": "Jesteś pewien że chcesz usunąć: ",

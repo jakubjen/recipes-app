@@ -169,7 +169,7 @@ export class UserEffects {
 			concatMap(async action => {
 				return SnackbarActions.createSnackbar({
 					variant: SnackbarVariant.Success,
-					text: this.translate.instant('App.LogoutSuccessfully'),
+					text: this.translate.instant('App.Snackbar.LogoutSuccessfully'),
 				});
 			})
 		);
