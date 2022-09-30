@@ -11,7 +11,13 @@
 		"AddIngredient": "Dodaj składnik",
 		"EditIngredient": "Edytuj składniki",
 		"AddInstruction": "Dodaj instrukcje",
-		"Time": "Czas potrzebny do przygotowanie przepisu"
+		"Time": "Czas potrzebny do przygotowanie przepisu",
+		"AddRecipe": "Dodaj przepis",
+		"UpdateRecipe": "Aktualizuj przepis"
+	},
+	"Ingredients": {
+		"Amount": "Ilość",
+		"Name": "Nazwa"
 	},
 	"Time": {
 		"minutesShort": "min"
@@ -24,8 +30,21 @@
 		"Login": "Zaloguj",
 		"LogOut": "Wyloguj"
 	},
+	"Units": {
+		"kilograms": "kilogramy",
+		"pounds": "funty",
+		"grams": "gramy",
+		"milliliters": "mililitry",
+		"cup": "kubek",
+		"liter":"litry",
+		"piece": "sztuka",
+		"spun": "łyżki"
+	},
 	"App": {
 		"Loading": "Ładuje...",
+		"Instructions": "Instrukcje",
+		"Instruction": "Instrukcja",		
+		"UnsavedChanges": "Uwaga: Masz niezapisane zmiany. Czy chcesz odrzucić niezapisany postęp?",
 		"AddIngredientsToShoppingList":"Dodaj składniki do listy zakupów",
 		"NoIngredientsInShoppingList":"List zakupów jest pusta",
 		"Delete":"Usuń",

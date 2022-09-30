@@ -94,7 +94,7 @@
 							<input
 								type="number"
 								class="form-control"
-								placeholder="Amount"
+								placeholder="{{ 'Ingredients.Amount' | translate }}"
 								[class.is-invalid]="
 									(ngForm.submitted || ingredients.controls[i].get('amount')?.touched) &&
 									!!ingredients.controls[i].get('amount')?.errors?.['required']"
@@ -114,15 +114,15 @@
 								<option
 									*ngFor="let unit of units.weight | keyvalue"
 									[value]="unit.key">
-									{{ unit.key }}
+									{{ 'Units.' + unit.key | translate }}
 								</option>
 								<option
 									*ngFor="let unit of units.volume | keyvalue"
 									[value]="unit.key">
-									{{ unit.key }}
+									{{ 'Units.' + unit.key | translate }}
 								</option>
 								<option *ngFor="let unit of units.other" [value]="unit">
-									{{ unit }}
+									{{ 'Units.' + unit | translate }}
 								</option>
 							</select>
 							<app-form-error
@@ -134,7 +134,7 @@
 								<input
 									type="text"
 									class="form-control"
-									placeholder="Name"
+									placeholder="{{ 'Ingredients.Name' | translate }}"
 									[class.is-invalid]="
 									(ngForm.submitted || ingredients.controls[i].get('name')?.touched) &&
 									!!ingredients.controls[i].get('name')?.errors?.['required']"
@@ -163,7 +163,9 @@
 			</div>
 
 			<div class="instructions mt-4" formArrayName="instructions">
-				<h3 class="fs-4">instructions</h3>
+				<h3 class="fs-5 fw-bold">
+					{{ 'App.Instructions' | translate }}
+				</h3>
 				<div
 					@fadeIn
 					*ngFor="let instructionForm of instructions.controls; let i = index"
@@ -172,7 +174,7 @@
 						[formControlName]="i"
 						class="form-control mt-2"
 						[id]="'instruction' + i"
-						[placeholder]="'instruction ' + (i + 1)"
+						[placeholder]="('App.Instruction' | translate) + ' ' + (i + 1)"
 						[class.is-invalid]="
 							(instructions.controls[i].touched || ngForm.submitted) &&
 							!!instructions.controls[i].errors
@@ -200,7 +202,7 @@
 				type="submit"
 				class="btn btn-primary mt-4"
 				[disabled]="processingData$ | async">
-				{{ action }}
+				{{ 'Recipes.' + action | translate }}
 				<span
 					class="spinner-border spinner-border-sm"
 					role="status"
