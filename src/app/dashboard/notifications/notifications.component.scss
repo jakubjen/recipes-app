@@ -1,10 +1,11 @@
-@import '~bootstrap/scss/mixins'; /* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/functions'; /* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/variables'; /* Importing Bootstrap SCSS file. */
+@use 'variables' as *;
+
 .notifications {
     position: fixed;
     bottom: 20px;
     left: 50%;
+    width: max-content;
+    max-width: 400px;
     transform: translateX(-50%);
 
     .notification {
