@@ -12,6 +12,8 @@ const initialState: MainState = {
 	availedLanguage: Object.values(Constants.languages),
 };
 
+export const MainStateInitialValues = initialState;
+
 export const mainReducer = createReducer(
 	initialState,
 	on(appActions.changeLanguage, (state: MainState, { language }): MainState => {
