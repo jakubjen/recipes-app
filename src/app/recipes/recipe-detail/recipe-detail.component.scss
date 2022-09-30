@@ -1,84 +1,103 @@
 @use 'variables' as *;
 
-.card-wrapper {
-    height: 400px;
-}
 
-.description {
-    color: $gray-600;
-}
-
-.recipe p {
-    color: $gray-600;
-    margin-top: 20px;
-
-    span::after {
-        content: '.';
-        margin-right: 15px;
+.recipe-details {
+    display: grid;
+    grid-template-columns: 1fr;
+    @include media-breakpoint-up(sm) {
+        grid-template-areas:
+        "image right"
+        "description right"
+        "instructions right";
+      grid-template-columns: 5fr 2fr;
+      column-gap: 25px;
     }
-}
 
-.ingredients-list {
-    .ingredient {
-        position: relative;
+    .card-wrapper {
+        height: 400px;
+        @include media-breakpoint-up(sm) {
+            grid-area: image;
+        }
+    }
+
+    .description {
         color: $gray-600;
-        margin-top: 200px;
-
-        @include media-breakpoint-down(sm) {
-            box-shadow: 4px 4px 12px 2px rgb(66 68 90 / 25%);
-            padding: 15px;
-            color: $gray-700;
-            margin-top: 20px;
-            border-radius: 8px;
+        word-wrap: break-word;
+        @include media-breakpoint-up(sm) {
+            grid-area: description;
         }
+    }
 
-        .add-to-shopping-list {
-            display: flex;
-            justify-content: flex-end;
+    .right {
+        @include media-breakpoint-up(sm) {
+            grid-area: right;
         }
+    }
 
-        button {
-            width: 40%;
-    
-            @include media-breakpoint-up(sm) {
-                width: fit-content;
-                position: absolute;
-                right: 0;
-                top: 50%;
-                color: $primary;
-                background: transparent;
-                transform: translateY(-50%);
-                opacity: 0;
-                transition: all .3s ease-out;
+    .instructions {
+        @include media-breakpoint-up(sm) {
+            grid-area: instructions;
+        }
+    }
 
-                &:hover {
-                    background: $primary;
-                    color: #fff;                }
+    .recipe p {
+        color: $gray-600;
+        margin-top: 15px;
+
+        span::after {
+            content: '.';
+            margin-right: 10px;
+        }
+    }
+
+    .ingredients-list {
+        .ingredient {
+            position: relative;
+            color: $gray-600;
+            margin-top: 200px;
+
+            @include media-breakpoint-down(sm) {
+                box-shadow: 4px 4px 12px 2px rgb(66 68 90 / 25%);
+                padding: 15px;
+                color: $gray-700;
+                margin-top: 20px;
+                border-radius: 8px;
+            }
+
+            .add-to-shopping-list {
+                display: flex;
+                justify-content: flex-end;
+            }
+
+            button {
+                width: 40%;
+        
+                @include media-breakpoint-up(sm) {
+                    width: fit-content;
+                    position: absolute;
+                    right: 0;
+                    top: 50%;
+                    color: $primary;
+                    background: #fff;
+                    transform: translateY(-50%);
+                    opacity: 0;
+                    transition: all .3s ease-out;
+
+                    &:hover {
+                        background: $primary;
+                        color: #fff;                }
+                }
+            }
+
+            &:hover button {
+                opacity: 1;
             }
         }
-
-        &:hover button {
-            opacity: 1;
-        }
-    }
-}
-
-.add-ingredients-to-shopping-list {
-    background-color: transparent;
-    border: none;
-    text-decoration: underline
-}
-
-@include media-breakpoint-up(md) {
-    .description {
-        order: 3;
     }
 
-    .ingredients {
-        order: 2;
-    }
-    
-    .recipe {
-        order: 4;
+    .add-ingredients-to-shopping-list {
+        background-color: transparent;
+        border: none;
+        text-decoration: underline
     }
 }
