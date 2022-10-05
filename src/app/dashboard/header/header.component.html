@@ -87,11 +87,11 @@
 			<div
 				class="language-list"
 				[@openClose]="languageDropDownIsOpen ? 'open' : 'closed'">
-				<button
-					(click)="changeLanguage(language)"
-					*ngFor="let language of availedLanguages">
-					{{ language.name }}
-				</button>
+				<div *ngFor="let language of availedLanguages">
+					<button (click)="changeLanguage(language)">
+						{{ language.name }}
+					</button>
+				</div>
 			</div>
 		</ng-container>
 	</div>

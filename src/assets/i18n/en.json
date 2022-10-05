@@ -77,7 +77,7 @@
 			"Login": "Login",
 			"LoginWithGoogle": "Login with Google",
 			"PasswordStrength" : "Password strength",
-			"ConfirmPassword": "Confirm password"
+			"ConfirmPassword": "Repeat password"
 		},
 		"Validation": {
 			"Required": "This field is required.",

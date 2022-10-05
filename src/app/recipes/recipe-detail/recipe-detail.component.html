@@ -1,14 +1,14 @@
-<div class="row" *ngIf="!!recipe">
-	<div class="col-12 col-md-8 card-wrapper">
+<div class="recipe-details" *ngIf="!!recipe">
+	<div class="card-wrapper">
 		<app-recipe-card [recipe]="recipe"></app-recipe-card>
 	</div>
-	<div class="col-12 col-md-8 mt-4 description">
+	<div class="description mt-3">
 		<p class="fs-6">
 			{{ recipe.description }}
 		</p>
 	</div>
-	<div class="col-12 col-md-4 ingredients">
-		<div class="row mb-5 mb-md-3" *ngIf="user?.uid === recipe.ownerId">
+	<div class="right">
+		<div class="row mb-5 mt-sm-0" *ngIf="user?.uid === recipe.ownerId">
 			<div class="col-6">
 				<a
 					[routerLink]="'/recipe/edit/' + recipe.id"
@@ -24,7 +24,7 @@
 				</button>
 			</div>
 		</div>
-		<h3 class="fs-4 mt-5 mt-md-3">{{ 'Recipes.Ingredients' | translate }}</h3>
+		<h3 class="fs-4 mt-md-3">{{ 'Recipes.Ingredients' | translate }}</h3>
 		<div class="ingredients-list">
 			<div
 				class="ingredient mt-3 mt-sm-2"
@@ -46,8 +46,8 @@
 				</div>
 			</div>
 		</div>
-		<div class="row" *ngIf="!recipe.ingredients.length">
-			<div class="col-12">{{ 'Recipes.NoIngredients' | translate }}</div>
+		<div *ngIf="!recipe.ingredients.length">
+			{{ 'Recipes.NoIngredients' | translate }}
 		</div>
 		<ng-template role="button" [ngIf]="!!recipe.ingredients.length">
 			<button
@@ -57,15 +57,15 @@
 			</button>
 		</ng-template>
 	</div>
-	<ng-container *ngIf="recipe.instructions.length > 0">
-		<div class="col-12 col-md-8 mt-5 mt-md-4 recipe pb-3">
+	<div class="instructions mt-5 mt-sm-3" *ngIf="recipe.instructions.length > 0">
+		<div class="recipe">
 			<h3 class="fs-4">{{ 'Preparing' | translate }}</h3>
 			<p *ngFor="let instruction of recipe.instructions; let i = index">
 				<span>{{ i + 1 }}</span>
 				{{ instruction }}
 			</p>
 		</div>
-	</ng-container>
+	</div>
 </div>
 
 <div class="d-flex justify-content-center mt-3" *ngIf="!recipe">

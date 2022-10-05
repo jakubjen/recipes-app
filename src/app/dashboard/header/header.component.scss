@@ -44,8 +44,9 @@ nav {
 
 
 		.language-list {
-			box-sizing: content-box;
 			position: absolute;
+			width: 100px;
+			text-align: center;
 			background: $gray-100;
 			padding: 8px 18px 12px;
 			border-radius: 8px;

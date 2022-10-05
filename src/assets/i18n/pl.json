@@ -66,9 +66,9 @@
 			"IngredientAdded": "Dodano składnik",
 			"Error": {
 				"EmailAreUsed": "Ten adres email jest już używany",
-				"InvalidEmailOrPassword": "Invalid email or password",
-				"UserClosePopUpBeforeLoginFinish": "User close popup",
-				"PopupBlock": "Popup blocked",
+				"InvalidEmailOrPassword": "Nieprawidłowy adres email lub hasło",
+				"UserClosePopUpBeforeLoginFinish": "Użytkownik zamknął popup przez zakończeniem logowania",
+				"PopupBlock": "Popup został zablokowany",
 				"InvalidEmail": "Nieprawidłowy adres email"
 			}
 		},
@@ -76,8 +76,8 @@
 			"Register": "Rejestracja",
 			"Login": "Zaloguj",
 			"LoginWithGoogle": "Zaloguj przez Google",
-			"ConfirmPassword": "Potwierdź hasło",
-			"PasswordStrength" : "Siła hasła"
+			"PasswordStrength" : "Siła hasła",
+			"ConfirmPassword": "Powtórz hasło"
 		},
 		"Validation": {
 			"Required": "To pole jest wymagane.",
@@ -98,6 +98,7 @@
 		"Time": "Czas"
 	},
 	"Modals": {
+		"Ingredient": "Składnik",
 		"Recipe": "Przepis",
 		"ConfirmRemove": "Potwierdź usunięcie: {{ what }}",
 		"AreYouSureYouWantToDelete": "Jesteś pewien że chcesz usunąć: ",
