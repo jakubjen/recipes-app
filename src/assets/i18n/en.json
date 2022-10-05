@@ -51,15 +51,17 @@
 		"Edit":"Edit",
 		"Search": "Search",
 		"SortBy": "Sort by",
+		"EmailAddress": "Email address",
+		"Password": "Password",
 		"Snackbar":{
 			"EditNotAllowed": "You are not allowed to edit this recipe",
-			"UserCreatedSuccess": "User created successfully",
-			"LoginSuccessfully": "Login successfully",
-			"LogoutSuccessfully": "Logout successfully",
+			"UserCreatedSuccess": "User created successful",
+			"LoginSuccessfully": "Login successful",
+			"LogoutSuccessfully": "Logout successful",
 			"UserNotAuthorized": "User not authorized",
-			"RecipeAddedSuccessfully": "Recipe added successfully",
-			"RecipeUpdatedSuccessfully": "Recipe updated successfully",
-			"RecipeRemoveSuccessfully": "Recipe remove successfully",
+			"RecipeAddedSuccessfully": "Recipe added successful",
+			"RecipeUpdatedSuccessfully": "Recipe updated successful",
+			"RecipeRemoveSuccessfully": "Recipe remove successful",
 			"AllIngredientsAdded": "All ingredients added",
 			"IngredientAdded": "Ingredient added",
 			"Error": {
@@ -78,7 +80,7 @@
 			"ConfirmPassword": "Confirm password"
 		},
 		"Validation": {
-			"Required": "This filed is required.",
+			"Required": "This field is required.",
 			"MinLength": "Field required min length {{ length }}.",
 			"MaxLength": "Field required max length {{ length }}.",
 			"MinValue": "Field must be greater than or equal to {{ min }}.",

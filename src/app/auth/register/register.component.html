@@ -1,8 +1,10 @@
 <div class="col-12 col-md-7">
 	<form [formGroup]="registerForm" #ngForm="ngForm" (ngSubmit)="register()">
-		<h3 class="mb-3">Register</h3>
+		<h3 class="mb-3">{{ 'Navigation.Register' | translate }}</h3>
 		<div class="mb-3">
-			<label for="emailInput" class="form-label">Email address</label>
+			<label for="emailInput" class="form-label">{{
+				'App.EmailAddress' | translate
+			}}</label>
 			<input
 				type="email"
 				class="form-control"
@@ -16,7 +18,9 @@
 		</div>
 
 		<div class="mb-3">
-			<label for="passwordInput" class="form-label">Password</label>
+			<label for="passwordInput" class="form-label">{{
+				'App.Password' | translate
+			}}</label>
 			<input
 				type="password"
 				class="form-control"
@@ -27,7 +31,7 @@
 				[class.is-invalid]="
 					(password?.touched || ngForm.submitted) && !!password?.errors
 				"
-				placeholder="Password" />
+				placeholder="{{ 'App.Password' | translate }}" />
 			<app-form-error [form]="ngForm" [input]="password"></app-form-error>
 
 			<div class="password-strength mt-2">
@@ -41,7 +45,7 @@
 
 		<div class="mb-3">
 			<label for="passwordConfirmInput" class="form-label">{{
-				'Confirm password' | translate
+				'App.Auth.ConfirmPassword' | translate
 			}}</label>
 			<input
 				type="password"
@@ -52,7 +56,7 @@
 					(passwordConfirm?.touched || ngForm.submitted) &&
 					!!passwordConfirm?.errors
 				"
-				placeholder="Password Confirm" />
+				placeholder="{{ 'App.Auth.ConfirmPassword' | translate }}" />
 			<div
 				class="text-danger"
 				*ngIf="password?.touched &&  passwordConfirm?.touched && !!registerForm?.errors?.['passwordConfirm']">
@@ -62,6 +66,8 @@
 			</div>
 		</div>
 
-		<button type="submit" class="btn btn-outline-primary">Register</button>
+		<button type="submit" class="btn btn-outline-primary">
+			{{ 'Navigation.Register' | translate }}
+		</button>
 	</form>
 </div>

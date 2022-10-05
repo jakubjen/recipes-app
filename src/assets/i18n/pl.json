@@ -7,7 +7,7 @@
 		"Recipe": "Przepis",
 		"Ingredients": "Składniki",
 		"Description": "Opis",
-		"ImageUrl": "Adres url zdjęcia",
+		"Image": "Zdjęcia",
 		"AddIngredient": "Dodaj składnik",
 		"EditIngredient": "Edytuj składniki",
 		"AddInstruction": "Dodaj instrukcje",
@@ -51,6 +51,8 @@
 		"Search": "Szukaj",
 		"SortBy": "Sortuj",
 		"Edit":"Edytuj",
+		"EmailAddress": "Adres email",
+		"Password": "Hasło",
 		"Snackbar":{
 			"EditNotAllowed": "Nie masz uprawnień do edycji tego przepisu",
 			"UserCreatedSuccess": "Pomyślnie utworzono użytkownika",
@@ -61,19 +63,29 @@
 			"RecipeUpdatedSuccessfully": "Pomyślni zaktualizowano przepis",
 			"RecipeRemoveSuccessfully": "Pomyślnie usunięto przepis",
 			"AllIngredientsAdded": "Wszystkie składniki dodano",
-			"IngredientAdded": "Dodano składnik"
+			"IngredientAdded": "Dodano składnik",
+			"Error": {
+				"EmailAreUsed": "Ten adres email jest już używany",
+				"InvalidEmailOrPassword": "Invalid email or password",
+				"UserClosePopUpBeforeLoginFinish": "User close popup",
+				"PopupBlock": "Popup blocked",
+				"InvalidEmail": "Nieprawidłowy adres email"
+			}
 		},
 		"Auth": {
 			"Register": "Rejestracja",
 			"Login": "Zaloguj",
-			"LoginWithGoogle": "Zaloguj przez Google"
+			"LoginWithGoogle": "Zaloguj przez Google",
+			"ConfirmPassword": "Potwierdź hasło",
+			"PasswordStrength" : "Siła hasła"
 		},
 		"Validation": {
 			"Required": "To pole jest wymagane.",
 			"MinLength": "Minimalna długość pola to {{ length }}.",
 			"MaxLength": "Maksymalna długość pola to {{ length }}.",
 			"MinValue": "Minimalna wartość pola to  {{ min }}.",
-			"Email": "Podaj adres email"
+			"Email": "Podaj adres email",
+			"ConfirmPassword": "Hasła muszą być identyczne."
    },
 		"PageNotFound": {
 			"Heading": "Strona nieznaleziona",
@@ -90,7 +102,8 @@
 		"ConfirmRemove": "Potwierdź usunięcie: {{ what }}",
 		"AreYouSureYouWantToDelete": "Jesteś pewien że chcesz usunąć: ",
 		"ThisOperationCanNotBeUndone": "Ta operacja jest nieodwracalna.",
-		"Cancel": "Anuluj"
+		"Cancel": "Anuluj",
+		"Ingredient": "Składnik"
 	},
 	"ShoppingList": {
 		"Amount": "Ilość",
