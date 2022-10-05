@@ -9,7 +9,7 @@
 		"test": "ng test",
 		"lint": "ng lint",
 		"deploy": "ng build && firebase deploy",
-		"compeerLanguage": "ts-node src/assets/i18n/compeerLanguage.ts"
+		"compeerLanguage": "ts-node src/compeerLanguage.ts"
 	},
 	"private": true,
 	"dependencies": {

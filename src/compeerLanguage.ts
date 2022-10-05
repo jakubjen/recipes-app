@@ -1,5 +1,5 @@
-const en = require('./en.json');
-const pl = require('./pl.json');
+const en = require('./assets/i18n/en.json');
+const pl = require('./assets/i18n/pl.json');
 
 const compereTranslations = (langOne: any, langTwo: any, nesting: string[]) => {
 	Object.keys(langOne).forEach(key => {
