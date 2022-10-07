@@ -13,6 +13,7 @@
 					type="number"
 					class="form-control"
 					formControlName="amount"
+					appNumberValidation
 					[class.is-invalid]="
 						(amount.touched || ngForm.submitted) && !!amount.errors
 					"

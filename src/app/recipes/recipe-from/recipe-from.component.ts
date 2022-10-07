@@ -138,7 +138,7 @@ export class RecipeFromComponent implements OnInit, OnDestroy {
 	public addIngredient(): void {
 		const ingredientsForm = new FormGroup({
 			amount: new FormControl<number | null>(null, [Validators.required]),
-			unit: new FormControl<string>('', Validators.required),
+			unit: new FormControl<string>('grams', Validators.required),
 			name: new FormControl<string>('', [Validators.required]),
 		});
 		this.ingredients.push(ingredientsForm);

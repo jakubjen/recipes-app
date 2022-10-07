@@ -69,8 +69,11 @@ export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
 	public sortDirectionEnum = SortDirection;
 
 	public ingredientForm = new FormGroup({
-		name: new FormControl<string>('', Validators.required),
-		unit: new FormControl('', Validators.required),
+		name: new FormControl<string>('', [
+			Validators.required,
+			Validators.maxLength(256),
+		]),
+		unit: new FormControl('grams', Validators.required),
 		amount: new FormControl<string | null>('', [
 			Validators.required,
 			Validators.min(0),

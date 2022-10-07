@@ -7,7 +7,7 @@
 		"Recipe": "Przepis",
 		"Ingredients": "Składniki",
 		"Description": "Opis",
-		"ImageUrl": "Adres url zdjęcia",
+		"Image": "Zdjęcie",
 		"AddIngredient": "Dodaj składnik",
 		"EditIngredient": "Edytuj składniki",
 		"AddInstruction": "Dodaj instrukcje",
@@ -50,6 +50,7 @@
 		"Delete":"Usuń",
 		"Search": "Szukaj",
 		"SortBy": "Sortuj",
+		"CardsSearchPlaceholder": "zupa, burger, sałatka, itp.",
 		"Edit":"Edytuj",
 		"Snackbar":{
 			"EditNotAllowed": "Nie masz uprawnień do edycji tego przepisu",
