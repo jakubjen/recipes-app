@@ -6,7 +6,7 @@
 	<form
 		[formGroup]="ingredientForm"
 		#ngForm="ngForm"
-		(ngSubmit)="ingredientFromSubmitButton.focus(); submit(ngForm)">
+		(ngSubmit)="submit(ngForm)">
 		<div class="row mt-3">
 			<div class="col-6 col-lg-3 amount">
 				<input

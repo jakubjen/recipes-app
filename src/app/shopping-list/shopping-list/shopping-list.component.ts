@@ -158,7 +158,7 @@ export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
 			unit: unit!,
 			amount: amount!.toString(),
 		};
-
+		(<HTMLElement>document.activeElement)?.blur();
 		if (this.mode == 'add') {
 			this.store.dispatch(shoppingListActions.addIngredient({ ingredient }));
 			return ngForm.resetForm();
@@ -176,7 +176,6 @@ export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
 					previousIngredient: this.editedIngredient,
 				})
 			);
-
 			return ngForm.resetForm();
 		}
 	}
