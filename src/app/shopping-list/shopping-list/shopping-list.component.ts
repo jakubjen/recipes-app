@@ -75,10 +75,12 @@ export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
 			Validators.required,
 			Validators.maxLength(256),
 		]),
-		unit: new FormControl('grams', Validators.required),
+		unit: new FormControl('grams', [Validators.required]),
 		amount: new FormControl<string | null>('', [
 			Validators.required,
 			Validators.min(0),
+			Validators.max(30000),
+
 			isNotANumber(),
 		]),
 	});

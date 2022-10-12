@@ -34,7 +34,7 @@ export class IngredientsService {
 					<keyof typeof IngredientsUnit.volume>ingredient.unit
 				];
 			ingredient.amount = (Number(ingredient.amount) * multiplayer).toString();
-			ingredient.unit = 'milliliter';
+			ingredient.unit = 'milliliters';
 		}
 		return ingredient;
 	}

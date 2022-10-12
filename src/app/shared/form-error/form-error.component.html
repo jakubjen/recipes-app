@@ -30,6 +30,15 @@
 			</small>
 		</div>
 
+		<div class="text-danger" *ngIf="!!input?.errors?.['max']">
+			<small>
+				{{
+					'App.Validation.MaxValue'
+						| translate: { max: input.errors?.['max']?.max}
+				}}
+			</small>
+		</div>
+
 		<div class="text-danger" *ngIf="!!input?.errors?.['email']">
 			<small>
 				{{ 'App.Validation.Email' | translate }}

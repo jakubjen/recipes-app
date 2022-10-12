@@ -28,7 +28,6 @@ import { NumberValidationDirective } from 'src/helpers/number-validation.directi
 		RecipeFromComponent,
 		FilterRecipesPipe,
 		SortRecipesPipe,
-		NumberValidationDirective,
 	],
 	imports: [
 		CommonModule,

@@ -37,19 +37,13 @@ import { ShoppingListComponent } from './shopping-list/shopping-list/shopping-li
 import { PendingChangesGuard } from 'src/helpers/pending-changes.guard';
 import { StoreRouterConnectingModule } from '@ngrx/router-store';
 import { AppEffects } from '@store/app/app.effect';
-import { NumberValidationDirective } from 'src/helpers/number-validation.directive';
 
 export function HttpLoaderFactory(http: HttpClient) {
 	return new TranslateHttpLoader(http);
 }
 
 @NgModule({
-	declarations: [
-		AppComponent,
-		ShoppingListComponent,
-		ConvertUnitPipe,
-		NumberValidationDirective,
-	],
+	declarations: [AppComponent, ShoppingListComponent, ConvertUnitPipe],
 	imports: [
 		BrowserModule,
 		BrowserAnimationsModule,
