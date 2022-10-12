@@ -52,8 +52,6 @@
 		"SortBy": "Sortuj",
 		"CardsSearchPlaceholder": "zupa, burger, sałatka, itp.",
 		"Edit":"Edytuj",
-		"EmailAddress": "Adres email",
-		"Password": "Hasło",
 		"Snackbar":{
 			"EditNotAllowed": "Nie masz uprawnień do edycji tego przepisu",
 			"UserCreatedSuccess": "Pomyślnie utworzono użytkownika",
@@ -66,7 +64,7 @@
 			"AllIngredientsAdded": "Wszystkie składniki dodano",
 			"IngredientAdded": "Dodano składnik",
 			"Error": {
-				"EmailAreUsed": "Ten adres email jest już używany",
+				"EmailAreUsed": "Email jest juź używany przez aplikacje",
 				"InvalidEmailOrPassword": "Nieprawidłowy adres email lub hasło",
 				"UserClosePopUpBeforeLoginFinish": "Użytkownik zamknął popup przez zakończeniem logowania",
 				"PopupBlock": "Popup został zablokowany",
@@ -106,8 +104,7 @@
 		"ConfirmRemove": "Potwierdź usunięcie: {{ what }}",
 		"AreYouSureYouWantToDelete": "Jesteś pewien że chcesz usunąć: ",
 		"ThisOperationCanNotBeUndone": "Ta operacja jest nieodwracalna.",
-		"Cancel": "Anuluj",
-		"Ingredient": "Składnik"
+		"Cancel": "Anuluj"
 	},
 	"ShoppingList": {
 		"Amount": "Ilość",
