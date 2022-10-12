@@ -123,15 +123,12 @@
         .buttons {
             display: flex;
             justify-content: space-between;
+            align-items: center;
             gap: 20px;
 
             @include media-breakpoint-up(sm) {
-                position: absolute;
-                opacity: 0;
+                // opacity: 0;
                 transition: opacity .3s ease-out;
-                pointer-events: none;
-                top: 8px;
-                right: 0;
             }
     
             button {

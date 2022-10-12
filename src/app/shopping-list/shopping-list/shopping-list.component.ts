@@ -27,6 +27,7 @@ import ShoppingListSelectors from '@store/shopping-list/shopping-list.selectors'
 import { first, Observable } from 'rxjs';
 import { convertUnit } from 'src/helpers/convertUnits';
 import { isNotANumber } from 'src/helpers/is-nan';
+import { noWhitespaceValidator } from 'src/helpers/no-whitespaces-validator';
 import { validate } from 'uuid';
 
 @Component({

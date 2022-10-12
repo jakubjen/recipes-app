@@ -15,6 +15,9 @@
 					formControlName="title"
 					[placeholder]="'Recipes.Title' | translate"
 					class="form-control"
+					appTrim
+					appNumberValidation
+					[integer]="true"
 					[class.is-invalid]="
 						(title?.touched || ngForm.submitted) && !!title?.errors
 					"
@@ -51,7 +54,11 @@
 					<div class="col-10 col-sm-8 col-md-6">
 						<div class="input-group">
 							<input
-								type="number"
+								type="string"
+								appNumberValidation
+								[integer]="true"
+								[numberOfDigitsAfterComma]="0"
+								[allowNegativeValue]="false"
 								formControlName="time"
 								class="form-control"
 								[class.is-invalid]="

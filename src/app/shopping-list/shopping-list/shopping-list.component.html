@@ -55,6 +55,7 @@
 					<input
 						type="text"
 						class="form-control"
+						appTrim
 						placeholder="{{ 'Ingredients.Name' | translate }}"
 						[class.is-invalid]="
 							(name.touched || ngForm.submitted) && !!name.errors
