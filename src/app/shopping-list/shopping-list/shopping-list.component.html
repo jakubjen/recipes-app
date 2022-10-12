@@ -14,15 +14,12 @@
 					class="form-control"
 					formControlName="amount"
 					appNumberValidation
-					[allowNegativeValue]="true"
-					[numberOfDigitsAfterComma]="5"
+					[numberOfDigitsAfterComma]="2"
 					inputmode="numeric"
 					[class.is-invalid]="
 						(amount.touched || ngForm.submitted) && !!amount.errors
 					"
 					placeholder="{{ 'Ingredients.Amount' | translate }}" />
-				{{ amount.errors | json }}
-				{{ amount.value | json }}
 				<app-form-error [input]="amount" [form]="ngForm"></app-form-error>
 			</div>
 

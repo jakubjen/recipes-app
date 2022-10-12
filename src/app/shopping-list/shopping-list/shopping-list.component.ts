@@ -26,6 +26,8 @@ import { shoppingListActions } from '@store/shopping-list/shopping-list.actions'
 import ShoppingListSelectors from '@store/shopping-list/shopping-list.selectors';
 import { first, Observable } from 'rxjs';
 import { convertUnit } from 'src/helpers/convertUnits';
+import { isNotANumber } from 'src/helpers/is-nan';
+import { validate } from 'uuid';
 
 @Component({
 	selector: 'app-shopping-list',
@@ -77,6 +79,7 @@ export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
 		amount: new FormControl<string | null>('', [
 			Validators.required,
 			Validators.min(0),
+			isNotANumber(),
 		]),
 	});
 

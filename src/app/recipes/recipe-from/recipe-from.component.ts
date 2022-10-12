@@ -24,6 +24,7 @@ import {
 import { IngredientsUnit } from '@models/ingredients-units.model';
 import Recipe, { NewRecipe } from '@models/recipe.model';
 import { Observable, Subject, takeUntil } from 'rxjs';
+import { isNotANumber } from 'src/helpers/is-nan';
 
 @Component({
 	selector: 'app-recipe-from',
@@ -137,7 +138,10 @@ export class RecipeFromComponent implements OnInit, OnDestroy {
 
 	public addIngredient(): void {
 		const ingredientsForm = new FormGroup({
-			amount: new FormControl<number | null>(null, [Validators.required]),
+			amount: new FormControl<number | null>(null, [
+				Validators.required,
+				isNotANumber(),
+			]),
 			unit: new FormControl<string>('grams', Validators.required),
 			name: new FormControl<string>('', [Validators.required]),
 		});

@@ -92,8 +92,11 @@
 					<ng-container [formGroupName]="i">
 						<div class="col-6 col-lg-3 amount">
 							<input
-								type="number"
+								type="text"
 								class="form-control"
+								appNumberValidation
+								[numberOfDigitsAfterComma]="2"
+								inputmode="numeric"
 								placeholder="{{ 'Ingredients.Amount' | translate }}"
 								[class.is-invalid]="
 									(ngForm.submitted || ingredients.controls[i].get('amount')?.touched) &&

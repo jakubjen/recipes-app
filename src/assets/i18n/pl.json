@@ -84,7 +84,8 @@
 			"MaxLength": "Maksymalna długość pola to {{ length }}.",
 			"MinValue": "Minimalna wartość pola to  {{ min }}.",
 			"Email": "Podaj adres email",
-			"ConfirmPassword": "Hasła muszą być takie same."
+			"ConfirmPassword": "Hasła muszą być takie same.",
+			"isNaN": "Pole musi zawierać liczbę."
    },
 		"PageNotFound": {
 			"Heading": "Strona nieznaleziona",
