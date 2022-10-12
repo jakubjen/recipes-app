@@ -20,7 +20,6 @@
 						(amount.touched || ngForm.submitted) && !!amount.errors
 					"
 					placeholder="{{ 'Ingredients.Amount' | translate }}" />
-				{{ amount.errors | json }}
 				<app-form-error [input]="amount" [form]="ngForm"></app-form-error>
 			</div>
 
