@@ -68,8 +68,8 @@
 			"Error": {
 				"EmailAreUsed": "This email already in used",
 				"InvalidEmailOrPassword": "Invalid email or password",
-				"UserClosePopUpBeforeLoginFinish": "User close popup",
-				"PopupBlock": "Login failed",
+				"UserClosePopUpBeforeLoginFinish": "Login failed",
+				"PopupBlock": "Popup blocked",
 				"InvalidEmail": "Invalid email"
 			}
 		},
