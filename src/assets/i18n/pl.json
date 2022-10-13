@@ -52,6 +52,8 @@
 		"SortBy": "Sortuj",
 		"CardsSearchPlaceholder": "zupa, burger, sałatka, itp.",
 		"Edit":"Edytuj",
+		"EmailAddress": "Adres email",
+		"Password": "Hasło",
 		"Snackbar":{
 			"EditNotAllowed": "Nie masz uprawnień do edycji tego przepisu",
 			"UserCreatedSuccess": "Pomyślnie utworzono użytkownika",

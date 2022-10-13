@@ -8,7 +8,9 @@
 		"watch": "ng build --watch --configuration development",
 		"test": "ng test",
 		"lint": "ng lint",
-		"deploy": "ng build && firebase deploy"
+		"deploy": "ng build && firebase deploy",
+		"compeerLanguage": "ts-node src/compeerLanguage.ts"
+
 	},
 	"private": true,
 	"dependencies": {
