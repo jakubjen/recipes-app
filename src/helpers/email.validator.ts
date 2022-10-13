@@ -7,6 +7,8 @@ export const customEmailValidator = () => {
 			/^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-]+$/
 		);
 
-		return regExp.test(provideEmail) ? null : { email: true };
+		return regExp.test(provideEmail) || provideEmail === ''
+			? null
+			: { email: true };
 	};
 };

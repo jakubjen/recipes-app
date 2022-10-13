@@ -16,7 +16,7 @@
 		"UpdateRecipe": "Update recipe"
 	},
 	"Ingredients": {
-		"Amount": "Value",
+		"Amount": "Amount",
 		"Name": "Name"
 	},
 	"Time": {
@@ -50,10 +50,10 @@
 		"Delete":"Delete",
 		"Edit":"Edit",
 		"Search": "Search",
-		"CardsSearchPlaceholder": "Soup, burger, salads, etc.",
 		"SortBy": "Sort by",
 		"EmailAddress": "Email address",
 		"Password": "Password",
+		"CardsSearchPlaceholder": "soup, burger, etc.",
 		"Snackbar":{
 			"EditNotAllowed": "You are not allowed to edit this recipe",
 			"UserCreatedSuccess": "User created successful",
@@ -85,10 +85,10 @@
 			"MinLength": "Field required min length {{ length }}.",
 			"MaxLength": "Field required max length {{ length }}.",
 			"MinValue": "Field must be greater than or equal to {{ min }}.",
-			"MaxValue": "Field must be greater than or equal to {{ max }}.",
-			"Email": "Provide current email address.",
+			"MaxValue": "Field must be less than or equal to {{ max }}.",
+			"Email": "Provide correct email address.",
 			"ConfirmPassword": "Passwords have to be equal.",
-			"isNaN": "Field must be a number."
+			"isNaN": "This field accept only numbers"
    },
 		"PageNotFound": {
 			"Heading": "Page Not Found",
@@ -105,11 +105,11 @@
 		"Recipe": "Recipe",
 		"ConfirmRemove": "Confirm remove: {{ what }}",
 		"AreYouSureYouWantToDelete": "Are you sure you want to delete: ",
-		"ThisOperationCanNotBeUndone": "This operation is permanent and can't be undone.",
+		"ThisOperationCanNotBeUndone": "This operation can not be undone.",
 		"Cancel": "Cancel"
 	},
 	"ShoppingList": {
-		"Amount": "Value",
+		"Amount": "Amount",
 		"Name": "Name"
 	}
 }

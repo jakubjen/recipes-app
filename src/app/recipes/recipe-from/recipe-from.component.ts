@@ -97,6 +97,7 @@ export class RecipeFromComponent implements OnInit, OnDestroy {
 		time: new FormControl<number | null>(null, [
 			Validators.required,
 			Validators.min(1),
+			Validators.max(9999),
 		]),
 		ingredients: new FormArray<FormGroup>([]),
 		instructions: new FormArray<FormControl<string>>([]),
@@ -140,10 +141,15 @@ export class RecipeFromComponent implements OnInit, OnDestroy {
 		const ingredientsForm = new FormGroup({
 			amount: new FormControl<number | null>(null, [
 				Validators.required,
+				Validators.max(30000),
+				Validators.min(1),
 				isNotANumber(),
 			]),
 			unit: new FormControl<string>('grams', Validators.required),
-			name: new FormControl<string>('', [Validators.required]),
+			name: new FormControl<string>('', [
+				Validators.required,
+				Validators.maxLength(255),
+			]),
 		});
 		this.ingredients.push(ingredientsForm);
 	}

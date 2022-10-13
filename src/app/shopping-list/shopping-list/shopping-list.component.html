@@ -14,13 +14,12 @@
 					class="form-control"
 					formControlName="amount"
 					appNumberValidation
-					[numberOfDigitsAfterComma]="2"
 					inputmode="numeric"
+					[numberOfDigitsAfterComma]="2"
 					[class.is-invalid]="
 						(amount.touched || ngForm.submitted) && !!amount.errors
 					"
 					placeholder="{{ 'Ingredients.Amount' | translate }}" />
-				{{ amount.errors | json }}
 				<app-form-error [input]="amount" [form]="ngForm"></app-form-error>
 			</div>
 
@@ -34,7 +33,8 @@
 					"
 					formControlName="unit">
 					<option
-						*ngFor="let unit of units.weight | keyvalue"
+						*ngFor="let unit of units.weight | keyvalue; let i = index"
+						[selected]="i === 1"
 						[value]="unit.key">
 						{{ 'Units.' + unit.key | translate }}
 					</option>
@@ -56,6 +56,7 @@
 					<input
 						type="text"
 						class="form-control"
+						appTrim
 						placeholder="{{ 'Ingredients.Name' | translate }}"
 						[class.is-invalid]="
 							(name.touched || ngForm.submitted) && !!name.errors
@@ -175,7 +176,7 @@
 	</div>
 </div>
 <ng-template #tableEmpty>
-	<div class="text-primary text-center">
+	<div class="text-primary mt-3 text-center">
 		{{ 'App.NoIngredientsInShoppingList' | translate }}
 	</div>
 </ng-template>

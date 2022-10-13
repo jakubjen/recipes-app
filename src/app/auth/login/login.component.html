@@ -32,7 +32,7 @@
 				[class.is-invalid]="
 					(password?.touched || ngForm.submitted) && !!password?.errors
 				"
-				placeholder="Password" />
+				placeholder="{{ 'App.Password' | translate }}				" />
 			<app-form-error [form]="ngForm" [input]="password"></app-form-error>
 		</div>
 

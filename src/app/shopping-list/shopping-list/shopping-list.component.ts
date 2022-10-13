@@ -27,7 +27,6 @@ import ShoppingListSelectors from '@store/shopping-list/shopping-list.selectors'
 import { first, Observable } from 'rxjs';
 import { convertUnit } from 'src/helpers/convertUnits';
 import { isNotANumber } from 'src/helpers/is-nan';
-import { validate } from 'uuid';
 
 @Component({
 	selector: 'app-shopping-list',
@@ -70,20 +69,22 @@ export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
 	public sortDirection?: Observable<SortDirection>;
 	public sortDirectionEnum = SortDirection;
 
-	public ingredientForm = new FormGroup({
-		name: new FormControl<string>('', [
-			Validators.required,
-			Validators.maxLength(256),
-		]),
-		unit: new FormControl('grams', [Validators.required]),
-		amount: new FormControl<string | null>('', [
-			Validators.required,
-			Validators.min(0),
-			Validators.max(30000),
-
-			isNotANumber(),
-		]),
-	});
+	public ingredientForm = new FormGroup(
+		{
+			name: new FormControl<string>('', [
+				Validators.required,
+				Validators.maxLength(256),
+			]),
+			unit: new FormControl('grams', [Validators.required]),
+			amount: new FormControl<string | null>('', [
+				Validators.required,
+				Validators.min(0),
+				Validators.max(30000),
+				isNotANumber(),
+			]),
+		},
+		{ updateOn: 'submit' }
+	);
 
 	get submitButtonText() {
 		return this.mode == 'add'
@@ -169,7 +170,8 @@ export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
 		(<HTMLElement>document.activeElement)?.blur();
 		if (this.mode == 'add') {
 			this.store.dispatch(shoppingListActions.addIngredient({ ingredient }));
-			return ngForm.resetForm();
+			ngForm.resetForm();
+			return this.ingredientForm.patchValue({ unit: 'grams' });
 		}
 		if (this.mode == 'edit') {
 			this.mode = 'add';
@@ -184,7 +186,8 @@ export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
 					previousIngredient: this.editedIngredient,
 				})
 			);
-			return ngForm.resetForm();
+			ngForm.resetForm();
+			return this.ingredientForm.patchValue({ unit: 'grams' });
 		}
 	}
 
