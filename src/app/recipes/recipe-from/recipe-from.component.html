@@ -13,7 +13,7 @@
 				<input
 					type="text"
 					formControlName="title"
-					[placeholder]="'Recipes.Title' | translate"
+					[placeholder]="'PlaceholderExamples.Recipe.Title' | translate"
 					class="form-control"
 					appTrim
 					[class.is-invalid]="
@@ -52,13 +52,14 @@
 					<div class="col-10 col-sm-8 col-md-6">
 						<div class="input-group">
 							<input
-								type="string"
+								type="text"
 								appNumberValidation
 								[integer]="true"
 								[numberOfDigitsAfterComma]="0"
 								[allowNegativeValue]="false"
 								formControlName="time"
 								class="form-control"
+								[placeholder]="'PlaceholderExamples.Recipe.Time' | translate"
 								[class.is-invalid]="
 									(time?.touched || ngForm.submitted) && !!time?.errors
 								"
@@ -79,7 +80,7 @@
 					class="form-control"
 					appTrim
 					id="description"
-					[placeholder]="'Recipes.Description' | translate"
+					[placeholder]="'PlaceholderExamples.Recipe.Description' | translate"
 					[class.is-invalid]="
 						(description?.touched || ngForm.submitted) && !!description?.errors
 					"
@@ -185,7 +186,7 @@
 						class="form-control mt-2"
 						[id]="'instruction' + i"
 						appTrim
-						[placeholder]="('App.Instruction' | translate) + ' ' + (i + 1)"
+						[placeholder]="'PlaceholderExamples.Recipe.Instruction' | translate"
 						[class.is-invalid]="
 							(instructions.controls[i].touched || ngForm.submitted) &&
 							!!instructions.controls[i].errors

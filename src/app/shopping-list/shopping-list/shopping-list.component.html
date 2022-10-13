@@ -96,6 +96,7 @@
 			class="form-control"
 			id="seachInput"
 			#queryString
+			[placeholder]="'PlaceholderExamples.ShoppingListSearch' | translate"
 			(input)="setQueryString(queryString.value)" />
 		<div class="icon">
 			<i class="bi bi-search"></i>

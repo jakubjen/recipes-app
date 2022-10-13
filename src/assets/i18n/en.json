@@ -53,7 +53,6 @@
 		"SortBy": "Sort by",
 		"EmailAddress": "Email address",
 		"Password": "Password",
-		"CardsSearchPlaceholder": "soup, burger, etc.",
 		"Snackbar":{
 			"EditNotAllowed": "You are not allowed to edit this recipe",
 			"UserCreatedSuccess": "User created successful",
@@ -95,6 +94,16 @@
 			"GoTo": "Go to",
 			"HomePage": "home page"
 		}
+	},
+	"PlaceholderExamples":{
+		"Recipe": {
+			"Title": "Example: onion soup, ninja burger",
+			"Time": "Example: 30min", 
+			"Description": "Example: This burger recipe is awesome.",
+			"Instruction": "Example: Chop all herbs."
+		},
+		"CardsSearch": "Soup, burger, etc.",
+		"ShoppingListSearch": "Onion, garlic, carrot etc."
 	},
 	"Sorting": {
 		"Title": "Title",
