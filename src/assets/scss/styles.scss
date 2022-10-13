@@ -29,12 +29,19 @@ $primary: rgb(246 189 65);
 
 .btn-primary {
 	color: #fff;
+
+	&:hover {
+		color: rgba(255 255 255 / 70%);
+	}
+
+	&:focus {
+		background:rgb(234 161 4);
+		color: #fff;
+	}
 }
 
-.btn-primary:hover {
-	color: rgba(255 255 255 / 70%);
-}
-
-.btn-outline-primary:hover {
-	color: #fff;
+.btn-outline-primary {
+	&:hover, &:focus {
+		color: #fff;
+	}
 }
