@@ -142,6 +142,7 @@ export class RecipeFromComponent implements OnInit, OnDestroy {
 			amount: new FormControl<number | null>(null, [
 				Validators.required,
 				Validators.max(30000),
+				Validators.min(1),
 				isNotANumber(),
 			]),
 			unit: new FormControl<string>('grams', Validators.required),

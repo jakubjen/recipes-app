@@ -16,8 +16,6 @@
 					[placeholder]="'Recipes.Title' | translate"
 					class="form-control"
 					appTrim
-					appNumberValidation
-					[integer]="true"
 					[class.is-invalid]="
 						(title?.touched || ngForm.submitted) && !!title?.errors
 					"
@@ -79,6 +77,7 @@
 				<textarea
 					formControlName="description"
 					class="form-control"
+					appTrim
 					id="description"
 					[placeholder]="'Recipes.Description' | translate"
 					[class.is-invalid]="
@@ -144,6 +143,7 @@
 								<input
 									type="text"
 									class="form-control"
+									appTrim
 									placeholder="{{ 'Ingredients.Name' | translate }}"
 									[class.is-invalid]="
 									(ngForm.submitted || ingredients.controls[i].get('name')?.touched) &&
@@ -184,6 +184,7 @@
 						[formControlName]="i"
 						class="form-control mt-2"
 						[id]="'instruction' + i"
+						appTrim
 						[placeholder]="('App.Instruction' | translate) + ' ' + (i + 1)"
 						[class.is-invalid]="
 							(instructions.controls[i].touched || ngForm.submitted) &&

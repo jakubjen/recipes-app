@@ -16,17 +16,20 @@ import { customEmailValidator } from 'src/helpers/email.validator';
 	styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent {
-	loginForm = new FormGroup({
-		email: new FormControl<string>('', [
-			Validators.required,
-			customEmailValidator(),
-		]),
-		password: new FormControl<string>('', [
-			Validators.required,
-			Validators.minLength(8),
-			Validators.maxLength(200),
-		]),
-	});
+	loginForm = new FormGroup(
+		{
+			email: new FormControl<string>('', [
+				Validators.required,
+				customEmailValidator(),
+			]),
+			password: new FormControl<string>('', [
+				Validators.required,
+				Validators.minLength(8),
+				Validators.maxLength(200),
+			]),
+		},
+		{ updateOn: 'submit' }
+	);
 
 	constructor(private authService: AuthService, private store: Store) {}
 
