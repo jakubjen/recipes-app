@@ -69,7 +69,7 @@
 				"EmailAreUsed": "This email already in used",
 				"InvalidEmailOrPassword": "Invalid email or password",
 				"UserClosePopUpBeforeLoginFinish": "User close popup",
-				"PopupBlock": "Popup blocked",
+				"PopupBlock": "Login failed",
 				"InvalidEmail": "Invalid email"
 			}
 		},
