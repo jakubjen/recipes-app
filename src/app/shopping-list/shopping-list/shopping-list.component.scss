@@ -134,7 +134,6 @@
             button {
                 flex: 1;
                 @include media-breakpoint-up(sm) {
-                    gap: 10px;
                     font-size: 14px;     
                     pointer-events: auto;         
                 }
