@@ -1,6 +1,6 @@
 <div class="recipe-details" *ngIf="!!recipe">
 	<div class="card-wrapper">
-		<app-recipe-card [recipe]="recipe"></app-recipe-card>
+		<app-recipe-card [recipe]="recipe" [enableHover]="false"></app-recipe-card>
 	</div>
 	<div class="description mt-3">
 		<p class="fs-6">
@@ -40,7 +40,9 @@
 				<div class="add-to-shopping-list">
 					<button
 						class="btn btn-primary mt-3 mt-sm-0"
-						(click)="addIngredientToShippingList(ingredient)">
+						(click)="
+							addIngredientToShippingList({ event: $event, ingredient })
+						">
 						add <i class="bi bi-basket-fill"></i>
 					</button>
 				</div>

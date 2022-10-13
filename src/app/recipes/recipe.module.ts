@@ -16,6 +16,7 @@ import { SharedModule } from '../shared/shared.module';
 import { FilterRecipesPipe } from './filter-recipes.pipe';
 import { SortRecipesPipe } from './sort-recipes.pipe';
 import { RecipeEffects } from '@store/recipes/effect/recipes.effects';
+import { NumberValidationDirective } from 'src/helpers/number-validation.directive';
 
 @NgModule({
 	declarations: [

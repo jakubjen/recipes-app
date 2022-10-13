@@ -7,7 +7,7 @@
 		"Recipe": "Przepis",
 		"Ingredients": "Składniki",
 		"Description": "Opis",
-		"Image": "Zdjęcia",
+		"Image": "Zdjęcie",
 		"AddIngredient": "Dodaj składnik",
 		"EditIngredient": "Edytuj składniki",
 		"AddInstruction": "Dodaj instrukcje",
@@ -36,7 +36,7 @@
 		"grams": "gramy",
 		"milliliters": "mililitry",
 		"cup": "kubek",
-		"liter":"litry",
+		"liters":"litry",
 		"piece": "sztuka",
 		"spun": "łyżki"
 	},
@@ -50,6 +50,7 @@
 		"Delete":"Usuń",
 		"Search": "Szukaj",
 		"SortBy": "Sortuj",
+		"CardsSearchPlaceholder": "zupa, burger, sałatka, itp.",
 		"Edit":"Edytuj",
 		"EmailAddress": "Adres email",
 		"Password": "Hasło",
@@ -84,8 +85,10 @@
 			"MinLength": "Minimalna długość pola to {{ length }}.",
 			"MaxLength": "Maksymalna długość pola to {{ length }}.",
 			"MinValue": "Minimalna wartość pola to  {{ min }}.",
+			"MaxValue": "Maksymalna wartość pola to {{ max }}.",
 			"Email": "Podaj adres email",
-			"ConfirmPassword": "Hasła muszą być identyczne."
+			"ConfirmPassword": "Hasła muszą być takie same.",
+			"isNaN": "Pole musi zawierać liczbę."
    },
 		"PageNotFound": {
 			"Heading": "Strona nieznaleziona",

@@ -30,15 +30,30 @@
 			</small>
 		</div>
 
+		<div class="text-danger" *ngIf="!!input?.errors?.['max']">
+			<small>
+				{{
+					'App.Validation.MaxValue'
+						| translate: { max: input.errors?.['max']?.max}
+				}}
+			</small>
+		</div>
+
 		<div class="text-danger" *ngIf="!!input?.errors?.['email']">
 			<small>
 				{{ 'App.Validation.Email' | translate }}
 			</small>
 		</div>
 
+		<div class="text-danger" *ngIf="!!input?.errors?.['isNaN']">
+			<small>
+				{{ 'App.Validation.isNaN' | translate }}
+			</small>
+		</div>
+
 		<div class="text-danger" *ngIf="!!input?.errors?.['confirmPassword']">
 			<small>
-				{{ 'App.ZupaZupa' | translate }}
+				{{ 'App.Validation.ConfirmPassword' | translate }}
 			</small>
 		</div>
 	</div>

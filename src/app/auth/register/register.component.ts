@@ -38,7 +38,7 @@ export class RegisterComponent {
 		{ validators: passwordConfirmValidator }
 	);
 
-	constructor(private authService: AuthService, private store: Store) {}
+	constructor(private store: Store) {}
 
 	public register(): void {
 		if (!this.registerForm.valid) return;
@@ -50,6 +50,12 @@ export class RegisterComponent {
 
 	public testPasswordStrength(password: string): void {
 		const userPasswordStrength = passwordStrength(password);
+
+		if (!userPasswordStrength.length) {
+			this.progresBarColor = ProgresBarColor.Red;
+			this.passwordStrength = 0;
+			return;
+		}
 
 		if (userPasswordStrength.value === 'Strong') {
 			this.progresBarColor = ProgresBarColor.Green;

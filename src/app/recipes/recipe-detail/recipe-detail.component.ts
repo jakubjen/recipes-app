@@ -58,7 +58,14 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
 		);
 	}
 
-	public addIngredientToShippingList(ingredient: Ingredients): void {
+	public addIngredientToShippingList({
+		event,
+		ingredient,
+	}: {
+		event: MouseEvent;
+		ingredient: Ingredients;
+	}): void {
+		(<HTMLElement>event.target).blur();
 		this.store.dispatch(
 			shoppingListActions.addIngredientFromRecipe({
 				ingredient,

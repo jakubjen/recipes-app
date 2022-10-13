@@ -1,4 +1,7 @@
-<div @fadeIn class="recipe-card" *ngIf="recipe">
+<div
+	@fadeIn
+	[ngClass]="{ 'recipe-card': true, 'enable-hover': enableHover }"
+	*ngIf="recipe">
 	<img [src]="recipe.imageUrl" [alt]="recipe.title" />
 	<div class="text">
 		<div class="time">

@@ -26,6 +26,8 @@ import { shoppingListActions } from '@store/shopping-list/shopping-list.actions'
 import ShoppingListSelectors from '@store/shopping-list/shopping-list.selectors';
 import { first, Observable } from 'rxjs';
 import { convertUnit } from 'src/helpers/convertUnits';
+import { isNotANumber } from 'src/helpers/is-nan';
+import { validate } from 'uuid';
 
 @Component({
 	selector: 'app-shopping-list',
@@ -69,11 +71,17 @@ export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
 	public sortDirectionEnum = SortDirection;
 
 	public ingredientForm = new FormGroup({
-		name: new FormControl<string>('', Validators.required),
-		unit: new FormControl('', Validators.required),
+		name: new FormControl<string>('', [
+			Validators.required,
+			Validators.maxLength(256),
+		]),
+		unit: new FormControl('grams', [Validators.required]),
 		amount: new FormControl<string | null>('', [
 			Validators.required,
 			Validators.min(0),
+			Validators.max(30000),
+
+			isNotANumber(),
 		]),
 	});
 
@@ -158,7 +166,7 @@ export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
 			unit: unit!,
 			amount: amount!.toString(),
 		};
-
+		(<HTMLElement>document.activeElement)?.blur();
 		if (this.mode == 'add') {
 			this.store.dispatch(shoppingListActions.addIngredient({ ingredient }));
 			return ngForm.resetForm();
@@ -176,7 +184,6 @@ export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
 					previousIngredient: this.editedIngredient,
 				})
 			);
-
 			return ngForm.resetForm();
 		}
 	}

@@ -6,17 +6,21 @@
 	<form
 		[formGroup]="ingredientForm"
 		#ngForm="ngForm"
-		(ngSubmit)="ingredientFromSubmitButton.focus(); submit(ngForm)">
+		(ngSubmit)="submit(ngForm)">
 		<div class="row mt-3">
 			<div class="col-6 col-lg-3 amount">
 				<input
-					type="number"
+					type="text"
 					class="form-control"
 					formControlName="amount"
+					appNumberValidation
+					[numberOfDigitsAfterComma]="2"
+					inputmode="numeric"
 					[class.is-invalid]="
 						(amount.touched || ngForm.submitted) && !!amount.errors
 					"
 					placeholder="{{ 'Ingredients.Amount' | translate }}" />
+				{{ amount.errors | json }}
 				<app-form-error [input]="amount" [form]="ngForm"></app-form-error>
 			</div>
 

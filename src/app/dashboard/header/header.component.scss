@@ -45,8 +45,7 @@ nav {
 
 		.language-list {
 			position: absolute;
-			width: 100px;
-			text-align: center;
+			width: max-content;
 			background: $gray-100;
 			padding: 8px 18px 12px;
 			border-radius: 8px;
@@ -58,6 +57,7 @@ nav {
 			
 			button {
 				font-weight: 300;
+				word-break: keep-all;
 			}
 		}
 	}

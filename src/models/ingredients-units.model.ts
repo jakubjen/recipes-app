@@ -7,7 +7,7 @@ export const IngredientsUnit = {
 	volume: {
 		milliliters: 1,
 		cup: 250,
-		liter: 1000,
+		liters: 1000,
 	},
 	other: ['piece', 'spun'],
 };
