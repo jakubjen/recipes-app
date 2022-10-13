@@ -1,12 +1,17 @@
 <div
 	@fadeIn
-	[ngClass]="{ 'recipe-card': true, 'enable-hover': enableHover }"
+	[ngClass]="{
+		'recipe-card': true,
+		'enable-hover': enableHover
+	}"
 	*ngIf="recipe">
 	<img [src]="recipe.imageUrl" [alt]="recipe.title" />
 	<div class="text">
 		<div class="time">
 			{{ recipe.time }} {{ 'Time.minutesShort' | translate }}
 		</div>
-		<div class="title fs-4 fw-bolder">{{ recipe.title }}</div>
+		<div class="title fs-4 fw-bolder" [class.ellipsis]="enableEllipsis">
+			{{ recipe.title }}
+		</div>
 	</div>
 </div>

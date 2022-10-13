@@ -31,5 +31,6 @@ import Recipe from '@models/recipe.model';
 export class RecipeCardComponent {
 	@Input() recipe: Recipe | undefined;
 	@Input() enableHover: boolean = true;
+	@Input() enableEllipsis: boolean = false;
 	constructor() {}
 }

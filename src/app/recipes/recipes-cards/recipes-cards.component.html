@@ -54,7 +54,9 @@
 				| sortRecipes: sortCategory:sortDirection
 		">
 		<a [routerLink]="'/recipe/' + recipe.id">
-			<app-recipe-card [recipe]="recipe"></app-recipe-card>
+			<app-recipe-card
+				[recipe]="recipe"
+				[enableEllipsis]="true"></app-recipe-card>
 		</a>
 	</div>
 </div>
