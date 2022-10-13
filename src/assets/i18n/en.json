@@ -16,7 +16,7 @@
 		"UpdateRecipe": "Update recipe"
 	},
 	"Ingredients": {
-		"Amount": "Amount",
+		"Amount": "Value",
 		"Name": "Name"
 	},
 	"Time": {
@@ -105,11 +105,11 @@
 		"Recipe": "Recipe",
 		"ConfirmRemove": "Confirm remove: {{ what }}",
 		"AreYouSureYouWantToDelete": "Are you sure you want to delete: ",
-		"ThisOperationCanNotBeUndone": "This operation can not be undone.",
+		"ThisOperationCanNotBeUndone": "This operation is permanently.",
 		"Cancel": "Cancel"
 	},
 	"ShoppingList": {
-		"Amount": "Amount",
+		"Amount": "Value",
 		"Name": "Name"
 	}
 }
