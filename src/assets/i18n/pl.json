@@ -68,7 +68,7 @@
 			"Error": {
 				"EmailAreUsed": "Email jest juź używany przez aplikacje",
 				"InvalidEmailOrPassword": "Nieprawidłowy adres email lub hasło",
-				"UserClosePopUpBeforeLoginFinish": "Użytkownik zamknął popup przez zakończeniem logowania",
+				"UserClosePopUpBeforeLoginFinish": "Logowanie nie powiodło się.",
 				"PopupBlock": "Popup został zablokowany",
 				"InvalidEmail": "Nieprawidłowy adres email"
 			}
@@ -105,7 +105,7 @@
 		"Recipe": "Przepis",
 		"ConfirmRemove": "Potwierdź usunięcie: {{ what }}",
 		"AreYouSureYouWantToDelete": "Jesteś pewien że chcesz usunąć: ",
-		"ThisOperationCanNotBeUndone": "Ta operacja jest nieodwracalna.",
+		"ThisOperationCanNotBeUndone": "Ta operacja jest permanentna",
 		"Cancel": "Anuluj"
 	},
 	"ShoppingList": {
