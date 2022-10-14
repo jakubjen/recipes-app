@@ -23,6 +23,7 @@ import {
 } from '@angular/forms';
 import { IngredientsUnit } from '@models/ingredients-units.model';
 import Recipe, { NewRecipe } from '@models/recipe.model';
+import { readAndCompressImage } from 'browser-image-resizer';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { isNotANumber } from 'src/helpers/is-nan';
 
@@ -72,7 +73,7 @@ export class RecipeFromComponent implements OnInit, OnDestroy {
 
 	@Output() submitRecipe = new EventEmitter<{
 		recipe: NewRecipe;
-		image: File | null | undefined;
+		image: Blob | null;
 	}>();
 	@Output() edited = new EventEmitter<'edited' | 'unedited'>();
 
@@ -187,17 +188,26 @@ export class RecipeFromComponent implements OnInit, OnDestroy {
 		};
 	}
 
-	public handleSubmit(): void {
+	public async handleSubmit(): Promise<void> {
 		if (this.recipeForm.valid) {
 			this.edited.next('unedited');
-			const { image, ...valuesFromFrom } = this.recipeForm.value;
+			let { image, ...valuesFromFrom } = this.recipeForm.value;
+			let imageToSend = <Blob | null>image;
+			if (!!image) {
+				const config = {
+					quality: 0.7,
+					maxWidth: 2000,
+					maxHeight: 2000,
+				};
+				imageToSend = await readAndCompressImage(image, config);
+			}
 			const recipe = {
 				...valuesFromFrom,
 				imageUrl: this.imageUrl,
 				id: this.recipeId,
 			} as NewRecipe;
 
-			this.submitRecipe.emit({ recipe, image });
+			this.submitRecipe.emit({ recipe, image: imageToSend });
 		}
 	}
 }

@@ -17,7 +17,7 @@ export class RecipesService {
 	}
 
 	public async uploadImage(
-		image: File,
+		image: Blob,
 		recipeId: string,
 		user: User
 	): Promise<Observable<string>> {
