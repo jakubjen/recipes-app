@@ -114,14 +114,11 @@
 		"Recipe": "Przepis",
 		"ConfirmRemove": "Potwierdź usunięcie: {{ what }}",
 		"AreYouSureYouWantToDelete": "Jesteś pewien że chcesz usunąć: ",
-		"ThisOperationCanNotBeUndone": "Ta operacja jest permanentna",
+		"ThisOperationCanNotBeUndone": "Ta operacja jest nie odwracalna",       
 		"Cancel": "Anuluj"
 	},
 	"ShoppingList": {
 		"Amount": "Ilość",
 		"Name": "Nazwa"
-	},
-	"ArialLabel": {
-		"ChangeSortingDirection": "Change Sorting Direction"
 	}
 }
