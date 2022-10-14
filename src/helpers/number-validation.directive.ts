@@ -10,39 +10,49 @@ export class NumberValidationDirective {
 
 	constructor(private element: ElementRef) {}
 
+	@HostListener('keydown', ['$event'])
 	@HostListener('keyup', ['$event'])
 	onImpute(): void {
 		const input: HTMLInputElement = this.element.nativeElement;
-		const inputValue: string = input.value;
-		const cursorStartPosition: number = input.selectionStart!;
+		const inputValue: string = input.value.replace(',', '.');
+		let cursorStartPosition: number = input.selectionStart!;
 		const negativeNumber = inputValue[0] === '-';
 
-		const onlyDigitsAndComasAndDotsArray: string[] =
-			inputValue.match(/([\d,\.]+)/g) ?? [];
+		const onlyDigitsAndDotsArray: string[] =
+			inputValue.match(/([\d\.]+)/g) ?? [];
 
-		const onlyDigitsAndComasAndDots = onlyDigitsAndComasAndDotsArray.join('');
-
-		const onlyDigits: string[] = onlyDigitsAndComasAndDots.split(/[,\.]/);
+		const onlyDigits: string[] = onlyDigitsAndDotsArray.filter(s => s !== '.');
 		let newValue = onlyDigits[0] ?? '';
 
 		if (onlyDigits.length > 1) {
 			const lastElement = onlyDigits.pop();
-			newValue = onlyDigits.join('') + ',' + lastElement;
+			newValue = onlyDigits.join('') + '.' + lastElement;
 		}
 
 		if (this.integer) {
-			newValue = newValue.replace(/[,\.]/, '');
+			newValue = newValue.replace('.', '');
 		}
 		if (negativeNumber && this.allowNegativeValue) newValue = `-${newValue}`;
 		if (newValue === '-0') newValue = '0';
 
 		if (this.numberOfDigitsAfterComma !== -1) {
-			const regexString = `^-?\\d*[.,]?(\\d{0,${this.numberOfDigitsAfterComma}})`;
+			const regexString = `^(-?\\d*[\.]?)(\\d{0,${this.numberOfDigitsAfterComma}})(\\d)?`;
 			const regex = new RegExp(regexString);
+			const result = newValue.match(regex)!;
 
-			newValue = newValue.match(regex)?.[0] ?? '';
+			newValue = (
+				result[1] + (Number(result[3]) >= 5 ? Number(result[2]) + 1 : result[2])
+			).trim();
 		}
-		newValue = newValue.replace(',', '.');
+
+		// if (!!onlyDigits.length && onlyDigits[0].length > 3) {
+		// 	const numbersBeforeComa = onlyDigits[0];
+		// 	newValue =
+		// 		numbersBeforeComa.slice(0, cursorStartPosition - 1) +
+		// 		numbersBeforeComa.slice(cursorStartPosition); +
+		// 	cursorStartPosition -= 1;
+		// }
+
 		input.value = newValue;
 		input.dispatchEvent(
 			new InputEvent('input', {

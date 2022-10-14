@@ -73,8 +73,6 @@ export const ShoppingListReducer = createReducer(
 	on(
 		shoppingListActions.addManyIngredientsFromRecipeAfterGrouping,
 		(state: ShoppingListState, { ingredients }): ShoppingListState => {
-			console.table(ingredients);
-
 			return adapter.setAll(ingredients, state);
 		}
 	),

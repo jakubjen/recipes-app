@@ -13,6 +13,9 @@ export const snackbarReducer = createReducer(
 	on(
 		SnackbarActions.addSnackbar,
 		(state: SnackbarState, { snackbar }): SnackbarState => {
+			if (state.ids.length >= 8) {
+				state = adapter.removeOne(<string>state.ids[0], state);
+			}
 			return adapter.addOne(snackbar, state);
 		}
 	),

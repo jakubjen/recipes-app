@@ -50,7 +50,6 @@
 		"Delete":"Usuń",
 		"Search": "Szukaj",
 		"SortBy": "Sortuj",
-		"CardsSearchPlaceholder": "zupa, burger, sałatka, itp.",
 		"Edit":"Edytuj",
 		"EmailAddress": "Adres email",
 		"Password": "Hasło",
@@ -96,6 +95,16 @@
 			"HomePage": "strony głównej"
 		}
 	},
+	"PlaceholderExamples":{
+		"Recipe": {
+			"Title": "Przykład: Zupa cebulowa, burger ninja",
+			"Time": "Przykład: 30min", 
+			"Description": "Przykład: PRzepis na ninja burger jest super",
+			"Instruction": "Przykład: Posiekaj wszystkie zioła"
+		},
+		"CardsSearch": "Zupa, Burger, itp.",
+		"ShoppingListSearch": "Cebula, czosnek, marchewka itp."
+	},
 	"Sorting": {
 		"Title": "Tytuł",
 		"Time": "Czas"
@@ -111,5 +120,8 @@
 	"ShoppingList": {
 		"Amount": "Ilość",
 		"Name": "Nazwa"
+	},
+	"ArialLabel": {
+		"ChangeSortingDirection": "Change Sorting Direction"
 	}
 }

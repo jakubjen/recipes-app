@@ -21,11 +21,10 @@
 		<label for="sortBySelect" class="form-label">{{
 			'App.SortBy' | translate
 		}}</label>
-		<div class="input-group mb-3">
+		<div class="input-group mb-3 sorting-groupe-buttons">
 			<select
 				class="form-select"
 				id="sortBySelect"
-				aria-label="Default select example"
 				(change)="selectFileToSort($event)">
 				<option
 					*ngFor="let category of sortingCategories"
@@ -34,7 +33,10 @@
 					{{ 'Sorting.' + (category | titlecase) | translate }}
 				</option>
 			</select>
-			<button class="icon input-group-text" (click)="changeSortDirection()">
+			<button
+				class="icon input-group-text"
+				[attr.aria-label]="'ArialLabel.ChangeSortingDirection' | translate"
+				(click)="changeSortDirection()">
 				<i
 					class="bi bi-sort-down"
 					*ngIf="sortDirection === sortDirectionEnum.ASC"></i>

@@ -15,6 +15,7 @@
 					formControlName="amount"
 					appNumberValidation
 					inputmode="numeric"
+					[allowNegativeValue]="false"
 					[numberOfDigitsAfterComma]="2"
 					[class.is-invalid]="
 						(amount.touched || ngForm.submitted) && !!amount.errors
@@ -52,7 +53,7 @@
 					[form]="ngForm"></app-form-error>
 			</div>
 			<div class="col-12 col-lg-6 mt-3 mt-lg-0">
-				<div class="input-group">
+				<div class="input-group name-input-groupe">
 					<input
 						type="text"
 						class="form-control"

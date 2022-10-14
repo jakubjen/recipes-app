@@ -1,7 +1,4 @@
-
-@import '~bootstrap/scss/mixins'; /* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/functions'; /* Importing Bootstrap SCSS file. */
-@import '~bootstrap/scss/variables'; /* Importing Bootstrap SCSS file. */
+@use 'variables' as *;
 
 .recipes-cards {
 	display: grid;
@@ -29,5 +26,14 @@
 		bottom: 7px;
 		right: 18px;
 		color: $gray-500;
+	}
+}
+
+.sorting-groupe-buttons:has(select:focus){
+	border-radius: $form-select-border-radius;
+	box-shadow: $form-select-focus-box-shadow;
+
+	select:focus{
+		box-shadow: none;
 	}
 }

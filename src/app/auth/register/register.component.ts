@@ -35,7 +35,7 @@ export class RegisterComponent {
 			]),
 			passwordConfirm: new FormControl<string>('', Validators.required),
 		},
-		{ validators: passwordConfirmValidator }
+		{ validators: passwordConfirmValidator, updateOn: 'submit' }
 	);
 
 	constructor(private store: Store) {}
