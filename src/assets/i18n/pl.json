@@ -121,8 +121,5 @@
 	"ShoppingList": {
 		"Amount": "Ilość",
 		"Name": "Nazwa"
-	},
-	"ArialLabel": {
-		"ChangeSortingDirection": "Change Sorting Direction"
 	}
 }
