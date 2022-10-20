@@ -1,8 +1,13 @@
 import { NgModule } from '@angular/core';
+import {
+	AngularFireAuthGuard,
+	redirectUnauthorizedTo,
+} from '@angular/fire/compat/auth-guard';
 import { RouterModule, Routes } from '@angular/router';
 import { NotFoundPageComponent } from './shared/not-found-page/not-found-page.component';
-import { LoadShoppingListResolver } from './shared/resolvers/shopping-list/load-shopping-list.resolver';
 import { ShoppingListComponent } from './shopping-list/shopping-list/shopping-list.component';
+const redirectUnauthorizedToLogin = () =>
+	redirectUnauthorizedTo(['/auth/login']);
 
 const routes: Routes = [
 	{
@@ -13,8 +18,12 @@ const routes: Routes = [
 	{
 		path: 'shopping-list',
 		component: ShoppingListComponent,
-		resolve: [LoadShoppingListResolver],
-		data: { title: 'Shopping List' },
+		canActivate: [AngularFireAuthGuard],
+
+		data: {
+			authGuardPipe: redirectUnauthorizedToLogin,
+			title: 'Shopping List',
+		},
 	},
 	{
 		path: 'auth',
