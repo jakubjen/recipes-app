@@ -155,25 +155,25 @@
             justify-content: space-between;
             align-items: center;
             gap: 20px;
-
-            @include media-breakpoint-up(sm) {
-                opacity: 0;
-                transition: opacity .3s ease-out;
-            }
+            
     
             button {
                 flex: 1;
                 @include media-breakpoint-up(sm) {
                     font-size: 14px;     
-                    pointer-events: auto;         
+                    pointer-events: auto;   
+                    opacity: 0;      
                 }
             }
         }
-
         @include media-breakpoint-up(sm) {
-            &:hover  .buttons {
+            &:hover  .buttons button, .buttons button:focus {
                 opacity: 1;
             }
+        }
+
+        .buttons:has(button:focus) button {
+            opacity: 1;
         }
     }
 
