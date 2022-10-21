@@ -166,10 +166,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy, AfterViewInit {
 				? true
 				: false;
 
-		this.readingProgress =
-			this.readingProgress < progres
-				? Math.round(progres)
-				: this.readingProgress;
+		this.readingProgress = Math.round(progres);
 	}
 
 	public ngOnDestroy(): void {
