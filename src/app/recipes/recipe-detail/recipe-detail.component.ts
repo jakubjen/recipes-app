@@ -37,7 +37,7 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
 				takeUntil(this.ngDestroyed$),
 				filter((state: DataState) => state === DataState.Loaded),
 				withLatestFrom(
-					this.store.select(RecipesSelectors.selectById(id)),
+					this.store.select(RecipesSelectors.selectByIdOrUrlSlug(id)),
 					this.store.select(userSelectors.selectUser)
 				),
 				tap(async ([_, recipe, user]) => {
