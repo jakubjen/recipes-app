@@ -188,7 +188,6 @@ export class RecipeFromComponent implements OnInit, OnDestroy {
 
 	public handleSubmit(): void {
 		if (this.recipeForm.valid) {
-			this.edited.next('unedited');
 			const { image, ...valuesFromFrom } = this.recipeForm.value;
 			const recipe = {
 				...valuesFromFrom,
@@ -197,6 +196,7 @@ export class RecipeFromComponent implements OnInit, OnDestroy {
 			} as NewRecipe;
 
 			this.submitRecipe.emit({ recipe, image });
+			this.edited.next('unedited');
 		}
 	}
 }

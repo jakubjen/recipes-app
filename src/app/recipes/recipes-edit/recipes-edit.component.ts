@@ -78,14 +78,12 @@ export class RecipesEditComponent implements OnInit, OnDestroy {
 		this.ngDestroyed$.complete();
 	}
 
-	public async update({
-		recipe,
-		image,
-	}: {
-		recipe: NewRecipe;
-		image?: File | null;
-	}): Promise<void> {
-		this.store.dispatch(
+	public update({ recipe, image }: { recipe: NewRecipe; image?: File | null }) {
+		console.log(this.recipeStatues);
+
+		if (this.recipeStatues === 'unedited')
+			return this.router.navigate(['recipe', recipe.id!]);
+		return this.store.dispatch(
 			RecipesActions.updateRecipe({ recipe: recipe as Recipe, image })
 		);
 	}
