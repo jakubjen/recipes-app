@@ -93,7 +93,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 		RecipesService,
 		PendingChangesGuard,
 	],
-	exports: [TranslateModule],
+	exports: [TranslateModule, NgbModule],
 	bootstrap: [AppComponent],
 })
 export class AppModule {}

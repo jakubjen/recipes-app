@@ -22,12 +22,18 @@ const selectById = (recipeId: string) =>
 	createSelector(selectAll, recipes =>
 		recipes.find(recipe => recipe.id === recipeId)
 	);
-
+const selectByIdOrUrlSlug = (idOrUrlSlug: string) =>
+	createSelector(selectAll, recipes =>
+		recipes.find(
+			recipe => recipe.id === idOrUrlSlug || recipe.urlSlug === idOrUrlSlug
+		)
+	);
 const RecipesSelectors = {
 	selectRecipesState,
 	selectAll,
 	selectDataState,
 	selectProcessingData,
 	selectById,
+	selectByIdOrUrlSlug,
 };
 export default RecipesSelectors;
