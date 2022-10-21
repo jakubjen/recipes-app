@@ -17,6 +17,7 @@ import { FilterRecipesPipe } from './filter-recipes.pipe';
 import { SortRecipesPipe } from './sort-recipes.pipe';
 import { RecipeEffects } from '@store/recipes/effect/recipes.effects';
 import { NumberValidationDirective } from 'src/helpers/number-validation.directive';
+import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
 	declarations: [
@@ -38,6 +39,7 @@ import { NumberValidationDirective } from 'src/helpers/number-validation.directi
 		FormsModule,
 		ReactiveFormsModule,
 		SharedModule,
+		NgbProgressbarModule,
 	],
 	exports: [RecipesAddComponent, RecipesEditComponent, RecipesCardsComponent],
 })
