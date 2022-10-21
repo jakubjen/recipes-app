@@ -55,7 +55,7 @@
 				| filterRecipes: searchText
 				| sortRecipes: sortCategory:sortDirection
 		">
-		<a [routerLink]="'/recipe/' + recipe.id">
+		<a [routerLink]="getRecipeUrl(recipe)">
 			<app-recipe-card
 				[recipe]="recipe"
 				[enableEllipsis]="true"></app-recipe-card>

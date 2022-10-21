@@ -1,10 +1,4 @@
-import {
-	animate,
-	state,
-	style,
-	transition,
-	trigger,
-} from '@angular/animations';
+import { animate, style, transition, trigger } from '@angular/animations';
 import {
 	Component,
 	EventEmitter,
@@ -25,6 +19,7 @@ import { IngredientsUnit } from '@models/ingredients-units.model';
 import Recipe, { NewRecipe } from '@models/recipe.model';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { isNotANumber } from 'src/helpers/is-nan';
+import urlSlug from 'url-slug';
 
 @Component({
 	selector: 'app-recipe-from',
@@ -94,6 +89,7 @@ export class RecipeFromComponent implements OnInit, OnDestroy {
 			Validators.minLength(10),
 			Validators.maxLength(2000),
 		]),
+		urlSlug: new FormControl<string>('', []),
 		time: new FormControl<number | null>(null, [
 			Validators.required,
 			Validators.min(1),
@@ -130,6 +126,9 @@ export class RecipeFromComponent implements OnInit, OnDestroy {
 			.subscribe(() => {
 				this.edited.next('edited');
 			});
+		this.recipeForm.controls.title.valueChanges.subscribe(title => {
+			this.recipeForm.controls.urlSlug.setValue(urlSlug(title ?? ''));
+		});
 	}
 
 	ngOnDestroy(): void {

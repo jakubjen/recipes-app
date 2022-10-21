@@ -9,6 +9,7 @@ export default interface Recipe {
 	ingredients: Ingredients[];
 	instructions: string[];
 	ownerId: string;
+	urlSlug?: string;
 }
 
 export interface NewRecipe extends Omit<Recipe, 'id' | 'ownerId'> {
