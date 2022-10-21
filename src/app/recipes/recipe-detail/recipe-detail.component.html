@@ -1,4 +1,5 @@
 <div class="recipe-details" *ngIf="!!recipe">
+	<app-scroll-to-top></app-scroll-to-top>
 	<div class="card-wrapper">
 		<app-recipe-card [recipe]="recipe" [enableHover]="false"></app-recipe-card>
 	</div>

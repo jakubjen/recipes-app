@@ -1,0 +1,23 @@
+@use 'variables' as *;
+
+.scroll-to-top {
+    position: fixed;
+    bottom: 50px;
+    right: 20px;
+    height: 30px;
+    background: #fff;
+
+    @include media-breakpoint-up(md){
+        right: 40px;
+    }
+}
+
+i {
+    color: $primary;
+    font-size: 42px;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    bottom: 12px;
+    cursor: pointer;
+}

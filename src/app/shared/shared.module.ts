@@ -6,6 +6,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { RouterModule } from '@angular/router';
 import { NumberValidationDirective } from 'src/helpers/number-validation.directive';
 import { TrimDirective } from 'src/helpers/trim-start.directive';
+import { ScrollToTopComponent } from './scroll-to-top/scroll-to-top.component';
 
 @NgModule({
 	declarations: [
@@ -13,6 +14,7 @@ import { TrimDirective } from 'src/helpers/trim-start.directive';
 		FormErrorComponent,
 		NumberValidationDirective,
 		TrimDirective,
+		ScrollToTopComponent,
 	],
 	imports: [CommonModule, RouterModule, TranslateModule],
 	exports: [
@@ -20,6 +22,7 @@ import { TrimDirective } from 'src/helpers/trim-start.directive';
 		FormErrorComponent,
 		NumberValidationDirective,
 		TrimDirective,
+		ScrollToTopComponent,
 	],
 })
 export class SharedModule {}
