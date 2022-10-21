@@ -191,6 +191,16 @@ export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
 		}
 	}
 
+	public handleFormRest(
+		button: HTMLButtonElement,
+		ngForm: FormGroupDirective
+	): void {
+		ngForm.reset();
+		button?.blur();
+		this.mode = 'add';
+		this.ingredientForm.patchValue({ unit: 'grams' });
+	}
+
 	public changeSortKey(sortKey: IngredientsSortBy): void {
 		this.store
 			.select(ShoppingListSelectors.selectSortedKey)
