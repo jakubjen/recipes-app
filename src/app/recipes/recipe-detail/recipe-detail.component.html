@@ -30,7 +30,7 @@
 				class="ingredient mt-3 mt-sm-2"
 				*ngFor="let ingredient of recipe.ingredients">
 				<div class="row">
-					<div class="col-4">
+					<div class="col-4 units">
 						{{ ingredient.amount }} {{ 'Units.' + ingredient.unit | translate }}
 					</div>
 					<div class="col-8 position-relative">
