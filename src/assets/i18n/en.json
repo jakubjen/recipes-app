@@ -13,7 +13,7 @@
 		"AddInstruction": "Add instruction",
 		"Time": "Time to prepare dish",
 		"AddRecipe": "Add recipe",
-		"UpdateRecipe": "Update recipe"
+		"Update": "Update recipe"
 	},
 	"Ingredients": {
 		"Amount": "Value",

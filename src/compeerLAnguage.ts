@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 const en = require('./assets/i18n/en.json');
 const pl = require('./assets/i18n/pl.json');
 

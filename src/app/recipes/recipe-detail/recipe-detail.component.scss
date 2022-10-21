@@ -9,7 +9,7 @@
         "image right"
         "description right"
         "instructions right";
-      grid-template-columns: 5fr 2fr;
+      grid-template-columns: 3fr 1fr;
       column-gap: 25px;
     }
 
@@ -100,4 +100,11 @@
         border: none;
         text-decoration: underline
     }
+}
+
+.progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
 }

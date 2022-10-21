@@ -67,11 +67,8 @@
 						type="button"
 						class="btn btn-danger"
 						aria-label="Reset"
-						(click)="
-							ngForm.reset();
-							mode = 'add';
-							ingredientForm.patchValue({ unit: 'grams' })
-						">
+						#resetButton
+						(click)="handleFormRest(resetButton, ngForm)">
 						<i class="bi bi-x-lg"></i>
 					</button>
 				</div>
@@ -81,6 +78,7 @@
 		<button
 			type="submit"
 			#ingredientFromSubmitButton
+			(click)="ingredientFromSubmitButton.blur()"
 			class="btn btn-outline-primary mt-3">
 			{{ submitButtonText | translate }}
 		</button>
@@ -168,13 +166,15 @@
 				<button
 					type="button"
 					class="btn btn-primary"
-					(click)="editIngredient(ingredient)">
+					#editButton
+					(click)="editIngredient(ingredient); editButton.blur()">
 					<i class="bi bi-pencil"></i>
 				</button>
 				<button
 					type="button"
 					class="btn btn-danger"
-					(click)="removeIngredient(ingredient, modal)">
+					#deleteButton
+					(click)="removeIngredient(ingredient, modal); deleteButton.blur()">
 					<i class="bi bi-x-circle"></i>
 				</button>
 			</div>

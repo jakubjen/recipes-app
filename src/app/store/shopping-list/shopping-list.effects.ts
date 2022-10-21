@@ -1,19 +1,28 @@
-import { transition } from '@angular/animations';
 import { Injectable } from '@angular/core';
 import Ingredients, { IngredientsInStore } from '@models/ingredients.model';
 import { SnackbarVariant } from '@models/snackbar.model';
 import { Actions, concatLatestFrom, createEffect, ofType } from '@ngrx/effects';
-import { State, Store } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { TranslateService } from '@ngx-translate/core';
 import { IngredientsService } from '@services/ingredients/ingredients.service';
+import { ShoppingListService } from '@services/shoppingList/shopping-list.service';
+import { userSelectors } from '@store/auth/selectors';
 import SnackbarActions from '@store/shared/snackbar.actions';
 import { AppState } from '@store/store';
-import { combineLatest, concatMap, map, tap } from 'rxjs';
+import { switchMap, map, firstValueFrom } from 'rxjs';
 import { shoppingListActions } from './shopping-list.actions';
 import ShoppingListSelectors from './shopping-list.selectors';
 
 @Injectable()
 export class shoppingListEffects {
+	constructor(
+		private actions$: Actions,
+		private store: Store<AppState>,
+		private translate: TranslateService,
+		private ingredientService: IngredientsService,
+		private shoppingListService: ShoppingListService
+	) {}
+
 	saveList$ = createEffect(
 		() => {
 			return this.actions$.pipe(
@@ -24,12 +33,14 @@ export class shoppingListEffects {
 					shoppingListActions.removeIngredient,
 					shoppingListActions.updateIngredientSuccess
 				),
-				concatLatestFrom(() =>
-					this.store.select(ShoppingListSelectors.selectAll)
-				),
-				map(([_, ingredients]) => {
-					const serializeIngredients = JSON.stringify(ingredients);
-					localStorage.setItem('ingredients', serializeIngredients);
+				concatLatestFrom(() => [
+					this.store.select(ShoppingListSelectors.selectAll),
+					this.store.select(userSelectors.selectUser),
+				]),
+				map(([_, ingredients, user]) => {
+					if (user) {
+						this.shoppingListService.saveList(ingredients, user?.uid);
+					}
 				})
 			);
 		},
@@ -39,11 +50,12 @@ export class shoppingListEffects {
 	load$ = createEffect(() => {
 		return this.actions$.pipe(
 			ofType(shoppingListActions.loadIngredients),
-			map(() => {
-				const serializeIngredients = localStorage.getItem('ingredients') ?? '';
-				const ingredients = JSON.parse(
-					serializeIngredients
-				) as IngredientsInStore[];
+			concatLatestFrom(() => this.store.select(userSelectors.selectUser)),
+			switchMap(async ([_, user]) => {
+				const ingredients: IngredientsInStore[] =
+					(
+						await firstValueFrom(this.shoppingListService.get(user?.uid!))
+					).data()?.value || [];
 				return shoppingListActions.loadIngredientsSuccess({ ingredients });
 			})
 		);
@@ -172,11 +184,4 @@ export class shoppingListEffects {
 			})
 		);
 	});
-
-	constructor(
-		private actions$: Actions,
-		private store: Store<AppState>,
-		private translate: TranslateService,
-		private ingredientService: IngredientsService
-	) {}
 }

@@ -13,7 +13,7 @@
 		"AddInstruction": "Dodaj instrukcje",
 		"Time": "Czas potrzebny do przygotowanie przepisu",
 		"AddRecipe": "Dodaj przepis",
-		"UpdateRecipe": "Aktualizuj przepis"
+		"Update": "Aktualizuj przepis"
 	},
 	"Ingredients": {
 		"Amount": "Ilość",
