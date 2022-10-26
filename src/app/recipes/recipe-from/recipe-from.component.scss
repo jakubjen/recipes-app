@@ -1,4 +1,4 @@
-@use 'variables';
+@use 'variables' as *;
 
 .image {
 	.image-preview {
@@ -11,6 +11,25 @@
 	}
 }
 
+.time-grope:has(input:focus){
+	border-radius: $form-select-border-radius;
+	box-shadow: $form-select-focus-box-shadow;
+
+	input:focus{
+		box-shadow: none;
+	}
+}
+
+.time-grope:has(.is-invalid:focus){
+	border: 1px $danger solid;
+	border-radius: $form-select-border-radius;
+	box-shadow: none;
+
+	input:focus{
+		box-shadow: none;
+	}
+}
+
 .description textarea{
 	transition: all .3s ease-out;
 	height: 120px;
@@ -18,6 +37,15 @@
 
 .description textarea:focus {
 	height: 300px;
+}
+
+.name-grope:has(input:focus){
+	border-radius: $form-select-border-radius;
+	box-shadow: $form-select-focus-box-shadow;
+
+	input:focus{
+		box-shadow: none;
+	}
 }
 
 .instruction {
