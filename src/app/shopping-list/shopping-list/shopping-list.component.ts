@@ -22,9 +22,11 @@ import Ingredients, {
 import SortDirection from '@models/sort-direction.ts';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Store } from '@ngrx/store';
+import { userSelectors } from '@store/auth/selectors';
 import { shoppingListActions } from '@store/shopping-list/shopping-list.actions';
 import ShoppingListSelectors from '@store/shopping-list/shopping-list.selectors';
-import { first, Observable } from 'rxjs';
+import { AppState } from '@store/store';
+import { filter, first, Observable, take, tap } from 'rxjs';
 import { convertUnit } from 'src/helpers/convertUnits';
 import { isNotANumber } from 'src/helpers/is-nan';
 
@@ -99,7 +101,7 @@ export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
 		return this.ingredientForm.controls.amount;
 	}
 
-	constructor(private store: Store, private modalService: NgbModal) {}
+	constructor(private store: Store<AppState>, private modalService: NgbModal) {}
 
 	ngOnInit(): void {
 		this.ingredientList$ = this.store.select(
@@ -110,6 +112,15 @@ export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
 		this.sortDirection = this.store.select(
 			ShoppingListSelectors.selectSortDirection
 		);
+		this.store
+			.select(userSelectors.selectUser)
+			.pipe(
+				filter(user => user !== null),
+				take(1)
+			)
+			.subscribe(() => {
+				this.store.dispatch(shoppingListActions.loadIngredients());
+			});
 	}
 
 	ngAfterViewInit(): void {

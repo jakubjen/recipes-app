@@ -32,7 +32,7 @@ const routes: Routes = [
 		data: { authGuardPipe: redirectUnauthorizedToLogin, title: 'Edit' },
 	},
 	{
-		path: 'recipe/:id',
+		path: 'recipe/:idOrUrlSlug',
 		component: RecipeDetailComponent,
 		data: { title: 'Recipe' },
 	},

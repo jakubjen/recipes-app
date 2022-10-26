@@ -11,6 +11,12 @@
         border-radius: 8px;
         padding: 15px 20px 25px;
         box-shadow: 8px 8px 24px 5px rgb(66 68 90 / 39%);
+        background: rgb(255 255 255 / 70%);
+        @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+            & {
+            backdrop-filter: blur(20px);
+            }
+        }
     }
 
     .name-input-groupe {
@@ -149,25 +155,25 @@
             justify-content: space-between;
             align-items: center;
             gap: 20px;
-
-            @include media-breakpoint-up(sm) {
-                opacity: 0;
-                transition: opacity .3s ease-out;
-            }
+            
     
             button {
                 flex: 1;
                 @include media-breakpoint-up(sm) {
                     font-size: 14px;     
-                    pointer-events: auto;         
+                    pointer-events: auto;   
+                    opacity: 0;      
                 }
             }
         }
-
         @include media-breakpoint-up(sm) {
-            &:hover  .buttons {
+            &:hover  .buttons button, .buttons button:focus {
                 opacity: 1;
             }
+        }
+
+        .buttons:has(button:focus) button {
+            opacity: 1;
         }
     }
 

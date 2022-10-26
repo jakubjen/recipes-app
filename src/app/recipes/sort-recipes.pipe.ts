@@ -8,7 +8,7 @@ import SortDirection from '@models/sort-direction';
 export class SortRecipesPipe implements PipeTransform {
 	transform(
 		recipes: Recipe[],
-		field: keyof Recipe,
+		field: keyof Omit<Recipe, 'urlSlug'>,
 		sortDirection: SortDirection
 	): Recipe[] {
 		recipes.sort((a, b) => {

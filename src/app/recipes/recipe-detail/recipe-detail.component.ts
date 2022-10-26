@@ -74,14 +74,15 @@ export class RecipeDetailComponent implements OnInit, OnDestroy, AfterViewInit {
 	) {}
 
 	ngOnInit(): void {
-		const id = this.route.snapshot.paramMap.get('id')!;
+		const idOrUlrSlug = this.route.snapshot.paramMap.get('idOrUrlSlug')!;
+
 		this.store
 			.select(RecipesSelectors.selectDataState)
 			.pipe(
 				takeUntil(this.ngDestroyed$),
 				filter((state: DataState) => state === DataState.Loaded),
 				withLatestFrom(
-					this.store.select(RecipesSelectors.selectById(id)),
+					this.store.select(RecipesSelectors.selectByIdOrUrlSlug(idOrUlrSlug)),
 					this.store.select(userSelectors.selectUser)
 				),
 				tap(async ([_, recipe, user]) => {

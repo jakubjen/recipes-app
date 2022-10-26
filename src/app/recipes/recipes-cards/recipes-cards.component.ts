@@ -17,7 +17,7 @@ export class RecipesCardsComponent implements OnInit {
 	public recipesAreLoaded$: Observable<DataState> | undefined;
 	public dataState: typeof DataState = DataState;
 	public searchText = '';
-	public sortCategory: keyof Recipe = 'title';
+	public sortCategory: keyof Omit<Recipe, 'urlSlug'> = 'title';
 	public sortingCategories: (keyof Recipe)[] = ['title', 'time'];
 	public sortDirection: SortDirection = SortDirection.ASC;
 	public sortDirectionEnum = SortDirection;
@@ -36,7 +36,14 @@ export class RecipesCardsComponent implements OnInit {
 	}
 
 	public selectFileToSort(event: Event): void {
-		this.sortCategory = (<HTMLInputElement>event.target).value as keyof Recipe;
+		this.sortCategory = (<HTMLInputElement>event.target).value as keyof Omit<
+			Recipe,
+			'urlSlug'
+		>;
+	}
+
+	public getRecipeUrl(recipe: Recipe): string {
+		return `recipe/${!!recipe.urlSlug ? recipe.urlSlug : recipe.id}`;
 	}
 
 	public changeSortDirection(): void {
