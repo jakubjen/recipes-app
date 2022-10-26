@@ -8,6 +8,7 @@ import {
 import { shoppingListActions } from './shopping-list.actions';
 import { v4 as uuidv4 } from 'uuid';
 import SortDirection from '@models/sort-direction.ts';
+import userActions from '@store/auth/user.actions';
 
 export interface ShoppingListState extends EntityState<IngredientsInStore> {
 	dataState: DataState;
@@ -99,6 +100,13 @@ export const ShoppingListReducer = createReducer(
 					? SortDirection.DESC
 					: SortDirection.ASC;
 			return { ...state, sortDirection: newDirection };
+		}
+	),
+
+	on(
+		shoppingListActions.clearStore,
+		(state: ShoppingListState): ShoppingListState => {
+			return adapter.removeAll({ ...state, dataState: DataState.BeforeLoad });
 		}
 	)
 );

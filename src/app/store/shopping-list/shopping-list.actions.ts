@@ -75,6 +75,8 @@ const setSortKey = createAction(
 	props<{ sortKey: IngredientsSortBy }>()
 );
 
+const clearStore = createAction('[App] clearStore');
+
 const toggleDirection = createAction('[ShoppingList table] Table direction');
 
 export const shoppingListActions = {
@@ -93,4 +95,5 @@ export const shoppingListActions = {
 	setSortKey,
 	addIngredientAfterGrouping,
 	addManyIngredientsFromRecipe,
+	clearStore,
 };
