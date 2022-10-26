@@ -2,10 +2,17 @@
 	@fadeIn
 	[ngClass]="{
 		'recipe-card': true,
-		'enable-hover': enableHover
+		'enable-hover': enableHover,
+		'image-error': imageError
 	}"
 	*ngIf="recipe">
-	<img [src]="recipe.imageUrl" [alt]="recipe.title" />
+	<img
+		[src]="recipe.imageUrl"
+		[alt]="recipe.title"
+		(error)="imageLodeError()" />
+	<div class="error-text" *ngIf="imageError">
+		{{ 'App.ImageError' | translate }}
+	</div>
 	<div class="text">
 		<div class="time">
 			{{ recipe.time }} {{ 'Time.minutesShort' | translate }}
