@@ -9,4 +9,6 @@ import { AbstractControl, FormGroupDirective } from '@angular/forms';
 export class FormErrorComponent {
 	@Input() input: AbstractControl | null = null;
 	@Input() form: FormGroupDirective | null = null;
+	@Input() requiredTouch = true;
+	@Input() requiredSubmit = true;
 }

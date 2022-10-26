@@ -76,6 +76,8 @@ export class RecipeFromComponent implements OnInit, OnDestroy {
 	public previewImageUrl: string | ArrayBuffer = '';
 	public units = IngredientsUnit;
 	private destroyed = new Subject<void>();
+	public UntouchedInstructionsCanShowError = false;
+	public UntouchedIngredientsCanShowError = false;
 
 	public recipeForm = new FormGroup({
 		title: new FormControl<string>('', [
@@ -137,20 +139,27 @@ export class RecipeFromComponent implements OnInit, OnDestroy {
 	}
 
 	public addIngredient(): void {
-		const ingredientsForm = new FormGroup({
-			amount: new FormControl<number | null>(null, [
-				Validators.required,
-				Validators.max(30000),
-				Validators.min(1),
-				isNotANumber(),
-			]),
-			unit: new FormControl<string>('grams', Validators.required),
-			name: new FormControl<string>('', [
-				Validators.required,
-				Validators.maxLength(255),
-			]),
-		});
-		this.ingredients.push(ingredientsForm);
+		(<HTMLElement>document.activeElement).blur();
+		if (!this.recipeForm.controls.ingredients.invalid) {
+			this.UntouchedIngredientsCanShowError = false;
+			this.recipeForm.controls.ingredients.markAsUntouched();
+			const ingredientsForm = new FormGroup({
+				amount: new FormControl<number | null>(null, [
+					Validators.required,
+					Validators.max(30000),
+					Validators.min(1),
+					isNotANumber(),
+				]),
+				unit: new FormControl<string>('grams', Validators.required),
+				name: new FormControl<string>('', [
+					Validators.required,
+					Validators.maxLength(255),
+				]),
+			});
+			this.ingredients.push(ingredientsForm);
+		} else {
+			this.UntouchedIngredientsCanShowError = true;
+		}
 	}
 
 	public removeIngredient(index: number): void {
@@ -158,13 +167,20 @@ export class RecipeFromComponent implements OnInit, OnDestroy {
 	}
 
 	public addInstruction(): void {
-		this.instructions.push(
-			new FormControl<string>('', [
-				Validators.required,
-				Validators.minLength(20),
-				Validators.maxLength(2000),
-			])
-		);
+		(<HTMLElement>document.activeElement).blur();
+		if (!this.recipeForm.controls.instructions.invalid) {
+			this.UntouchedInstructionsCanShowError = false;
+			this.recipeForm.controls.instructions.markAsUntouched();
+			this.instructions.push(
+				new FormControl<string>('', [
+					Validators.required,
+					Validators.minLength(20),
+					Validators.maxLength(2000),
+				])
+			);
+		} else {
+			this.UntouchedInstructionsCanShowError = true;
+		}
 	}
 
 	public removeInstruction(index: number): void {
