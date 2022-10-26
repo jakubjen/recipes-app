@@ -25,10 +25,12 @@
 
 	button {
 		position: absolute;
-		top: 8px;
-		right: 8px;
+		top: 0;
+		right: 0;
 		transition: scale .3s ease-out;
-		scale: 0;
+		width: 42px;
+		height: 38px;
+		font-family: 17rem;
 	}
 
 	&:hover button {
