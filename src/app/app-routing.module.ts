@@ -1,13 +1,9 @@
 import { NgModule } from '@angular/core';
-import {
-	AngularFireAuthGuard,
-	redirectUnauthorizedTo,
-} from '@angular/fire/compat/auth-guard';
+import { AngularFireAuthGuard } from '@angular/fire/compat/auth-guard';
 import { RouterModule, Routes } from '@angular/router';
+import { redirectUnauthorizedToLogin } from 'src/helpers/redirectUnauthorizedToLogin';
 import { NotFoundPageComponent } from './shared/not-found-page/not-found-page.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list/shopping-list.component';
-const redirectUnauthorizedToLogin = () =>
-	redirectUnauthorizedTo(['/auth/login']);
 
 const routes: Routes = [
 	{
