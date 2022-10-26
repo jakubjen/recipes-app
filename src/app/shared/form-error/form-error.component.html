@@ -1,5 +1,9 @@
 <ng-container *ngIf="!!input && !!form">
-	<div class="error" *ngIf="input.touched || form.submitted">
+	<div
+		class="error"
+		*ngIf="
+			input.touched || !requiredTouch || form.submitted || !requiredSubmit
+		">
 		<div class="text-danger" *ngIf="input?.errors?.['required']">
 			<small>{{ 'App.Validation.Required' | translate }}</small>
 		</div>

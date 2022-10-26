@@ -108,19 +108,22 @@
 								inputmode="numeric"
 								placeholder="{{ 'Ingredients.Amount' | translate }}"
 								[class.is-invalid]="
-									(ngForm.submitted || ingredients.controls[i].get('amount')?.touched) &&
+									(ngForm.submitted || ingredients.controls[i].get('amount')?.touched || UntouchedIngredientsCanShowError) &&
 									!!ingredients.controls[i].get('amount')?.errors?.['required']"
 								formControlName="amount" />
 							<app-form-error
 								[input]="ingredients.controls[i].get('amount')"
-								[form]="ngForm"></app-form-error>
+								[form]="ngForm"
+								[requiredTouch]="
+									!UntouchedIngredientsCanShowError
+								"></app-form-error>
 						</div>
 						<div class="col-6 col-lg-3">
 							<select
 								class="form-select"
 								aria-label="select unit"
 								[class.is-invalid]="
-									(ngForm.submitted || ingredients.controls[i].get('unit')?.touched) &&
+									(ngForm.submitted || ingredients.controls[i].get('unit')?.touched || UntouchedIngredientsCanShowError) &&
 									!!ingredients.controls[i].get('unit')?.errors?.['required']"
 								formControlName="unit">
 								<option
@@ -139,7 +142,10 @@
 							</select>
 							<app-form-error
 								[input]="ingredients.controls[i].get('unit')"
-								[form]="ngForm"></app-form-error>
+								[form]="ngForm"
+								[requiredTouch]="
+									!UntouchedIngredientsCanShowError
+								"></app-form-error>
 						</div>
 						<div class="col-12 col-lg-6 mt-3 mt-lg-0">
 							<div class="input-group">
@@ -149,7 +155,7 @@
 									appTrim
 									placeholder="{{ 'Ingredients.Name' | translate }}"
 									[class.is-invalid]="
-									(ngForm.submitted || ingredients.controls[i].get('name')?.touched) &&
+									(ngForm.submitted || ingredients.controls[i].get('name')?.touched || UntouchedIngredientsCanShowError) &&
 									!!ingredients.controls[i].get('name')?.errors?.['required']"
 									formControlName="name" />
 
@@ -163,7 +169,10 @@
 							</div>
 							<app-form-error
 								[input]="ingredients.controls[i].get('name')"
-								[form]="ngForm"></app-form-error>
+								[form]="ngForm"
+								[requiredTouch]="
+									!UntouchedIngredientsCanShowError
+								"></app-form-error>
 						</div>
 					</ng-container>
 				</div>
@@ -190,7 +199,9 @@
 						appTrim
 						[placeholder]="'PlaceholderExamples.Recipe.Instruction' | translate"
 						[class.is-invalid]="
-							(instructions.controls[i].touched || ngForm.submitted) &&
+							(ngForm.submitted ||
+								instructions.touched ||
+								UntouchedInstructionsCanShowError) &&
 							!!instructions.controls[i].errors
 						"
 						rows="3"></textarea>
@@ -203,7 +214,10 @@
 					</button>
 					<app-form-error
 						[input]="instructions.controls[i]"
-						[form]="ngForm"></app-form-error>
+						[form]="ngForm"
+						[requiredTouch]="
+							!UntouchedInstructionsCanShowError
+						"></app-form-error>
 				</div>
 				<button
 					type="button"
