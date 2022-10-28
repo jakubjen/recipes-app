@@ -30,11 +30,31 @@
 	}
 }
 
-.sorting-groupe-buttons:has(select:focus){
+.focus-groupe:has(select:focus), .focus-groupe:has(input:focus), .focus-groupe:has(button:focus){
 	border-radius: $form-select-border-radius;
 	box-shadow: $form-select-focus-box-shadow;
 
-	select:focus{
+	select:focus, input:focus, button:focus{
 		box-shadow: none;
+	}
+}
+
+a {
+	text-decoration: none;
+}
+
+.serach-groupe {
+	display: flex;
+
+	.input-wrapper {
+		width: 100%;
+
+		input {
+			border-radius: $border-radius 0 0 $border-radius;
+		}
+	}
+
+	.dropdown-button {
+		border-radius: 0 $border-radius $border-radius 0;
 	}
 }
