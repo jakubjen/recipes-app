@@ -28,7 +28,7 @@ export class RecipesAddComponent implements OnInit {
 		return this.recipeStatues === 'unedited';
 	}
 
-	addRecipe({ recipe, image }: { recipe: NewRecipe; image?: File | null }) {
+	addRecipe({ recipe, image }: { recipe: NewRecipe; image?: Blob | null }) {
 		this.store.dispatch(RecipesActions.addRecipe({ recipe, image: image! }));
 	}
 }
