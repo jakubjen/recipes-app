@@ -83,7 +83,7 @@ export class RecipesEditComponent implements OnInit, OnDestroy {
 		image,
 	}: {
 		recipe: NewRecipe;
-		image?: File | null;
+		image?: Blob | null;
 	}): Promise<void> {
 		this.store.dispatch(
 			RecipesActions.updateRecipe({ recipe: recipe as Recipe, image })

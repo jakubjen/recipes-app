@@ -1,8 +1,8 @@
-<div class="recipe-details" *ngIf="!!recipe">
+<div class="recipe-details" #recipeDetail *ngIf="!!recipe">
 	<div class="card-wrapper">
 		<app-recipe-card [recipe]="recipe" [enableHover]="false"></app-recipe-card>
 	</div>
-	<div class="description mt-3">
+	<div class="description mt-3" #description>
 		<p class="fs-6">
 			{{ recipe.description }}
 		</p>
@@ -68,6 +68,11 @@
 			</p>
 		</div>
 	</div>
+</div>
+
+<div class="progress" [@openClose]="progressBarOpen ? 'open' : 'closed'">
+	>
+	<ngb-progressbar type="warning" [value]="readingProgress"></ngb-progressbar>
 </div>
 
 <div class="d-flex justify-content-center mt-3" *ngIf="!recipe">
