@@ -61,4 +61,22 @@
 			}
 		}
 	}
+
+	&.image-error {
+		animation: none;
+		background: $gray-200;
+		color: rgb(10 10 10);
+
+		img {
+			visibility: hidden;
+		}
+
+		.error-text {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			translate: -50% -50%;
+			text-align: center;
+		}
+	}
 }

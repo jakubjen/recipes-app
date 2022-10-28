@@ -5,13 +5,20 @@ import Recipe from '@models/recipe.model';
 	name: 'filterRecipes',
 })
 export class FilterRecipesPipe implements PipeTransform {
-	transform(value: Recipe[] | null, searchText = ''): Recipe[] {
+	transform(
+		value: Recipe[] | null,
+		searchText = '',
+		fields: string[]
+	): Recipe[] {
 		if (!value) return [];
 		const searchTextToLowerCase = searchText.toLowerCase();
+		if (!fields.length) return value;
 		return value.filter(
 			recipe =>
-				recipe.title.toLowerCase().includes(searchTextToLowerCase) ||
-				recipe.description.toLowerCase().includes(searchTextToLowerCase)
+				(fields.includes('title') &&
+					recipe.title.toLowerCase().includes(searchTextToLowerCase)) ||
+				(fields.includes('description') &&
+					recipe.description.toLowerCase().includes(searchText))
 		);
 	}
 }
