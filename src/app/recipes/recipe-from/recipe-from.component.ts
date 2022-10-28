@@ -17,6 +17,7 @@ import {
 } from '@angular/forms';
 import { IngredientsUnit } from '@models/ingredients-units.model';
 import Recipe, { NewRecipe } from '@models/recipe.model';
+import { readAndCompressImage } from 'browser-image-resizer';
 import { Observable, Subject, takeUntil } from 'rxjs';
 import { isNotANumber } from 'src/helpers/is-nan';
 import urlSlug from 'url-slug';
@@ -67,7 +68,7 @@ export class RecipeFromComponent implements OnInit, OnDestroy {
 
 	@Output() submitRecipe = new EventEmitter<{
 		recipe: NewRecipe;
-		image: File | null | undefined;
+		image: Blob | null;
 	}>();
 	@Output() edited = new EventEmitter<'edited' | 'unedited'>();
 
@@ -76,6 +77,8 @@ export class RecipeFromComponent implements OnInit, OnDestroy {
 	public previewImageUrl: string | ArrayBuffer = '';
 	public units = IngredientsUnit;
 	private destroyed = new Subject<void>();
+	public UntouchedInstructionsCanShowError = false;
+	public UntouchedIngredientsCanShowError = false;
 
 	public recipeForm = new FormGroup({
 		title: new FormControl<string>('', [
@@ -137,20 +140,27 @@ export class RecipeFromComponent implements OnInit, OnDestroy {
 	}
 
 	public addIngredient(): void {
-		const ingredientsForm = new FormGroup({
-			amount: new FormControl<number | null>(null, [
-				Validators.required,
-				Validators.max(30000),
-				Validators.min(1),
-				isNotANumber(),
-			]),
-			unit: new FormControl<string>('grams', Validators.required),
-			name: new FormControl<string>('', [
-				Validators.required,
-				Validators.maxLength(255),
-			]),
-		});
-		this.ingredients.push(ingredientsForm);
+		(<HTMLElement>document.activeElement).blur();
+		if (!this.recipeForm.controls.ingredients.invalid) {
+			this.UntouchedIngredientsCanShowError = false;
+			this.recipeForm.controls.ingredients.markAsUntouched();
+			const ingredientsForm = new FormGroup({
+				amount: new FormControl<number | null>(null, [
+					Validators.required,
+					Validators.max(30000),
+					Validators.min(1),
+					isNotANumber(),
+				]),
+				unit: new FormControl<string>('grams', Validators.required),
+				name: new FormControl<string>('', [
+					Validators.required,
+					Validators.maxLength(255),
+				]),
+			});
+			this.ingredients.push(ingredientsForm);
+		} else {
+			this.UntouchedIngredientsCanShowError = true;
+		}
 	}
 
 	public removeIngredient(index: number): void {
@@ -158,13 +168,20 @@ export class RecipeFromComponent implements OnInit, OnDestroy {
 	}
 
 	public addInstruction(): void {
-		this.instructions.push(
-			new FormControl<string>('', [
-				Validators.required,
-				Validators.minLength(20),
-				Validators.maxLength(2000),
-			])
-		);
+		(<HTMLElement>document.activeElement).blur();
+		if (!this.recipeForm.controls.instructions.invalid) {
+			this.UntouchedInstructionsCanShowError = false;
+			this.recipeForm.controls.instructions.markAsUntouched();
+			this.instructions.push(
+				new FormControl<string>('', [
+					Validators.required,
+					Validators.minLength(20),
+					Validators.maxLength(2000),
+				])
+			);
+		} else {
+			this.UntouchedInstructionsCanShowError = true;
+		}
 	}
 
 	public removeInstruction(index: number): void {
@@ -186,17 +203,26 @@ export class RecipeFromComponent implements OnInit, OnDestroy {
 		};
 	}
 
-	public handleSubmit(): void {
+	public async handleSubmit(): Promise<void> {
 		if (this.recipeForm.valid) {
-			const { image, ...valuesFromFrom } = this.recipeForm.value;
+			this.edited.next('unedited');
+			let { image, ...valuesFromFrom } = this.recipeForm.value;
+			let imageToSend = <Blob | null>image;
+			if (!!image) {
+				const config = {
+					quality: 0.7,
+					maxWidth: 2000,
+					maxHeight: 2000,
+				};
+				imageToSend = await readAndCompressImage(image, config);
+			}
 			const recipe = {
 				...valuesFromFrom,
 				imageUrl: this.imageUrl,
 				id: this.recipeId,
 			} as NewRecipe;
 
-			this.submitRecipe.emit({ recipe, image });
-			this.edited.next('unedited');
+			this.submitRecipe.emit({ recipe, image: imageToSend });
 		}
 	}
 }

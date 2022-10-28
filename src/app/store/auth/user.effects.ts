@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAnalytics } from '@angular/fire/compat/analytics';
-import { Router } from '@angular/router';
+import {
+	ActivatedRoute,
+	ActivatedRouteSnapshot,
+	Router,
+} from '@angular/router';
 import { SnackbarVariant } from '@models/snackbar.model';
 import { User } from '@models/user.model';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
@@ -15,9 +19,9 @@ export class UserEffects {
 	constructor(
 		private actions$: Actions,
 		private authService: AuthService,
-		private router: Router,
 		private translate: TranslateService,
-		private analytics: AngularFireAnalytics
+		private route: ActivatedRoute,
+		private router: Router
 	) {}
 
 	loginWithPassword$ = createEffect(() => {
@@ -89,8 +93,13 @@ export class UserEffects {
 	loginSuccess$ = createEffect(() => {
 		return this.actions$.pipe(
 			ofType(userActions.loginSuccess),
-			concatMap(async action => {
-				this.router.navigate(['/']);
+			concatMap(async () => {
+				console.log(decodeURI(this.route.snapshot.queryParams['originUrl']));
+
+				const redirectUrl = this.route.snapshot.queryParams['originUrl']
+					? `/${decodeURI(this.route.snapshot.queryParams['originUrl'])}`
+					: '/';
+				this.router.navigateByUrl(redirectUrl);
 				return SnackbarActions.createSnackbar({
 					variant: SnackbarVariant.Success,
 					text: this.translate.instant('App.Snackbar.LoginSuccessfully'),

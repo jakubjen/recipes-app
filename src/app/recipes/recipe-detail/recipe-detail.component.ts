@@ -1,4 +1,20 @@
-import { Component, OnDestroy, OnInit, TemplateRef } from '@angular/core';
+import {
+	animate,
+	state,
+	style,
+	transition,
+	trigger,
+} from '@angular/animations';
+import {
+	AfterViewInit,
+	Component,
+	ElementRef,
+	HostListener,
+	OnDestroy,
+	OnInit,
+	TemplateRef,
+	ViewChild,
+} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import DataState from '@models/data-store.enum';
 import Ingredients from '@models/ingredients.model';
@@ -11,17 +27,45 @@ import RecipesActions from '@store/recipes/recipes.actions';
 import RecipesSelectors from '@store/recipes/recipes.selector';
 import { shoppingListActions } from '@store/shopping-list/shopping-list.actions';
 import { AppState } from '@store/store';
-import { filter, Subject, takeUntil, tap, withLatestFrom } from 'rxjs';
+import {
+	debounce,
+	filter,
+	fromEvent,
+	interval,
+	Subject,
+	takeUntil,
+	tap,
+	throttle,
+	withLatestFrom,
+} from 'rxjs';
 
 @Component({
 	selector: 'app-recipe-detail',
 	templateUrl: './recipe-detail.component.html',
 	styleUrls: ['./recipe-detail.component.scss'],
+	animations: [
+		trigger('openClose', [
+			state('open', style({ opacity: 1 })),
+			state(
+				'closed',
+				style({
+					height: 0,
+					opacity: 0,
+				})
+			),
+			transition('open => closed', [animate('0.3s ease-out')]),
+			transition('closed => open', [animate('0.3s ease-out')]),
+		]),
+	],
 })
-export class RecipeDetailComponent implements OnInit, OnDestroy {
+export class RecipeDetailComponent implements OnInit, OnDestroy, AfterViewInit {
 	public recipe?: Recipe;
 	private ngDestroyed$ = new Subject();
 	public user?: User;
+	public readingProgress = 0;
+	public progressBarOpen = false;
+	@ViewChild('description') description!: ElementRef<HTMLElement>;
+	@ViewChild('recipeDetail') recipeDetail!: ElementRef<HTMLElement>;
 	constructor(
 		private route: ActivatedRoute,
 		private store: Store<AppState>,
@@ -49,6 +93,15 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
 				this.recipe = recipe;
 				this.user = user;
 			});
+	}
+
+	ngAfterViewInit(): void {
+		fromEvent(document, 'scroll')
+			.pipe(
+				takeUntil(this.ngDestroyed$),
+				debounce(() => interval(300))
+			)
+			.subscribe(() => this.calculateReadingProgress());
 	}
 
 	public addAllIngredientsToShippingList(ingredients: Ingredients[]): void {
@@ -83,6 +136,38 @@ export class RecipeDetailComponent implements OnInit, OnDestroy {
 				);
 			})
 			.catch(() => {});
+	}
+
+	private calculateReadingProgress() {
+		const description = this.description.nativeElement;
+		const startPoint =
+			description.getBoundingClientRect().top +
+			(window.pageYOffset ?? document.documentElement.scrollTop);
+
+		const recipeDetail = this.recipeDetail.nativeElement;
+
+		const progres =
+			((window.scrollY - startPoint) /
+				(recipeDetail.clientHeight -
+					window.visualViewport.height -
+					startPoint)) *
+			100;
+		const body = document.body;
+		const html = document.documentElement;
+		const documentHeight = Math.max(
+			body.scrollHeight,
+			body.offsetHeight,
+			html.clientHeight,
+			html.scrollHeight,
+			html.offsetHeight
+		);
+
+		this.progressBarOpen =
+			progres > 0 && documentHeight > startPoint + window.visualViewport.height
+				? true
+				: false;
+
+		this.readingProgress = Math.round(progres);
 	}
 
 	public ngOnDestroy(): void {

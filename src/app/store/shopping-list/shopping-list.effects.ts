@@ -7,9 +7,10 @@ import { TranslateService } from '@ngx-translate/core';
 import { IngredientsService } from '@services/ingredients/ingredients.service';
 import { ShoppingListService } from '@services/shoppingList/shopping-list.service';
 import { userSelectors } from '@store/auth/selectors';
+import userActions from '@store/auth/user.actions';
 import SnackbarActions from '@store/shared/snackbar.actions';
 import { AppState } from '@store/store';
-import { switchMap, map, firstValueFrom } from 'rxjs';
+import { switchMap, map, firstValueFrom, tap } from 'rxjs';
 import { shoppingListActions } from './shopping-list.actions';
 import ShoppingListSelectors from './shopping-list.selectors';
 
@@ -182,6 +183,13 @@ export class shoppingListEffects {
 					ingredients: ingredientsToStore,
 				});
 			})
+		);
+	});
+
+	deleteIngredientsOnLogout = createEffect(() => {
+		return this.actions$.pipe(
+			ofType(userActions.logOutSuccess),
+			map(() => shoppingListActions.clearStore())
 		);
 	});
 }

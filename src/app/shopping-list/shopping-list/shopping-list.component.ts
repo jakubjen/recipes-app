@@ -207,8 +207,6 @@ export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
 		ngForm: FormGroupDirective
 	): void {
 		ngForm.reset();
-		console.log(button);
-
 		button?.blur();
 		this.mode = 'add';
 		this.ingredientForm.patchValue({ unit: 'grams' });

@@ -16,6 +16,8 @@ import { SharedModule } from '../shared/shared.module';
 import { FilterRecipesPipe } from './filter-recipes.pipe';
 import { SortRecipesPipe } from './sort-recipes.pipe';
 import { RecipeEffects } from '@store/recipes/effect/recipes.effects';
+import { NumberValidationDirective } from 'src/helpers/number-validation.directive';
+import { NgbProgressbarModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
@@ -39,6 +41,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 		FormsModule,
 		ReactiveFormsModule,
 		SharedModule,
+		NgbProgressbarModule,
 	],
 	exports: [RecipesAddComponent, RecipesEditComponent, RecipesCardsComponent],
 })
