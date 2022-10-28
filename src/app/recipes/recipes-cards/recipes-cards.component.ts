@@ -21,6 +21,7 @@ export class RecipesCardsComponent implements OnInit {
 	public sortingCategories: (keyof Recipe)[] = ['title', 'time'];
 	public sortDirection: SortDirection = SortDirection.ASC;
 	public sortDirectionEnum = SortDirection;
+	public filterCategories = ['title', 'description'];
 
 	constructor(private store: Store<AppState>) {}
 
@@ -51,5 +52,12 @@ export class RecipesCardsComponent implements OnInit {
 			this.sortDirection === SortDirection.ASC
 				? SortDirection.DESC
 				: SortDirection.ASC;
+	}
+
+	public changeFilterCategories(category: string) {
+		this.filterCategories = this.filterCategories.includes(category)
+			? this.filterCategories.filter(e => e != category)
+			: [...this.filterCategories, category];
+		if (!this.filterCategories.length) this.filterCategories = [category];
 	}
 }

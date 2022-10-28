@@ -4,16 +4,43 @@
 		<label for="seachInput" class="form-label">{{
 			'App.Search' | translate
 		}}</label>
-		<div class="input-wrapper">
-			<input
-				type="text"
-				class="form-control"
-				id="seachInput"
-				[placeholder]="'PlaceholderExamples.CardsSearch' | translate"
-				appTrim
-				(input)="handleTextSearchInput($event)" />
-			<div class="icon">
-				<i class="bi bi-search"></i>
+		<div class="serach-groupe focus-groupe">
+			<div class="input-wrapper">
+				<input
+					type="text"
+					class="form-control"
+					id="seachInput"
+					[placeholder]="'PlaceholderExamples.CardsSearch' | translate"
+					appTrim
+					(input)="handleTextSearchInput($event)" />
+				<div class="icon">
+					<i class="bi bi-search"></i>
+				</div>
+			</div>
+			<div ngbDropdown [autoClose]="'outside'" class="d-inline-block">
+				<button
+					type="button"
+					class="btn btn-outline-primary dropdown-button"
+					id="dropdownBasic1"
+					ngbDropdownToggle>
+					Search in
+				</button>
+				<div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+					<button ngbDropdownItem (click)="changeFilterCategories('title')">
+						<i
+							class="bi bi-check-lg"
+							*ngIf="filterCategories.includes('title')"></i>
+						Title
+					</button>
+					<button
+						ngbDropdownItem
+						(click)="changeFilterCategories('description')">
+						<i
+							class="bi bi-check-lg"
+							*ngIf="filterCategories.includes('description')"></i>
+						Description
+					</button>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -21,7 +48,7 @@
 		<label for="sortBySelect" class="form-label">{{
 			'App.SortBy' | translate
 		}}</label>
-		<div class="input-group mb-3 sorting-groupe-buttons">
+		<div class="input-group mb-3 sorting-groupe-buttons focus-groupe">
 			<select
 				class="form-select"
 				id="sortBySelect"
@@ -52,7 +79,7 @@
 		class="card-wrapper"
 		*ngFor="
 			let recipe of recipes
-				| filterRecipes: searchText
+				| filterRecipes: searchText:filterCategories
 				| sortRecipes: sortCategory:sortDirection
 		">
 		<a [routerLink]="getRecipeUrl(recipe)">
