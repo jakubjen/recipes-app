@@ -32,5 +32,9 @@ export class RecipeCardComponent {
 	@Input() recipe: Recipe | undefined;
 	@Input() enableHover: boolean = true;
 	@Input() enableEllipsis: boolean = false;
-	constructor() {}
+	public imageError = false;
+
+	public imageLodeError() {
+		this.imageError = true;
+	}
 }

@@ -44,6 +44,7 @@
 	"App": {
 		"Loading": "Ładuje...",
 		"Instructions": "Instrukcje",
+		"ImageError": "Nieznaleziona obrazka",
 		"Instruction": "Instrukcja",		
 		"UnsavedChanges": "Uwaga: Masz niezapisane zmiany. Czy chcesz odrzucić niezapisany postęp?",
 		"AddIngredientsToShoppingList":"Dodaj składniki do listy zakupów",

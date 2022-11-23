@@ -50,7 +50,7 @@
 				}}</label>
 				<div class="row">
 					<div class="col-10 col-sm-8 col-md-6">
-						<div class="input-group">
+						<div class="input-group time-grope">
 							<input
 								type="text"
 								appNumberValidation
@@ -148,7 +148,7 @@
 								"></app-form-error>
 						</div>
 						<div class="col-12 col-lg-6 mt-3 mt-lg-0">
-							<div class="input-group">
+							<div class="input-group name-grope">
 								<input
 									type="text"
 									class="form-control"
@@ -207,10 +207,10 @@
 						rows="3"></textarea>
 					<button
 						type="button"
-						class="btn btn-danger btn-sm"
+						class="btn btn-danger"
 						aria-label="Close"
 						(click)="removeInstruction(i)">
-						<i class="bi bi-x"></i>
+						<i class="bi bi-x-lg ng-tns-c112-2"></i>
 					</button>
 					<app-form-error
 						[input]="instructions.controls[i]"
